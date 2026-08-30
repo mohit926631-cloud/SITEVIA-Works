@@ -21,8 +21,6 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { ThreeCanvas } from './components/ThreeCanvas';
-import { SpotlightEffect } from './components/SpotlightEffect';
 
 export default function App() {
   const [selectedPackage, setSelectedPackage] = useState<string>('Business — ₹3,499');
@@ -70,11 +68,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
-      {/* 3D WebGL Background Scene */}
-      <ThreeCanvas />
-
-      {/* Dynamic Cursor Spotlight Glow */}
-      <SpotlightEffect />
+      {/* Ultra-lightweight Static Ambient CSS Background (0% GPU/CPU overhead) */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-[120px]" />
+        <div className="absolute top-[35%] -left-40 w-[600px] h-[600px] bg-indigo-500/5 dark:bg-cyan-500/10 rounded-full blur-[140px]" />
+        <div className="absolute top-[70%] -right-40 w-[600px] h-[600px] bg-purple-500/5 dark:bg-purple-600/10 rounded-full blur-[140px]" />
+      </div>
 
       {/* Fixed Navigation Header */}
       <Navbar onNavigateToSection={handleNavbarNavigate} />
