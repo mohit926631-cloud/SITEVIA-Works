@@ -2,7 +2,7 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { InfiniteMarquee } from './components/InfiniteMarquee';
@@ -29,7 +29,7 @@ export default function App() {
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Business Website');
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>('');
 
-  const scrollToElementWithOffset = (id: string, offset = 80) => {
+  const scrollToElementWithOffset = useCallback((id: string, offset = 80) => {
     const el = document.getElementById(id);
     if (el) {
       const elementPosition = el.getBoundingClientRect().top;
@@ -39,30 +39,34 @@ export default function App() {
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
-  const scrollToEnquiry = () => {
+  const scrollToEnquiry = useCallback(() => {
     scrollToElementWithOffset('enquiry', 80);
-  };
+  }, [scrollToElementWithOffset]);
 
-  const scrollToWork = () => {
+  const scrollToWork = useCallback(() => {
     scrollToElementWithOffset('work', 80);
-  };
+  }, [scrollToElementWithOffset]);
 
-  const handleSelectPricingPlan = (planVal: string) => {
+  const handleSelectPricingPlan = useCallback((planVal: string) => {
     setSelectedPackage(planVal);
     scrollToEnquiry();
-  };
+  }, [scrollToEnquiry]);
 
-  const handleDiscussService = (websiteType: string) => {
+  const handleDiscussService = useCallback((websiteType: string) => {
     setSelectedWebsiteType(websiteType);
     scrollToEnquiry();
-  };
+  }, [scrollToEnquiry]);
 
-  const handleSelectAudience = (businessType: string) => {
+  const handleSelectAudience = useCallback((businessType: string) => {
     setSelectedBusinessType(businessType);
     scrollToEnquiry();
-  };
+  }, [scrollToEnquiry]);
+
+  const handleNavbarNavigate = useCallback((id: string) => {
+    scrollToElementWithOffset(id, 80);
+  }, [scrollToElementWithOffset]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
@@ -73,11 +77,7 @@ export default function App() {
       <SpotlightEffect />
 
       {/* Fixed Navigation Header */}
-      <Navbar
-        onNavigateToSection={(id) => {
-          scrollToElementWithOffset(id, 80);
-        }}
-      />
+      <Navbar onNavigateToSection={handleNavbarNavigate} />
 
       {/* Main Content Sections */}
       <main className="flex-1 relative z-10">
@@ -99,7 +99,7 @@ export default function App() {
         {/* 6. Services Section with Hover-Scale Animations */}
         <ServicesSection onDiscussService={handleDiscussService} />
 
-        {/* 7. Why Choose Sitevia */}
+        {/* 7. Why Choose Webvia */}
         <WhySitevia />
 
         {/* 8. How It Works (Timeline) */}
@@ -111,7 +111,7 @@ export default function App() {
         {/* 10. Who We Build For (Niche Audiences) */}
         <WhoWeBuildFor onSelectAudience={handleSelectAudience} />
 
-        {/* 11. About Sitevia (Why We Exist) */}
+        {/* 11. About Webvia (Why We Exist) */}
         <AboutSitevia />
 
         {/* 12. Main Conversion: Project Enquiry Form (WhatsApp) */}

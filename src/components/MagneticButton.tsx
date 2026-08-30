@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { playClickSound, playHoverTick } from '../utils/audio';
 
 interface MagneticButtonProps {
@@ -25,25 +25,26 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   shimmer = true,
 }) => {
   const btnRef = useRef<HTMLElement | null>(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!btnRef.current) return;
-    const rect = btnRef.current.getBoundingClientRect();
-    const x = (e.clientX - (rect.left + rect.width / 2)) * 0.32;
-    const y = (e.clientY - (rect.top + rect.height / 2)) * 0.32;
-    setOffset({ x, y });
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const btn = btnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = (e.clientX - (rect.left + rect.width / 2)) * 0.28;
+    const y = (e.clientY - (rect.top + rect.height / 2)) * 0.28;
+    btn.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0px) scale(1.03)`;
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
     playHoverTick();
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setOffset({ x: 0, y: 0 });
+    const btn = btnRef.current;
+    if (btn) {
+      btn.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+    }
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -71,8 +72,8 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     onMouseLeave: handleMouseLeave,
     onClick: handleClick,
     style: {
-      transform: `translate3d(${offset.x}px, ${offset.y}px, 0px) scale(${isHovered ? 1.04 : 1})`,
-      transition: isHovered ? 'transform 0.08s ease-out' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+      transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
+      willChange: 'transform',
     },
     className: `relative inline-flex items-center justify-center font-bold rounded-xl transition-colors duration-200 select-none cursor-pointer overflow-hidden ${variantStyles[variant]} ${shimmerClass} ${className}`,
   };

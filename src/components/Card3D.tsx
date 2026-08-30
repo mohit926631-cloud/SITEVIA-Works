@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 interface Card3DProps {
   children: React.ReactNode;
@@ -12,20 +12,22 @@ interface Card3DProps {
 export const Card3D: React.FC<Card3DProps> = ({
   children,
   className = '',
-  intensity = 12,
+  intensity = 8,
   glareOpacity = 0.2,
   onClick,
   id,
 }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
-  const [isHovered, setIsHovered] = useState(false);
+  const innerRef = useRef<HTMLDivElement | null>(null);
+  const glareRef = useRef<HTMLDivElement | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const card = cardRef.current;
+    const inner = innerRef.current;
+    if (!card || !inner) return;
+
+    const rect = card.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
 
@@ -35,22 +37,26 @@ export const Card3D: React.FC<Card3DProps> = ({
     const xPct = (mouseX / width - 0.5) * 2;
     const yPct = (mouseY / height - 0.5) * 2;
 
-    setRotateX(-yPct * intensity);
-    setRotateY(xPct * intensity);
-    setGlarePos({
-      x: (mouseX / width) * 100,
-      y: (mouseY / height) * 100,
-    });
-  };
+    const rX = -yPct * intensity;
+    const rY = xPct * intensity;
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+    inner.style.transform = `perspective(1000px) rotateX(${rX.toFixed(2)}deg) rotateY(${rY.toFixed(2)}deg) translateZ(8px) scale(1.015)`;
+
+    if (glareRef.current) {
+      const gX = (mouseX / width) * 100;
+      const gY = (mouseY / height) * 100;
+      glareRef.current.style.opacity = `${glareOpacity}`;
+      glareRef.current.style.background = `radial-gradient(circle at ${gX.toFixed(1)}% ${gY.toFixed(1)}%, rgba(255, 255, 255, 0.4) 0%, rgba(59, 130, 246, 0.15) 35%, transparent 70%)`;
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setRotateX(0);
-    setRotateY(0);
+    if (innerRef.current) {
+      innerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+    }
+    if (glareRef.current) {
+      glareRef.current.style.opacity = '0';
+    }
   };
 
   return (
@@ -59,29 +65,28 @@ export const Card3D: React.FC<Card3DProps> = ({
       id={id}
       onClick={onClick}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
         perspective: '1200px',
       }}
-      className={`relative cursor-pointer transition-transform duration-150 ease-out select-none ${className}`}
+      className={`relative cursor-pointer select-none ${className}`}
     >
       <div
+        ref={innerRef}
         style={{
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${isHovered ? 'translateZ(10px) scale(1.015)' : 'translateZ(0px) scale(1)'}`,
           transformStyle: 'preserve-3d',
-          transition: isHovered ? 'transform 0.1s cubic-bezier(0.16, 1, 0.3, 1)' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          willChange: 'transform',
         }}
-        className="relative w-full h-full rounded-2xl sm:rounded-3xl bg-white/90 dark:bg-slate-900/80 border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-[0_10px_35px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl group overflow-hidden transition-colors duration-300"
+        className="relative w-full h-full rounded-2xl sm:rounded-3xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-[0_10px_35px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl group overflow-hidden transition-colors duration-300"
       >
         {/* Specular 3D light glare layer */}
         <div
+          ref={glareRef}
           style={{
-            opacity: isHovered ? glareOpacity : 0,
-            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.5) 0%, rgba(59, 130, 246, 0.15) 30%, transparent 70%)`,
             transition: 'opacity 0.25s ease',
           }}
-          className="pointer-events-none absolute inset-0 z-30 rounded-[inherit] mix-blend-overlay"
+          className="pointer-events-none absolute inset-0 z-30 rounded-[inherit] mix-blend-overlay opacity-0"
         />
 
         {/* Ambient Top Rim Highlight */}
@@ -95,3 +100,4 @@ export const Card3D: React.FC<Card3DProps> = ({
     </div>
   );
 };
+
