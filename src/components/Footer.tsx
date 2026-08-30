@@ -4,7 +4,12 @@ import { MessageCircle, Mail, ArrowUp } from 'lucide-react';
 import { SITEVIA_EMAIL } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -109,9 +114,27 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom copyright row */}
+        {/* Bottom copyright & legal row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-          <p>© 2026 Webvia. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2">
+            <p>© 2026 Webvia. All rights reserved.</p>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
+            <button
+              type="button"
+              onClick={onOpenPrivacy}
+              className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+            >
+              Privacy Policy
+            </button>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <button
+              type="button"
+              onClick={onOpenTerms}
+              className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+            >
+              Terms of Service
+            </button>
+          </div>
 
           <button
             type="button"

@@ -21,11 +21,13 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { LegalModal } from './components/LegalModal';
 
 export default function App() {
   const [selectedPackage, setSelectedPackage] = useState<string>('Business — ₹3,499');
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Business Website');
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>('');
+  const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | null>(null);
 
   const scrollToElementWithOffset = useCallback((id: string, offset = 80) => {
     const el = document.getElementById(id);
@@ -134,7 +136,17 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer
+        onOpenPrivacy={() => setLegalModalType('privacy')}
+        onOpenTerms={() => setLegalModalType('terms')}
+      />
+
+      {/* Privacy Policy & Terms of Service Modal */}
+      <LegalModal
+        isOpen={legalModalType !== null}
+        type={legalModalType}
+        onClose={() => setLegalModalType(null)}
+      />
 
       {/* Mobile Fixed Bottom CTA Bar */}
       <MobileStickyCTA onGetWebsiteClick={scrollToEnquiry} />
