@@ -8,16 +8,20 @@ import {
   TargetAudience,
 } from './types';
 
-export const WEBVIA_WHATSAPP_NUMBER = "919511007593";
-export const WEBVIA_EMAIL = "mohit926631@gmail.com";
-export const WEBVIA_INSTAGRAM = "https://instagram.com";
-export const WEBVIA_GITHUB = "https://github.com";
+export const VITEWEB_WHATSAPP_NUMBER = "919511007593";
+export const VITEWEB_EMAIL = "mohit926631@gmail.com";
+export const VITEWEB_INSTAGRAM = "https://instagram.com";
+export const VITEWEB_GITHUB = "https://github.com";
 
 // Compatibility aliases
-export const SITEVIA_WHATSAPP_NUMBER = WEBVIA_WHATSAPP_NUMBER;
-export const SITEVIA_EMAIL = WEBVIA_EMAIL;
-export const SITEVIA_INSTAGRAM = WEBVIA_INSTAGRAM;
-export const SITEVIA_GITHUB = WEBVIA_GITHUB;
+export const WEBVIA_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
+export const WEBVIA_EMAIL = VITEWEB_EMAIL;
+export const WEBVIA_INSTAGRAM = VITEWEB_INSTAGRAM;
+export const WEBVIA_GITHUB = VITEWEB_GITHUB;
+export const SITEVIA_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
+export const SITEVIA_EMAIL = VITEWEB_EMAIL;
+export const SITEVIA_INSTAGRAM = VITEWEB_INSTAGRAM;
+export const SITEVIA_GITHUB = VITEWEB_GITHUB;
 
 export const BUSINESS_TYPES = [
   'Restaurant',
@@ -556,7 +560,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     id: 'faq-10',
-    question: 'What happens after I contact Webvia?',
+    question: 'What happens after I contact ViteWEB?',
     answer: 'We will respond promptly on WhatsApp or email to discuss your requirements, confirm the best package for your budget, agree on timeline and content, and immediately begin planning your custom website.',
   },
 ];

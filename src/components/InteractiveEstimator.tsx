@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Calculator, ShieldCheck, Send } from 'lucide-react';
 import { Card3D } from './Card3D';
-import { SITEVIA_WHATSAPP_NUMBER } from '../constants';
+import { VITEWEB_WHATSAPP_NUMBER } from '../constants';
 
 interface InteractiveEstimatorProps {
   onApplyConfiguration?: (config: { pages: number; features: string[]; estimatedPrice: string }) => void;
@@ -63,7 +63,7 @@ export const InteractiveEstimator: React.FC<InteractiveEstimatorProps> = ({ onAp
       colors: ['#3b82f6', '#06b6d4', '#10b981', '#ffffff'],
     });
 
-    const msg = `👋 Hi Sitevia Team! I customized a project scope using your Interactive Estimator:
+    const msg = `👋 Hi ViteWEB Team! I customized a project scope using your Interactive Estimator:
 - *Package Tier:* ${planName}
 - *Page Count:* ${pageCount} Pages
 - *Selected Capabilities:* ${selectedAddons.join(', ')}
@@ -72,7 +72,7 @@ export const InteractiveEstimator: React.FC<InteractiveEstimatorProps> = ({ onAp
 I'd like to discuss bringing this live!`;
 
     const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/${SITEVIA_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
 
     onApplyConfiguration?.({
       pages: pageCount,

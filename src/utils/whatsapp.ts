@@ -1,4 +1,4 @@
-import { WEBVIA_WHATSAPP_NUMBER } from '../constants';
+import { VITEWEB_WHATSAPP_NUMBER } from '../constants';
 import { ProjectFormData } from '../types';
 
 export function createWhatsAppUrl(data: Partial<ProjectFormData>): string {
@@ -14,7 +14,7 @@ export function createWhatsAppUrl(data: Partial<ProjectFormData>): string {
   const email = data.email?.trim() || 'Not specified';
   const requirements = data.requirements?.trim() || 'None provided';
 
-  const message = `Hello Webvia 👋
+  const message = `Hello ViteWEB 👋
 
 I'd like to discuss a website project.
 
@@ -46,13 +46,13 @@ ${email}
 Additional Requirements:
 ${requirements}
 
-Sent via Webvia Website.`;
+Sent via ViteWEB Website.`;
 
-  return `https://wa.me/${WEBVIA_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 export function createQuickWhatsAppUrl(customGreeting?: string): string {
-  const greeting = customGreeting || "Hello Webvia 👋 I'm interested in getting a custom website built for my business. Let's discuss details and pricing!";
-  return `https://wa.me/${WEBVIA_WHATSAPP_NUMBER}?text=${encodeURIComponent(greeting)}`;
+  const greeting = customGreeting || "Hello ViteWEB 👋 I'm interested in getting a custom website built for my business. Let's discuss details and pricing!";
+  return `https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encodeURIComponent(greeting)}`;
 }
 

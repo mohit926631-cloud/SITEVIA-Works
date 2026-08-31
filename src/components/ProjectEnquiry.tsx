@@ -7,7 +7,7 @@ import {
   FEATURE_OPTIONS,
   BUDGET_OPTIONS,
   PAGE_OPTIONS,
-  WEBVIA_WHATSAPP_NUMBER,
+  VITEWEB_WHATSAPP_NUMBER,
 } from '../constants';
 import { ProjectFormData } from '../types';
 import { createWhatsAppUrl } from '../utils/whatsapp';
@@ -391,7 +391,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
               <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
               <span>Direct WhatsApp Line:</span>
               <a
-                href={`https://wa.me/${WEBVIA_WHATSAPP_NUMBER}`}
+                href={`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-emerald-600 dark:text-emerald-400 hover:underline font-bold font-mono"

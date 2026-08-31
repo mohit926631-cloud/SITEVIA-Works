@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
     { label: 'Home', href: '#home', id: 'home' },
     { label: 'Services', href: '#services', id: 'services' },
     { label: 'Demos', href: '#work', id: 'work' },
-    { label: 'Why Webvia', href: '#why-sitevia', id: 'why-sitevia' },
+    { label: 'Why ViteWEB', href: '#why-sitevia', id: 'why-sitevia' },
     { label: 'How It Works', href: '#how-it-works', id: 'how-it-works' },
     { label: 'Pricing', href: '#pricing', id: 'pricing' },
     { label: 'Industries', href: '#who-we-build-for', id: 'who-we-build-for' },
@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
               href="#home"
               onClick={(e) => handleLinkClick('#home', e)}
               className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl p-1 transition-transform hover:scale-102"
-              aria-label="Webvia Home"
+              aria-label="ViteWEB Home"
             >
               <SiteviaLogo variant="horizontal" size="md" />
             </a>

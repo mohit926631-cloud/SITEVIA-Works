@@ -14,7 +14,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<Theme>(() => {
     // 1. Check if user explicitly saved preference in localStorage
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('sitevia_theme') as Theme | null;
+      const saved = (localStorage.getItem('viteweb_theme') || localStorage.getItem('sitevia_theme')) as Theme | null;
       if (saved === 'light' || saved === 'dark') {
         return saved;
       }
@@ -23,7 +23,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return 'light';
       }
     }
-    // 3. Default to dark for Sitevia
+    // 3. Default to dark for ViteWEB
     return 'dark';
   });
 
@@ -51,7 +51,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
-      const saved = localStorage.getItem('sitevia_theme');
+      const saved = localStorage.getItem('viteweb_theme') || localStorage.getItem('sitevia_theme');
       if (!saved) {
         setThemeState(e.matches ? 'dark' : 'light');
       }
@@ -64,14 +64,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const toggleTheme = () => {
     setThemeState((prev) => {
       const nextTheme = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('sitevia_theme', nextTheme);
+      localStorage.setItem('viteweb_theme', nextTheme);
       return nextTheme;
     });
   };
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('sitevia_theme', newTheme);
+    localStorage.setItem('viteweb_theme', newTheme);
   };
 
   return (

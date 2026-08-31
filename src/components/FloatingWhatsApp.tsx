@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MessageCircle, X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
-import { SITEVIA_WHATSAPP_NUMBER } from '../constants';
+import { VITEWEB_WHATSAPP_NUMBER } from '../constants';
 
 export const FloatingWhatsApp: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -54,7 +54,7 @@ export const FloatingWhatsApp: React.FC = () => {
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-100 flex items-center gap-1.5">
-                    <span>Webvia Direct Support</span>
+                    <span>ViteWEB Direct Support</span>
                     <Sparkles className="w-3 h-3 text-emerald-400" />
                   </span>
                 </div>
@@ -75,7 +75,7 @@ export const FloatingWhatsApp: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                   Typically replies in &lt; 15 mins
                 </span>
-                <span className="text-[10px] font-mono text-slate-400">{SITEVIA_WHATSAPP_NUMBER}</span>
+                <span className="text-[10px] font-mono text-slate-400">{VITEWEB_WHATSAPP_NUMBER}</span>
               </div>
             </motion.div>
           )}
@@ -91,7 +91,7 @@ export const FloatingWhatsApp: React.FC = () => {
           whileHover={{ scale: 1.06, y: -2 }}
           whileTap={{ scale: 0.95 }}
           className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-600/90 via-teal-600/90 to-emerald-600/90 backdrop-blur-xl border border-emerald-400/40 text-white pl-4 pr-5 py-3.5 rounded-full shadow-[0_12px_36px_rgba(16,185,129,0.35),0_0_20px_rgba(5,150,105,0.2)] hover:shadow-[0_16px_44px_rgba(16,185,129,0.5),0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/40 overflow-hidden"
-          aria-label="Chat with Webvia on WhatsApp"
+          aria-label="Chat with ViteWEB on WhatsApp"
         >
           {/* Subtle glass specular sweep */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/20 pointer-events-none" />

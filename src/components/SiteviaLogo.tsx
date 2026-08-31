@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface WebviaLogoProps {
+interface ViteWebLogoProps {
   variant?: 'horizontal' | 'icon' | 'stacked' | 'full';
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   theme?: 'dark' | 'light';
 }
 
-export const WebviaLogo: React.FC<WebviaLogoProps> = ({
+export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
   variant = 'horizontal',
   className = '',
   size = 'md',
@@ -20,8 +20,8 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
   };
 
   const currentIconClass = iconSizes[size];
-  const logoSrc = "/webvia-logo.png";
-  const fallbackLogoSrc = "https://i.ibb.co/2mGHtFG/file-00000000776482118813c460b6c9b14b.png";
+  const logoSrc = "/viteweb-logo.png";
+  const fallbackLogoSrc = "https://i.ibb.co/DPztyt6Z/file-000000003d6882119dfb99f4cee0a98a.png";
 
   // 1. Icon Only variant
   if (variant === 'icon') {
@@ -29,7 +29,7 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
       <div className={`inline-flex items-center justify-center ${className}`}>
         <img
           src={logoSrc}
-          alt="Webvia Logo Icon"
+          alt="ViteWEB Logo Icon"
           className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none`}
           loading="eager"
           onError={(e) => {
@@ -46,21 +46,21 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
       <div className={`inline-flex flex-col items-center text-center select-none ${className}`}>
         <img
           src={logoSrc}
-          alt="Webvia Brand Logo"
-          className={`${size === 'xl' ? 'h-28 sm:h-32' : size === 'lg' ? 'h-20 sm:h-24' : 'h-14 sm:h-16'} w-auto object-contain transition-transform duration-300 hover:scale-105 select-none drop-shadow-[0_10px_25px_rgba(0,102,255,0.2)]`}
+          alt="ViteWEB Brand Logo"
+          className={`${size === 'xl' ? 'h-28 sm:h-32' : size === 'lg' ? 'h-20 sm:h-24' : 'h-14 sm:h-16'} w-auto object-contain transition-transform duration-300 hover:scale-105 select-none drop-shadow-[0_10px_25px_rgba(0,102,255,0.25)]`}
           loading="eager"
           onError={(e) => {
             (e.target as HTMLImageElement).src = fallbackLogoSrc;
           }}
         />
 
-        {/* Wordmark: WEB (Navy/White) + VIA (Vibrant Blue to Purple Gradient) */}
+        {/* Wordmark: VITE (Navy/White) + WEB (Vibrant Blue to Purple Gradient) */}
         <div className="mt-4 flex items-baseline tracking-tight font-black font-sans">
           <span className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-950 dark:text-white font-extrabold uppercase">
-            WEB
+            VITE
           </span>
           <span className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] font-extrabold uppercase">
-            VIA
+            WEB
           </span>
         </div>
 
@@ -88,7 +88,7 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
     <div className={`inline-flex items-center gap-2.5 sm:gap-3 group select-none ${className}`}>
       <img
         src={logoSrc}
-        alt="Webvia Logo"
+        alt="ViteWEB Logo"
         className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none`}
         loading="eager"
         onError={(e) => {
@@ -98,10 +98,10 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
       <div className="flex flex-col">
         <div className="flex items-baseline leading-none font-sans font-black">
           <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 dark:text-white transition-colors uppercase">
-            WEB
+            VITE
           </span>
           <span className="text-xl sm:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] transition-colors uppercase">
-            VIA
+            WEB
           </span>
         </div>
         <div className="flex items-center gap-1.5 mt-1">
@@ -114,6 +114,8 @@ export const WebviaLogo: React.FC<WebviaLogoProps> = ({
   );
 };
 
-// Aliases for compatibility
-export const SiteviaLogo = WebviaLogo;
+// Aliases for compatibility across existing components
+export const WebviaLogo = ViteWebLogo;
+export const SiteviaLogo = ViteWebLogo;
+
 

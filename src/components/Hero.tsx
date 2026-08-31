@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick }) => {
             <div className="relative w-full sm:w-auto">
               <MagneticButton
                 id="hero-whatsapp-btn"
-                href={createQuickWhatsAppUrl('Hi Webvia! I would like to discuss building a website for my business.')}
+                href={createQuickWhatsAppUrl('Hi ViteWEB! I would like to discuss building a website for my business.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="emerald"

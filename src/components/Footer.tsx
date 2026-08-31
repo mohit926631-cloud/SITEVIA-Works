@@ -1,7 +1,7 @@
 import React from 'react';
-import { SiteviaLogo } from './SiteviaLogo';
+import { ViteWebLogo } from './SiteviaLogo';
 import { MessageCircle, Mail, ArrowUp, ShieldCheck, Scale } from 'lucide-react';
-import { SITEVIA_EMAIL } from '../constants';
+import { VITEWEB_EMAIL } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { LegalTab } from './LegalModal';
 
@@ -18,11 +18,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
     { label: 'Home', href: '#home' },
     { label: 'Services', href: '#services' },
     { label: 'Demos & Work', href: '#work' },
-    { label: 'Why Webvia', href: '#why-sitevia' },
+    { label: 'Why ViteWEB', href: '#why-sitevia' },
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Pricing Plans', href: '#pricing' },
     { label: 'Who We Build For', href: '#who-we-build-for' },
-    { label: 'About Webvia', href: '#about' },
+    { label: 'About ViteWEB', href: '#about' },
     { label: 'Frequently Asked Questions', href: '#faq' },
     { label: 'Project Enquiry', href: '#enquiry' },
     { label: 'Contact', href: '#contact' },
@@ -44,9 +44,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 scrollToTop();
               }}
               className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-              aria-label="Webvia Top"
+              aria-label="ViteWEB Top"
             >
-              <SiteviaLogo variant="horizontal" size="md" />
+              <ViteWebLogo variant="horizontal" size="md" />
             </a>
 
             <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-4 max-w-sm tracking-wide">
@@ -120,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               </a>
 
               <a
-                href={`mailto:${SITEVIA_EMAIL}`}
+                href={`mailto:${VITEWEB_EMAIL}`}
                 className="flex items-center gap-2.5 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <div className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-blue-600 dark:text-blue-400 shadow-sm">
@@ -128,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold uppercase">Email</span>
-                  <span className="font-mono text-xs truncate">{SITEVIA_EMAIL}</span>
+                  <span className="font-mono text-xs truncate">{VITEWEB_EMAIL}</span>
                 </div>
               </a>
             </div>
@@ -162,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Bottom copyright row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-center sm:text-left">
-            <span>© 2026 Webvia. All rights reserved.</span>
+            <span>© 2026 ViteWEB. All rights reserved.</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <button
               type="button"

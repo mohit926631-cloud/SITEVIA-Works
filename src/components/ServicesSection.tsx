@@ -650,7 +650,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onDiscussServi
           </div>
 
           <a
-            href={createQuickWhatsAppUrl('Hi Sitevia! I would like to discuss a custom website for my business.')}
+            href={createQuickWhatsAppUrl('Hi ViteWEB! I would like to discuss a custom website for my business.')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-sm shadow-md whitespace-nowrap transition-all"

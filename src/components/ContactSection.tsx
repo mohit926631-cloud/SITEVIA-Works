@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MessageCircle, Mail, Send, Phone, Clock, CheckCircle2, ShieldCheck, Lock } from 'lucide-react';
-import { WEBVIA_EMAIL } from '../constants';
+import { VITEWEB_EMAIL } from '../constants';
 import { createWhatsAppUrl, createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { LegalTab } from './LegalModal';
 
@@ -71,7 +71,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) =
                   +91 95110 07593
                 </p>
                 <a
-                  href={createQuickWhatsAppUrl('Hi Webvia! I have a question regarding a new website.')}
+                  href={createQuickWhatsAppUrl('Hi ViteWEB! I have a question regarding a new website.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all"
@@ -98,10 +98,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) =
                   Send us your detailed brief or RFPs. We reply within 24 hours.
                 </p>
                 <p className="text-sm font-bold font-mono text-blue-600 dark:text-cyan-400 mb-4 truncate">
-                  {WEBVIA_EMAIL}
+                  {VITEWEB_EMAIL}
                 </p>
                 <a
-                  href={`mailto:${WEBVIA_EMAIL}?subject=Website%20Inquiry%20for%20Webvia`}
+                  href={`mailto:${VITEWEB_EMAIL}?subject=Website%20Inquiry%20for%20ViteWEB`}
                   className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all"
                 >
                   <Mail className="w-4 h-4" />

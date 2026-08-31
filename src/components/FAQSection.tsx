@@ -30,7 +30,7 @@ export const FAQSection: React.FC = () => {
             Frequently Asked Questions.
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2">
-            Everything you need to know about working with Webvia.
+            Everything you need to know about working with ViteWEB.
           </p>
         </motion.div>
 

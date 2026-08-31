@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, Shield, FileText, CheckCircle2, Lock, Scale, Mail, MessageCircle, ExternalLink } from 'lucide-react';
-import { WEBVIA_EMAIL, WEBVIA_WHATSAPP_NUMBER } from '../constants';
+import { VITEWEB_EMAIL, VITEWEB_WHATSAPP_NUMBER } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 
 export type LegalTab = 'privacy' | 'terms';
@@ -111,7 +111,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Privacy Summary</span>
                 </p>
                 <p className="text-blue-800/90 dark:text-blue-300/90 leading-normal">
-                  Webvia is committed to protecting your privacy. We strictly use your provided information to communicate project details, design your website, configure integrations (such as WhatsApp & Google Maps), and provide support. We never sell or share your data with third-party advertisers.
+                  ViteWEB is committed to protecting your privacy. We strictly use your provided information to communicate project details, design your website, configure integrations (such as WhatsApp & Google Maps), and provide support. We never sell or share your data with third-party advertisers.
                 </p>
               </div>
 
@@ -159,7 +159,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Third-Party Hosting & Integration Services</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                  To ensure 99.9% uptime and lightning-fast loading speeds, websites built by Webvia are deployed using world-class hosting infrastructures (such as Vercel, Cloudflare, or Netlify). Third-party services like Google Maps Platform and WhatsApp API operate under their respective privacy terms.
+                  To ensure 99.9% uptime and lightning-fast loading speeds, websites built by ViteWEB are deployed using world-class hosting infrastructures (such as Vercel, Cloudflare, or Netlify). Third-party services like Google Maps Platform and WhatsApp API operate under their respective privacy terms.
                 </p>
               </section>
 
@@ -183,11 +183,11 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 </p>
                 <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between text-xs">
                   <div>
-                    <p className="font-bold text-slate-900 dark:text-white">Webvia Privacy Desk</p>
-                    <p className="text-slate-500 font-mono">{WEBVIA_EMAIL}</p>
+                    <p className="font-bold text-slate-900 dark:text-white">ViteWEB Privacy Desk</p>
+                    <p className="text-slate-500 font-mono">{VITEWEB_EMAIL}</p>
                   </div>
                   <a
-                    href={`mailto:${WEBVIA_EMAIL}?subject=Privacy%20Inquiry%20-%20Webvia`}
+                    href={`mailto:${VITEWEB_EMAIL}?subject=Privacy%20Inquiry%20-%20ViteWEB`}
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition-colors"
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -205,7 +205,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Terms Summary</span>
                 </p>
                 <p className="text-indigo-800/90 dark:text-indigo-300/90 leading-normal">
-                  By engaging Webvia for web design & development services, you agree to these transparent terms covering project scopes, deliverables, transparent milestone pricing, code ownership, and client responsibilities.
+                  By engaging ViteWEB for web design & development services, you agree to these transparent terms covering project scopes, deliverables, transparent milestone pricing, code ownership, and client responsibilities.
                 </p>
               </div>
 
@@ -215,7 +215,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Scope of Services & Packages</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                  Webvia provides custom website design, responsive front-end development, interactive user interfaces, WhatsApp ordering/booking triggers, Google Maps integration, and live deployment. Packages are structured as:
+                  ViteWEB provides custom website design, responsive front-end development, interactive user interfaces, WhatsApp ordering/booking triggers, Google Maps integration, and live deployment. Packages are structured as:
                 </p>
                 <ul className="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pl-2">
                   <li><strong className="text-slate-800 dark:text-slate-200">Starter Plan (₹1,999):</strong> 1–3 pages, mobile-first design, WhatsApp integration, Google Maps, contact section, live deployment.</li>
@@ -250,7 +250,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Code Ownership & Intellectual Property</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                  Upon completion of the project and full payment, full ownership of the final website frontend code, styling, and custom digital assets is transferred to the client. Webvia reserves the right to showcase screenshots and live preview links in our portfolio and marketing materials.
+                  Upon completion of the project and full payment, full ownership of the final website frontend code, styling, and custom digital assets is transferred to the client. ViteWEB reserves the right to showcase screenshots and live preview links in our portfolio and marketing materials.
                 </p>
               </section>
 
@@ -270,7 +270,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <span>Payment Terms & Support</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                  Payments are processed via secure UPI, Net Banking, or Bank Transfer. Webvia provides initial post-launch warranty support to ensure all links, contact forms, and map coordinates operate smoothly.
+                  Payments are processed via secure UPI, Net Banking, or Bank Transfer. ViteWEB provides initial post-launch warranty support to ensure all links, contact forms, and map coordinates operate smoothly.
                 </p>
               </section>
             </div>
@@ -282,7 +282,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
           <div className="flex items-center gap-2 text-slate-500">
             <span>Need clarification?</span>
             <a
-              href={createQuickWhatsAppUrl('Hi Webvia! I have a question regarding your Privacy Policy or Terms of Service.')}
+              href={createQuickWhatsAppUrl('Hi ViteWEB! I have a question regarding your Privacy Policy or Terms of Service.')}
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline inline-flex items-center gap-1"

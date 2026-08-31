@@ -1,6 +1,6 @@
 {
-  "name": "Webvia",
-  "description": "Webvia creates modern, custom websites for businesses, creators, freelancers and professionals.",
+  "name": "ViteWEB",
+  "description": "ViteWEB creates modern, custom websites for businesses, creators, freelancers and professionals.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
