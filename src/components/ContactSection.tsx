@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { MessageCircle, Mail, Send, Phone, Clock, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, Mail, Send, Phone, Clock, CheckCircle2, ShieldCheck, Lock } from 'lucide-react';
 import { WEBVIA_EMAIL } from '../constants';
 import { createWhatsAppUrl, createQuickWhatsAppUrl } from '../utils/whatsapp';
+import { LegalTab } from './LegalModal';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  onOpenLegal?: (tab: LegalTab) => void;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) => {
   const [name, setName] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [phone, setPhone] = useState('');
@@ -209,6 +214,26 @@ export const ContactSection: React.FC = () => {
                     <Send className="w-4 h-4" />
                     <span>Send Inquiry on WhatsApp</span>
                   </button>
+
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 pt-1">
+                    <Lock className="w-3.5 h-3.5 text-slate-400" />
+                    <span>We respect your privacy. View our</span>
+                    <button
+                      type="button"
+                      onClick={() => onOpenLegal?.('privacy')}
+                      className="text-slate-600 dark:text-slate-300 hover:text-blue-600 underline cursor-pointer"
+                    >
+                      Privacy Policy
+                    </button>
+                    <span>&</span>
+                    <button
+                      type="button"
+                      onClick={() => onOpenLegal?.('terms')}
+                      className="text-slate-600 dark:text-slate-300 hover:text-blue-600 underline cursor-pointer"
+                    >
+                      Terms
+                    </button>
+                  </div>
 
                   {submitted && (
                     <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium flex items-center gap-2">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { playClickSound, playHoverTick } from '../utils/audio';
 
 interface MagneticButtonProps {
@@ -24,8 +24,27 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   id,
   shimmer = true,
 }) => {
+  const btnRef = useRef<HTMLElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const btn = btnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = (e.clientX - (rect.left + rect.width / 2)) * 0.28;
+    const y = (e.clientY - (rect.top + rect.height / 2)) * 0.28;
+    btn.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0px) scale(1.03)`;
+  };
+
   const handleMouseEnter = () => {
     playHoverTick();
+  };
+
+  const handleMouseLeave = () => {
+    const btn = btnRef.current;
+    if (btn) {
+      btn.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+    }
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -48,14 +67,21 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
   const commonProps = {
     id,
+    onMouseMove: handleMouseMove,
     onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
     onClick: handleClick,
-    className: `relative inline-flex items-center justify-center font-bold rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] select-none cursor-pointer overflow-hidden ${variantStyles[variant]} ${shimmerClass} ${className}`,
+    style: {
+      transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
+      willChange: 'transform',
+    },
+    className: `relative inline-flex items-center justify-center font-bold rounded-xl transition-colors duration-200 select-none cursor-pointer overflow-hidden ${variantStyles[variant]} ${shimmerClass} ${className}`,
   };
 
   if (href) {
     return (
       <a
+        ref={btnRef as React.RefObject<HTMLAnchorElement>}
         href={href}
         target={target}
         rel={rel}
@@ -70,6 +96,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
   return (
     <button
+      ref={btnRef as React.RefObject<HTMLButtonElement>}
       type="button"
       {...commonProps}
     >
@@ -79,4 +106,3 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     </button>
   );
 };
-

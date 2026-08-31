@@ -11,18 +11,21 @@ import {
 } from '../constants';
 import { ProjectFormData } from '../types';
 import { createWhatsAppUrl } from '../utils/whatsapp';
-import { MessageSquare, Send, Check, Copy, ShieldCheck } from 'lucide-react';
+import { MessageSquare, Send, Check, Copy, ShieldCheck, Lock } from 'lucide-react';
+import { LegalTab } from './LegalModal';
 
 interface ProjectEnquiryProps {
   initialPackage?: string;
   initialWebsiteType?: string;
   initialBusinessType?: string;
+  onOpenLegal?: (tab: LegalTab) => void;
 }
 
 export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
   initialPackage = '',
   initialWebsiteType = '',
   initialBusinessType = '',
+  onOpenLegal,
 }) => {
   const [formData, setFormData] = useState<ProjectFormData>({
     name: '',
@@ -382,18 +385,40 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
             </button>
           </div>
 
-          {/* WhatsApp Direct Line */}
-          <div className="text-center text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2 pt-2">
-            <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-            <span>Direct WhatsApp Line:</span>
-            <a
-              href={`https://wa.me/${WEBVIA_WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 dark:text-emerald-400 hover:underline font-bold font-mono"
-            >
-              +91 95110 07593
-            </a>
+          {/* WhatsApp Direct Line & Legal Assurance */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
+              <span>Direct WhatsApp Line:</span>
+              <a
+                href={`https://wa.me/${WEBVIA_WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline font-bold font-mono"
+              >
+                +91 95110 07593
+              </a>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500">
+              <Lock className="w-3.5 h-3.5 text-slate-400" />
+              <span>Protected by</span>
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.('privacy')}
+                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 underline cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+              <span>&</span>
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.('terms')}
+                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 underline cursor-pointer"
+              >
+                Terms
+              </button>
+            </div>
           </div>
         </form>
       </div>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { SiteviaLogo } from './SiteviaLogo';
-import { MessageCircle, Mail, ArrowUp } from 'lucide-react';
+import { MessageCircle, Mail, ArrowUp, ShieldCheck, Scale } from 'lucide-react';
 import { SITEVIA_EMAIL } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
+import { LegalTab } from './LegalModal';
 
 interface FooterProps {
-  onOpenPrivacy?: () => void;
-  onOpenTerms?: () => void;
+  onOpenLegal?: (tab: LegalTab) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -56,6 +56,27 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) =>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 max-w-sm leading-relaxed">
               Modern websites designed around your business. Fast, mobile-first, and engineered to turn visitors into real customers.
             </p>
+
+            {/* Quick Trust Badges */}
+            <div className="flex flex-wrap items-center gap-3 mt-5">
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.('privacy')}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-300 transition-colors shadow-xs cursor-pointer"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
+                <span>Verified Privacy Policy</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.('terms')}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-300 transition-colors shadow-xs cursor-pointer"
+              >
+                <Scale className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Terms of Service</span>
+              </button>
+            </div>
           </div>
 
           {/* Column 2: Navigation Links */}
@@ -111,26 +132,50 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) =>
                 </div>
               </a>
             </div>
+
+            {/* Legal Information Section */}
+            <div className="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800/80">
+              <h5 className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                Legal & Compliance
+              </h5>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px]">
+                <button
+                  type="button"
+                  onClick={() => onOpenLegal?.('privacy')}
+                  className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+                <span className="text-slate-300 dark:text-slate-700">•</span>
+                <button
+                  type="button"
+                  onClick={() => onOpenLegal?.('terms')}
+                  className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
+                >
+                  Terms of Service
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom copyright & legal row */}
+        {/* Bottom copyright row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2">
-            <p>© 2026 Webvia. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-center sm:text-left">
+            <span>© 2026 Webvia. All rights reserved.</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <button
               type="button"
-              onClick={onOpenPrivacy}
-              className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+              onClick={() => onOpenLegal?.('privacy')}
+              className="text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 underline cursor-pointer"
             >
               Privacy Policy
             </button>
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <button
               type="button"
-              onClick={onOpenTerms}
-              className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors underline-offset-4 hover:underline"
+              onClick={() => onOpenLegal?.('terms')}
+              className="text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 underline cursor-pointer"
             >
               Terms of Service
             </button>
@@ -139,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) =>
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
@@ -149,3 +194,4 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacy, onOpenTerms }) =>
     </footer>
   );
 };
+
