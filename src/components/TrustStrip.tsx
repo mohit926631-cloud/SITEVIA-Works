@@ -66,7 +66,7 @@ export const TrustStrip: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="rounded-2xl p-4 sm:p-5 bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center text-center group cursor-default"
+                className="rounded-2xl p-4 sm:p-5 bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center text-center group cursor-default card-hover-glow"
               >
                 <div className={`p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 ${item.iconColor} mb-3 group-hover:scale-110 transition-transform duration-200`}>
                   <Icon className="w-5 h-5 sm:w-6 sm:h-6" />

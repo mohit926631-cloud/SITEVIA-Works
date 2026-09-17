@@ -9,15 +9,15 @@ import {
 } from './types';
 
 export const VITEWEB_WHATSAPP_NUMBER = "919511007593";
-export const VITEWEB_EMAIL = "mohit926631@gmail.com";
+export const VITEWEB_EMAIL = "siteviaworks@zohomail.in";
 export const VITEWEB_INSTAGRAM = "https://instagram.com";
 export const VITEWEB_GITHUB = "https://github.com";
 
-// Compatibility aliases
-export const WEBVIA_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
-export const WEBVIA_EMAIL = VITEWEB_EMAIL;
-export const WEBVIA_INSTAGRAM = VITEWEB_INSTAGRAM;
-export const WEBVIA_GITHUB = VITEWEB_GITHUB;
+// SITEVIA WORKS official constants
+export const SITEVIA_WORKS_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
+export const SITEVIA_WORKS_EMAIL = VITEWEB_EMAIL;
+export const SITEVIA_WORKS_INSTAGRAM = VITEWEB_INSTAGRAM;
+export const SITEVIA_WORKS_GITHUB = VITEWEB_GITHUB;
 export const SITEVIA_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
 export const SITEVIA_EMAIL = VITEWEB_EMAIL;
 export const SITEVIA_INSTAGRAM = VITEWEB_INSTAGRAM;
@@ -67,16 +67,16 @@ export const FEATURE_OPTIONS = [
 ];
 
 export const BUDGET_OPTIONS = [
-  '₹1,999 (Starter Plan)',
-  '₹3,499 (Business Plan - Most Popular)',
-  '₹5,999 (Professional Plan)',
+  '₹2,999 (Starter Plan)',
+  '₹5,499 (Business Plan - Most Popular)',
+  '₹7,999 (Premium Plan)',
   'Flexible / Let\'s discuss',
 ];
 
 export const PAGE_OPTIONS = [
-  '1–3 Pages (Starter)',
-  '4–7 Pages (Business)',
-  '7–10+ Pages (Professional)',
+  'Up to 3 Pages (Starter)',
+  'Up to 6 Pages (Business)',
+  'Up to 10 Pages (Premium)',
 ];
 
 export const DEMO_PROJECTS: ProjectItem[] = [
@@ -360,64 +360,68 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     id: 'starter',
     name: 'Starter',
-    price: '₹1,999',
-    priceNum: 1999,
-    subtitle: 'Ideal for simple websites, single pages, and personal portfolios.',
-    pages: '1–3 pages',
+    price: '₹2,999',
+    priceNum: 2999,
+    subtitle: 'Suitable for individuals and small businesses',
+    pages: 'Up to 3 custom pages',
     features: [
-      '1–3 pages',
-      'Mobile-first responsive design',
+      'Professional responsive website',
+      'Up to 3 custom pages',
+      'Mobile-first design',
       'WhatsApp integration',
-      'Google Maps',
       'Contact section',
-      'Deployment',
+      'Social media links',
+      'Basic SEO',
+      'Fast loading',
+      '15 days support',
     ],
     ctaText: 'Choose Starter →',
-    websiteTypeVal: 'Starter — ₹1,999',
+    websiteTypeVal: 'Starter — ₹2,999',
   },
   {
     id: 'business',
     name: 'Business',
-    price: '₹3,499',
-    priceNum: 3499,
-    subtitle: 'Perfect for salons, restaurants, gyms, clinics & local businesses.',
+    price: '₹5,499',
+    priceNum: 5499,
+    subtitle: 'Suitable for growing businesses',
     badge: 'MOST POPULAR',
     isPopular: true,
-    pages: '4–7 pages',
+    pages: 'Up to 6 custom pages',
     features: [
-      '4–7 pages',
-      'Custom modern design',
+      'Up to 6 custom pages',
+      'Premium mobile-first design',
       'WhatsApp integration',
+      'Contact form',
       'Google Maps',
-      'Gallery',
-      'Services / Products section',
-      'Contact / enquiry form',
-      'Animations',
-      'Deployment',
+      'Social media integration',
+      'Basic SEO',
+      'Fast loading',
+      '1 month support',
     ],
     ctaText: 'Choose Business →',
-    websiteTypeVal: 'Business — ₹3,499',
+    websiteTypeVal: 'Business — ₹5,499',
   },
   {
-    id: 'professional',
-    name: 'Professional',
-    price: '₹5,999',
-    priceNum: 5999,
-    subtitle: 'Comprehensive high-impact website with advanced interactions and booking.',
-    pages: '7–10+ pages',
+    id: 'premium',
+    name: 'Premium',
+    price: '₹7,999',
+    priceNum: 7999,
+    subtitle: 'Suitable for businesses wanting a more advanced website',
+    pages: 'Up to 10 custom pages',
     features: [
-      '7–10+ pages',
-      'Highly customized design',
-      'Advanced sections',
-      'Gallery',
+      'Up to 10 custom pages',
+      'Advanced custom design',
+      'Premium animations/interactions',
       'WhatsApp integration',
+      'Contact form',
       'Google Maps',
-      'Enquiry / booking features',
-      'Advanced interactions',
-      'Deployment',
+      'Social media integration',
+      'SEO-ready structure',
+      'Performance optimization',
+      '2 months support',
     ],
-    ctaText: 'Choose Professional →',
-    websiteTypeVal: 'Professional — ₹5,999',
+    ctaText: 'Choose Premium →',
+    websiteTypeVal: 'Premium — ₹7,999',
   },
 ];
 
@@ -516,51 +520,51 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'How much does a website cost?',
-    answer: 'Our launch pricing offers 3 transparent packages: 🌱 Starter at ₹1,999 (1–3 pages), ⭐ Business at ₹3,499 (4–7 pages with custom modern design, gallery, and animations - MOST POPULAR), and 🚀 Professional at ₹5,999 (7–10+ pages with advanced sections and booking features). All packages include mobile-first design, WhatsApp integration, Google Maps, and live deployment with no hidden fees.',
+    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 15 days support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 month support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 2 months support). All packages include live deployment and 100% code ownership.',
   },
   {
     id: 'faq-2',
-    question: 'How long does a website take to build?',
-    answer: 'A standard Starter or Business website is typically designed, developed, reviewed, and deployed within 3 to 7 business days once we receive your business details. Larger Professional projects generally take 7 to 10 business days.',
+    question: 'Do I own the website code once completed?',
+    answer: 'Yes, absolutely! 100% full ownership of the custom code, design layouts, and digital assets belongs to you upon project delivery. There are no proprietary lock-ins, recurring platform commissions, or cancellation hurdles. You can host it anywhere you like.',
   },
   {
     id: 'faq-3',
-    question: 'Can you build a website for my local business?',
-    answer: 'Yes, absolutely! Local businesses are our specialty. We build websites for salons, restaurants, cafés, fitness gyms, dental clinics, retail shops, contractors, and service providers with built-in Google Maps directions, WhatsApp buttons, photo galleries, and opening hours.',
+    question: 'How long does a website take to build?',
+    answer: 'A standard Starter or Business website is typically designed, developed, reviewed on staging, and deployed live within 3 to 7 business days once we receive your brand materials and details. Premium or complex multi-page projects generally take 7 to 10 business days.',
   },
   {
     id: 'faq-4',
-    question: 'Can I request changes during development?',
-    answer: 'Yes! Every project includes a dedicated review milestone before launch. You get to review the website on your phone and computer, and we will make the agreed revisions to ensure the text, colors, layouts, and images match your vision before going live.',
+    question: 'Can you build a website for my specific business or industry?',
+    answer: 'Yes! We specialize in custom business websites for cafés, restaurants, salons, clinics, fitness centers, freelance consultants, boutiques, local service providers, and personal brand portfolios. Every site is tailored with fast loading speeds, local SEO structure, and high-conversion mobile layouts.',
   },
   {
     id: 'faq-5',
-    question: 'Do you provide domain and hosting assistance?',
-    answer: 'We assist you in selecting and configuring high-speed, modern hosting and connecting your custom domain (e.g. yourbusiness.com). Domain registration fees and third-party hosting plans (if applicable) are paid directly to domain providers or billed separately at actual cost.',
+    question: 'How does the WhatsApp integration work?',
+    answer: 'Every website comes configured with custom one-tap WhatsApp trigger buttons and floating action triggers. When potential clients click to inquire, order, or book an appointment, a pre-formatted message opens directly in their WhatsApp chat with your business number.',
   },
   {
     id: 'faq-6',
-    question: 'Can you add WhatsApp?',
-    answer: 'Yes, WhatsApp is our primary integration! Every website we build comes configured with direct WhatsApp chat triggers, pre-filled enquiry messages, or ordering links so your customers can start a conversation with you in one click.',
+    question: 'Can I request revisions before the website goes live?',
+    answer: 'Yes! Every project includes a dedicated staging review milestone. We send you a private preview link so you can test the site live on your mobile phone and computer. We adjust copy, colors, imagery, and component alignment until you are fully confident and satisfied before launch.',
   },
   {
     id: 'faq-7',
-    question: 'Can you add Google Maps?',
-    answer: 'Yes! We embed interactive or pinpointed Google Maps so your visitors can easily see your physical store, clinic, or restaurant location and tap for turn-by-turn navigation.',
+    question: 'Do you help connect my custom domain name?',
+    answer: 'Yes! We guide you step-by-step through configuring your custom domain name (e.g. yourbusiness.com) to high-speed global hosting infrastructure (like Vercel, Cloudflare, or Netlify) with free SSL encryption certificate for secure HTTPS browsing.',
   },
   {
     id: 'faq-8',
-    question: 'Can you redesign my existing website?',
-    answer: 'Yes. If your current website looks dated, loads slowly, or does not look good on smartphones, we can completely redesign it from the ground up with a modern, mobile-first design while preserving your existing domain and brand identity.',
+    question: 'What do I need to provide to get started?',
+    answer: 'Simply share your business name, logo (if you have one), list of services or products, basic contact details, and any color or style preferences. If you don’t have prepared copy or photos yet, we can help structure clean placeholder layouts and guide you on what to include.',
   },
   {
     id: 'faq-9',
-    question: 'How do I start a project?',
-    answer: 'Simply fill out the project enquiry form on this page or send us a message on WhatsApp (+91 95110 07593). Tell us about your business, the pages you need, and any reference websites you like. We will send you a clear recommendation and quote immediately.',
+    question: 'What kind of support is included after launch?',
+    answer: 'Every package includes dedicated post-launch technical warranty support (15 days for Starter, 30 days for Business, 60 days for Premium) to ensure your contact forms, links, Google Maps pins, and WhatsApp triggers operate without a hitch.',
   },
   {
     id: 'faq-10',
-    question: 'What happens after I contact ViteWEB?',
-    answer: 'We will respond promptly on WhatsApp or email to discuss your requirements, confirm the best package for your budget, agree on timeline and content, and immediately begin planning your custom website.',
+    question: 'How do I get started with SITEVIA WORKS?',
+    answer: 'Click "Contact & Enquiry" or reach out directly on WhatsApp (+91 95110 07593). Tell us about your business goals and the package that fits your needs, and we will get back to you immediately with a clear scope and timeline.',
   },
 ];

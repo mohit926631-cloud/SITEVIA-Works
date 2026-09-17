@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { MessageCircle, Mail, Send, Phone, Clock, CheckCircle2, ShieldCheck, Lock } from 'lucide-react';
 import { VITEWEB_EMAIL } from '../constants';
 import { createWhatsAppUrl, createQuickWhatsAppUrl } from '../utils/whatsapp';
-import { LegalTab } from './LegalModal';
-
 interface ContactSectionProps {
-  onOpenLegal?: (tab: LegalTab) => void;
+  onOpenLegal?: (tab: 'privacy' | 'terms') => void;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) => {
@@ -71,7 +69,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) =
                   +91 95110 07593
                 </p>
                 <a
-                  href={createQuickWhatsAppUrl('Hi ViteWEB! I have a question regarding a new website.')}
+                  href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I have a question regarding a new website.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all"
@@ -101,7 +99,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenLegal }) =
                   {VITEWEB_EMAIL}
                 </p>
                 <a
-                  href={`mailto:${VITEWEB_EMAIL}?subject=Website%20Inquiry%20for%20ViteWEB`}
+                  href={`mailto:${VITEWEB_EMAIL}?subject=Website%20Inquiry%20for%20SITEVIA%20WORKS`}
                   className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all"
                 >
                   <Mail className="w-4 h-4" />

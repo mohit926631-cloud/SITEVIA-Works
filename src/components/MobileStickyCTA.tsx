@@ -42,7 +42,7 @@ export const MobileStickyCTA: React.FC<MobileStickyCTAProps> = ({ onGetWebsiteCl
         {/* WhatsApp Button */}
         <a
           id="mobile-sticky-whatsapp-btn"
-          href={createQuickWhatsAppUrl('Hi ViteWEB! I would like to build a website for my business.')}
+          href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I would like to build a website for my business.')}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-sm shadow-sm min-h-[46px] transition-transform active:scale-[0.98]"

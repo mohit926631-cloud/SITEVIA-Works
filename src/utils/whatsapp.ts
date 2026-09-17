@@ -14,7 +14,7 @@ export function createWhatsAppUrl(data: Partial<ProjectFormData>): string {
   const email = data.email?.trim() || 'Not specified';
   const requirements = data.requirements?.trim() || 'None provided';
 
-  const message = `Hello ViteWEB 👋
+  const message = `Hello SITEVIA WORKS 👋
 
 I'd like to discuss a website project.
 
@@ -46,13 +46,13 @@ ${email}
 Additional Requirements:
 ${requirements}
 
-Sent via ViteWEB Website.`;
+Sent via SITEVIA WORKS Website.`;
 
   return `https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 export function createQuickWhatsAppUrl(customGreeting?: string): string {
-  const greeting = customGreeting || "Hello ViteWEB 👋 I'm interested in getting a custom website built for my business. Let's discuss details and pricing!";
+  const greeting = customGreeting || "Hello SITEVIA WORKS 👋 I'm interested in getting a custom website built for my business. Let's discuss details and pricing!";
   return `https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encodeURIComponent(greeting)}`;
 }
 

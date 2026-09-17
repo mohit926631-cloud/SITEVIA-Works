@@ -20,8 +20,8 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
   };
 
   const currentIconClass = iconSizes[size];
-  const logoSrc = "/viteweb-logo.png";
-  const fallbackLogoSrc = "https://i.ibb.co/DPztyt6Z/file-000000003d6882119dfb99f4cee0a98a.png";
+  const logoSrc = "/webviaworks-logo.png";
+  const fallbackLogoSrc = "https://i.ibb.co/LdghgrVq/153554.png";
 
   // 1. Icon Only variant
   if (variant === 'icon') {
@@ -29,8 +29,8 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
       <div className={`inline-flex items-center justify-center ${className}`}>
         <img
           src={logoSrc}
-          alt="ViteWEB Logo Icon"
-          className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none`}
+          alt="SITEVIA WORKS Logo Icon"
+          className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none rounded-xl`}
           loading="eager"
           onError={(e) => {
             (e.target as HTMLImageElement).src = fallbackLogoSrc;
@@ -46,21 +46,21 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
       <div className={`inline-flex flex-col items-center text-center select-none ${className}`}>
         <img
           src={logoSrc}
-          alt="ViteWEB Brand Logo"
-          className={`${size === 'xl' ? 'h-28 sm:h-32' : size === 'lg' ? 'h-20 sm:h-24' : 'h-14 sm:h-16'} w-auto object-contain transition-transform duration-300 hover:scale-105 select-none drop-shadow-[0_10px_25px_rgba(0,102,255,0.25)]`}
+          alt="SITEVIA WORKS Brand Logo"
+          className={`${size === 'xl' ? 'h-28 sm:h-32' : size === 'lg' ? 'h-20 sm:h-24' : 'h-16 sm:h-20'} w-auto object-contain transition-transform duration-300 hover:scale-105 select-none drop-shadow-[0_10px_25px_rgba(0,102,255,0.25)] rounded-2xl`}
           loading="eager"
           onError={(e) => {
             (e.target as HTMLImageElement).src = fallbackLogoSrc;
           }}
         />
 
-        {/* Wordmark: VITE (Navy/White) + WEB (Vibrant Blue to Purple Gradient) */}
+        {/* Wordmark: SITEVIA (Navy/White) + WORKS (Vibrant Blue to Purple Gradient) */}
         <div className="mt-4 flex items-baseline tracking-tight font-black font-sans">
           <span className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-950 dark:text-white font-extrabold uppercase">
-            VITE
+            SITEVIA
           </span>
-          <span className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] font-extrabold uppercase">
-            WEB
+          <span className="ml-2 text-3xl sm:text-4xl lg:text-5xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] font-extrabold uppercase">
+            WORKS
           </span>
         </div>
 
@@ -73,10 +73,10 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
           <div className="h-[2px] w-6 sm:w-10 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#9333EA]" />
         </div>
 
-        {/* Slogan Quote: YOUR VISION, OUR CODE */}
-        <div className="mt-2">
-          <span className="text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 tracking-[0.22em] uppercase">
-            YOUR VISION, OUR CODE
+        {/* Slogan Quote: Your Vison, Our code */}
+        <div className="mt-2.5 px-3 py-1 rounded-full bg-blue-500/10 dark:bg-blue-400/10 border border-blue-500/20">
+          <span className="text-[11px] sm:text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-[0.18em] uppercase">
+            Your Vison, Our code
           </span>
         </div>
       </div>
@@ -88,8 +88,8 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
     <div className={`inline-flex items-center gap-2.5 sm:gap-3 group select-none ${className}`}>
       <img
         src={logoSrc}
-        alt="ViteWEB Logo"
-        className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none`}
+        alt="SITEVIA WORKS Logo"
+        className={`${currentIconClass} object-contain transition-transform duration-300 group-hover:scale-105 select-none rounded-lg`}
         loading="eager"
         onError={(e) => {
           (e.target as HTMLImageElement).src = fallbackLogoSrc;
@@ -98,15 +98,15 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
       <div className="flex flex-col">
         <div className="flex items-baseline leading-none font-sans font-black">
           <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 dark:text-white transition-colors uppercase">
-            VITE
+            SITEVIA
           </span>
-          <span className="text-xl sm:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] transition-colors uppercase">
-            WEB
+          <span className="ml-1.5 text-xl sm:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#00D2FF] to-[#9333EA] transition-colors uppercase">
+            WORKS
           </span>
         </div>
         <div className="flex items-center gap-1.5 mt-1">
           <span className="text-[8px] sm:text-[9px] font-bold text-slate-500 dark:text-slate-400 tracking-wider uppercase">
-            WEBSITES • DESIGNS • SOLUTIONS
+            Your Vison, Our code
           </span>
         </div>
       </div>
@@ -117,5 +117,6 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
 // Aliases for compatibility across existing components
 export const WebviaLogo = ViteWebLogo;
 export const SiteviaLogo = ViteWebLogo;
+export const WebviaWorksLogo = ViteWebLogo;
 
 

@@ -83,3 +83,6 @@ export interface ProjectFormData {
   email: string;
   requirements: string;
 }
+
+export type PageType = 'home' | 'services' | 'pricing' | 'about' | 'contact' | 'terms' | 'privacy';
+

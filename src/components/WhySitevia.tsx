@@ -73,7 +73,7 @@ export const WhyWebvia: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-            Why Small Businesses Choose ViteWEB
+            Why Small Businesses Choose SITEVIA WORKS
           </h2>
           <p className="text-base sm:text-lg text-blue-200/80 max-w-2xl mx-auto mb-14">
             We specialize in creating affordable, professional websites that help small businesses grow online and attract more customers.

@@ -175,7 +175,7 @@ export const AboutWebvia: React.FC = () => {
                   <span>{lang === 'en' ? 'OUR STORY & PURPOSE' : 'हमारा उद्देश्य और शुरुआत'}</span>
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  {lang === 'en' ? 'ViteWEB started with a simple idea:' : 'वाइटवेब (ViteWEB) की शुरुआत एक सरल विचार से हुई:'}
+                  {lang === 'en' ? 'SITEVIA WORKS started with a simple idea:' : 'साइटविया वर्क्स (SITEVIA WORKS) की शुरुआत एक सरल विचार से हुई:'}
                 </h3>
               </div>
               <WebviaLogo variant="horizontal" size="md" />
@@ -205,11 +205,11 @@ export const AboutWebvia: React.FC = () => {
             <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-8 font-normal">
               {lang === 'en' ? (
                 <>
-                  That’s why <strong className="text-slate-900 dark:text-white">ViteWEB</strong> was created — to make professional websites and online systems <span className="underline decoration-blue-500 decoration-2 underline-offset-4 font-semibold">simple, affordable, and actually useful</span> for every small business.
+                  That’s why <strong className="text-slate-900 dark:text-white">SITEVIA WORKS</strong> was created — to make professional websites and online systems <span className="underline decoration-blue-500 decoration-2 underline-offset-4 font-semibold">simple, affordable, and actually useful</span> for every small business.
                 </>
               ) : (
                 <>
-                  इसीलिए <strong className="text-slate-900 dark:text-white">वाइटवेब (ViteWEB)</strong> का जन्म हुआ — ताकि पेशेवर वेबसाइट्स और ऑनलाइन सिस्टम्स को हर छोटे व्यवसाय के लिए <span className="underline decoration-blue-500 decoration-2 underline-offset-4 font-semibold">सरल, किफायती और बेहद उपयोगी</span> बनाया जा सके।
+                  इसीलिए <strong className="text-slate-900 dark:text-white">साइटविया वर्क्स (SITEVIA WORKS)</strong> का जन्म हुआ — ताकि पेशेवर वेबसाइट्स और ऑनलाइन सिस्टम्स को हर छोटे व्यवसाय के लिए <span className="underline decoration-blue-500 decoration-2 underline-offset-4 font-semibold">सरल, किफायती और बेहद उपयोगी</span> बनाया जा सके।
                 </>
               )}
             </p>
@@ -236,7 +236,7 @@ export const AboutWebvia: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Section 2: Struggles vs ViteWEB Solutions (Interactive Comparison Grid) */}
+          {/* Section 2: Struggles vs SITEVIA WORKS Solutions (Interactive Comparison Grid) */}
           <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1.5 mb-2">
               <TrendingUp className="w-3.5 h-3.5" />
@@ -247,8 +247,8 @@ export const AboutWebvia: React.FC = () => {
             </h3>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 max-w-xl mx-auto">
               {lang === 'en'
-                ? 'We saw business owners losing sales due to 4 critical bottlenecks. Here is how ViteWEB transforms them into revenue.'
-                : 'हमने देखा कि 4 मुख्य कारणों से बिजनेस का नुकसान हो रहा था। देखिए वाइटवेब (ViteWEB) इसे कैसे मुनाफे में बदलता है।'}
+                ? 'We saw business owners losing sales due to 4 critical bottlenecks. Here is how SITEVIA WORKS transforms them into revenue.'
+                : 'हमने देखा कि 4 मुख्य कारणों से बिजनेस का नुकसान हो रहा था। देखिए साइटविया वर्क्स (SITEVIA WORKS) इसे कैसे मुनाफे में बदलता है।'}
             </p>
           </div>
 
@@ -291,7 +291,7 @@ export const AboutWebvia: React.FC = () => {
                         <div>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] uppercase font-black tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-md">
-                              {lang === 'en' ? 'VITEWEB SOLUTION' : 'वाइटवेब समाधान'}
+                              {lang === 'en' ? 'SITEVIA WORKS SOLUTION' : 'साइटविया वर्क्स समाधान'}
                             </span>
                           </div>
                           <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-1.5">
@@ -407,7 +407,7 @@ export const AboutWebvia: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
               <MagneticButton
-                href={createQuickWhatsAppUrl('Hi ViteWEB! I read your story and I want to build a website for my business.')}
+                href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I read your story and I want to build a website for my business.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="emerald"

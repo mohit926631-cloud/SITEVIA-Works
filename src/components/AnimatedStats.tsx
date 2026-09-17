@@ -56,7 +56,8 @@ const StatCounter: React.FC<StatItemProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center text-center relative overflow-hidden group hover:shadow-lg transition-all"
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center text-center relative overflow-hidden group card-hover-glow transition-all"
     >
       <div className={`p-3 rounded-xl ${color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
         <Icon className="w-5 h-5 sm:w-6 sm:h-6" />

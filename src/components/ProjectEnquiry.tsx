@@ -12,13 +12,11 @@ import {
 import { ProjectFormData } from '../types';
 import { createWhatsAppUrl } from '../utils/whatsapp';
 import { MessageSquare, Send, Check, Copy, ShieldCheck, Lock } from 'lucide-react';
-import { LegalTab } from './LegalModal';
-
 interface ProjectEnquiryProps {
   initialPackage?: string;
   initialWebsiteType?: string;
   initialBusinessType?: string;
-  onOpenLegal?: (tab: LegalTab) => void;
+  onOpenLegal?: (tab: 'privacy' | 'terms') => void;
 }
 
 export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({

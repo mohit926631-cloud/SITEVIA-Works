@@ -8,9 +8,18 @@ export const FloatingWhatsApp: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <aside
+    <motion.aside
       id="desktop-floating-whatsapp-container"
       aria-label="Direct WhatsApp Support"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      initial={{ opacity: 0, y: 32, x: 20, scale: 0.88 }}
+      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+      transition={{
+        duration: 0.7,
+        delay: 0.35,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="hidden md:block fixed bottom-6 right-6 z-40"
     >
       {/* Floating parallax & gentle hover motion container */}
@@ -26,21 +35,28 @@ export const FloatingWhatsApp: React.FC = () => {
         }}
         className="relative flex items-center"
       >
-        {/* Hover / Expandable Tooltip Card with tactile Spring physics and entrance delay */}
+        {/* Hover / Expandable Tooltip Card with tactile Spring physics and slide-out to the right */}
         <AnimatePresence>
           {showTooltip && (
             <motion.div
               key="desktop-whatsapp-tooltip"
               id="desktop-whatsapp-tooltip"
-              initial={{ opacity: 0, y: 16, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95, transition: { duration: 0.15, ease: 'easeOut' } }}
+              initial={{ opacity: 0, y: 12, x: 10, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+              exit={{
+                opacity: 0,
+                x: 28,
+                y: 4,
+                scale: 0.94,
+                filter: 'blur(2px)',
+                transition: { duration: 0.22, ease: [0.32, 0, 0.67, 0] },
+              }}
               transition={{
                 type: 'spring',
                 stiffness: 380,
                 damping: 26,
                 mass: 0.8,
-                delay: 0.18,
+                delay: 0.15,
               }}
               className="absolute bottom-16 right-0 w-80 bg-slate-900/80 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_20px_rgba(16,185,129,0.15)] text-left relative overflow-hidden"
             >
@@ -54,7 +70,7 @@ export const FloatingWhatsApp: React.FC = () => {
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-100 flex items-center gap-1.5">
-                    <span>ViteWEB Direct Support</span>
+                    <span>SITEVIA WORKS Direct Support</span>
                     <Sparkles className="w-3 h-3 text-emerald-400" />
                   </span>
                 </div>
@@ -91,7 +107,7 @@ export const FloatingWhatsApp: React.FC = () => {
           whileHover={{ scale: 1.06, y: -2 }}
           whileTap={{ scale: 0.95 }}
           className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-600/90 via-teal-600/90 to-emerald-600/90 backdrop-blur-xl border border-emerald-400/40 text-white pl-4 pr-5 py-3.5 rounded-full shadow-[0_12px_36px_rgba(16,185,129,0.35),0_0_20px_rgba(5,150,105,0.2)] hover:shadow-[0_16px_44px_rgba(16,185,129,0.5),0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/40 overflow-hidden"
-          aria-label="Chat with ViteWEB on WhatsApp"
+          aria-label="Chat with SITEVIA WORKS on WhatsApp"
         >
           {/* Subtle glass specular sweep */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/20 pointer-events-none" />
@@ -120,6 +136,6 @@ export const FloatingWhatsApp: React.FC = () => {
           </div>
         </motion.a>
       </motion.div>
-    </aside>
+    </motion.aside>
   );
 };

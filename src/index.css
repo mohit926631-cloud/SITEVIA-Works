@@ -19,6 +19,17 @@
   }
 }
 
+/* Cyber-Luxury Ambient Background Grid */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.dark .bg-grid-pattern {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
 /* Day / Night icon morph & flip animation */
 @keyframes themeFlip {
   0% {
@@ -72,6 +83,24 @@
   pointer-events: none;
 }
 
+/* Smooth Floating Animation for Badges */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatSlow 4.5s ease-in-out 1.5s infinite;
+}
+
 /* Animated Flowing Line for Timeline */
 @keyframes flowingGradient {
   0% {
@@ -88,6 +117,72 @@
 .animate-flowing-timeline {
   background-size: 200% 200%;
   animation: flowingGradient 4s ease infinite;
+}
+
+/* Glowing Border Pulse */
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 25px rgba(14, 165, 233, 0.5));
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3.5s ease-in-out infinite;
+}
+
+/* Animated Shimmer Text */
+@keyframes shimmerText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-shimmer-text {
+  background-size: 200% auto;
+  animation: shimmerText 5s ease-in-out infinite;
+}
+
+/* Atmospheric Aurora Wave */
+@keyframes auroraWave {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(24px, -18px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+.animate-aurora-wave {
+  animation: auroraWave 9s ease-in-out infinite alternate;
+}
+
+/* Radiant card border glow utility */
+.card-hover-glow {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover-glow:hover {
+  box-shadow: 0 16px 32px -8px rgba(59, 130, 246, 0.16), 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+/* Glass Card Premium */
+.glass-card-premium {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
 /* Custom utility for clean horizontal swiping on mobile */

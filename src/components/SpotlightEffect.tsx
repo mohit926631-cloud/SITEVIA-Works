@@ -65,9 +65,9 @@ export const SpotlightEffect: React.FC = () => {
     >
       <div
         ref={spotlightRef}
-        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
+        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(6,182,212,0.04) 40%, rgba(0,0,0,0) 70%)',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(6,182,212,0.06) 35%, rgba(0,0,0,0) 70%)',
           willChange: 'transform',
         }}
       />

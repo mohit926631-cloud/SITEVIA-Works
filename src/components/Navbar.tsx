@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { SiteviaLogo } from './SiteviaLogo';
-import { Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
+import { PageType } from '../types';
+import { motion } from 'motion/react';
 
 interface NavbarProps {
-  onNavigateToSection?: (sectionId: string) => void;
-  activeSection?: string;
+  currentPage: PageType;
+  onNavigatePage: (page: PageType) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSection = 'home' }) => {
+interface NavItem {
+  id: PageType;
+  label: string;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const [animatingTheme, setAnimatingTheme] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,37 +34,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleThemeToggle = () => {
-    setAnimatingTheme(true);
-    toggleTheme();
-    setTimeout(() => setAnimatingTheme(false), 500);
-  };
-
-  const navLinks = [
-    { label: 'Home', href: '#home', id: 'home' },
-    { label: 'Services', href: '#services', id: 'services' },
-    { label: 'Demos', href: '#work', id: 'work' },
-    { label: 'Why ViteWEB', href: '#why-sitevia', id: 'why-sitevia' },
-    { label: 'How It Works', href: '#how-it-works', id: 'how-it-works' },
-    { label: 'Pricing', href: '#pricing', id: 'pricing' },
-    { label: 'Industries', href: '#who-we-build-for', id: 'who-we-build-for' },
-    { label: 'About', href: '#about', id: 'about' },
-    { label: 'FAQ', href: '#faq', id: 'faq' },
-    { label: 'Contact', href: '#contact', id: 'contact' },
+  const navItems: NavItem[] = [
+    { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services & Work' },
+    { id: 'pricing', label: 'Pricing & Plans' },
+    { id: 'about', label: 'About Us' },
+    { id: 'contact', label: 'Contact & Enquiry' },
   ];
 
-  const handleLinkClick = (href: string, e: React.MouseEvent) => {
-    e.preventDefault();
+  const handlePageClick = (page: PageType) => {
     setMobileMenuOpen(false);
-    const targetId = href.replace('#', '');
-    if (onNavigateToSection) {
-      onNavigateToSection(targetId);
-    } else {
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    onNavigatePage(page);
   };
 
   return (
@@ -76,93 +60,68 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a
+            <button
               id="header-logo-link"
-              href="#home"
-              onClick={(e) => handleLinkClick('#home', e)}
-              className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl p-1 transition-transform hover:scale-102"
-              aria-label="ViteWEB Home"
+              type="button"
+              onClick={() => handlePageClick('home')}
+              className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl p-1 transition-transform hover:scale-102 cursor-pointer text-left"
+              aria-label="SITEVIA WORKS Home"
             >
               <SiteviaLogo variant="horizontal" size="md" />
-            </a>
+            </button>
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Navigation Links with animated active pill */}
             <nav
               id="desktop-nav"
-              className="hidden lg:flex items-center gap-1"
+              className="hidden lg:flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800"
             >
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.id;
+              {navItems.map((item) => {
+                const isActive = currentPage === item.id;
                 return (
-                  <a
-                    key={link.label}
-                    id={`nav-link-${link.label.toLowerCase()}`}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(link.href, e)}
-                    className={`text-sm font-semibold transition-colors duration-150 px-4 py-2 rounded-xl ${
+                  <button
+                    key={item.id}
+                    id={`nav-link-${item.id}`}
+                    type="button"
+                    onClick={() => handlePageClick(item.id)}
+                    className={`relative text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'text-blue-600 dark:text-cyan-400 bg-blue-50/80 dark:bg-blue-950/40 font-bold'
-                        : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-slate-800/60'
+                        ? 'text-white'
+                        : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white'
                     }`}
                   >
-                    {link.label}
-                  </a>
+                    {isActive && (
+                      <motion.div
+                        layoutId="navbar-active-pill"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        className="absolute inset-0 rounded-xl bg-blue-600 dark:bg-blue-600 shadow-sm"
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+                  </button>
                 );
               })}
             </nav>
 
-            {/* Desktop Right Controls: Light/Dark Mode + "Get Started" Blue CTA */}
+            {/* Desktop Right Controls: "Start Project" Blue CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <button
-                id="theme-toggle-btn"
-                type="button"
-                onClick={handleThemeToggle}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-sm flex items-center justify-center min-w-[40px] min-h-[40px] relative overflow-hidden group"
-                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              >
-                <div className={animatingTheme ? 'theme-icon-animate' : 'transition-transform duration-300 group-hover:rotate-12'}>
-                  {theme === 'dark' ? (
-                    <Sun className="w-4 h-4 text-amber-400" />
-                  ) : (
-                    <Moon className="w-4 h-4 text-blue-600" />
-                  )}
-                </div>
-              </button>
-
               <button
                 id="header-get-started-cta"
                 type="button"
-                onClick={(e) => handleLinkClick('#contact', e)}
-                className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-600/20 transition-all flex items-center gap-1.5"
+                onClick={() => handlePageClick('contact')}
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 transition-all flex items-center gap-1.5 cursor-pointer"
               >
-                <span>Get Started</span>
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Start Project</span>
               </button>
             </div>
 
-            {/* Mobile Actions: Theme Toggle + Hamburger */}
+            {/* Mobile Actions: Hamburger Menu Toggle */}
             <div className="md:hidden flex items-center gap-2">
-              <button
-                id="mobile-theme-toggle-btn"
-                type="button"
-                onClick={handleThemeToggle}
-                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 min-w-[42px] min-h-[42px] flex items-center justify-center"
-                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              >
-                <div className={animatingTheme ? 'theme-icon-animate' : ''}>
-                  {theme === 'dark' ? (
-                    <Sun className="w-4 h-4 text-amber-400" />
-                  ) : (
-                    <Moon className="w-4 h-4 text-blue-600" />
-                  )}
-                </div>
-              </button>
-
               <button
                 id="mobile-menu-toggle-btn"
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:text-black dark:hover:text-white min-w-[44px] min-h-[44px]"
+                className="inline-flex items-center justify-center p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:text-black dark:hover:text-white min-w-[44px] min-h-[44px] cursor-pointer"
                 aria-expanded={mobileMenuOpen}
                 aria-label="Toggle navigation menu"
               >
@@ -187,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
                 id="mobile-menu-close-btn"
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6" />
@@ -195,24 +154,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
             </div>
 
             {/* Mobile Navigation Links */}
-            <nav className="flex flex-col gap-1 mt-4">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.id;
+            <nav className="flex flex-col gap-1.5 mt-5">
+              {navItems.map((item) => {
+                const isActive = currentPage === item.id;
                 return (
-                  <a
-                    key={link.label}
-                    id={`mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(link.href, e)}
-                    className={`py-3 px-3.5 rounded-xl text-base font-semibold transition-all flex items-center justify-between ${
+                  <button
+                    key={item.id}
+                    id={`mobile-nav-${item.id}`}
+                    type="button"
+                    onClick={() => handlePageClick(item.id)}
+                    className={`py-3.5 px-4 rounded-xl text-base font-semibold transition-all flex items-center justify-between cursor-pointer text-left ${
                       isActive
-                        ? 'text-blue-600 dark:text-cyan-400 bg-blue-50/80 dark:bg-blue-950/40 font-bold'
-                        : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/60'
+                        ? 'text-white bg-blue-600 font-bold shadow-md shadow-blue-600/25'
+                        : 'text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
                     }`}
                   >
-                    <span>{link.label}</span>
-                    <span className="text-xs text-slate-400 dark:text-slate-600 font-mono">→</span>
-                  </a>
+                    <span>{item.label}</span>
+                    <span className="text-xs opacity-70 font-mono">→</span>
+                  </button>
                 );
               })}
             </nav>
@@ -223,10 +182,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigateToSection, activeSecti
             <button
               id="mobile-nav-get-started-btn"
               type="button"
-              onClick={(e) => handleLinkClick('#contact', e)}
-              className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 text-base"
+              onClick={() => handlePageClick('contact')}
+              className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 text-base cursor-pointer"
             >
-              <span>Get Started</span>
+              <span>Start Your Project</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

@@ -2,83 +2,110 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { InfiniteMarquee } from './components/InfiniteMarquee';
-import { TrustStrip } from './components/TrustStrip';
-import { PortfolioSection } from './components/PortfolioSection';
-import { ServicesSection } from './components/ServicesSection';
-import { WhySitevia } from './components/WhySitevia';
-import { HowItWorks } from './components/HowItWorks';
-import { PricingSection } from './components/PricingSection';
-import { WhoWeBuildFor } from './components/WhoWeBuildFor';
-import { AboutSitevia } from './components/AboutSitevia';
-import { FAQSection } from './components/FAQSection';
-import { ProjectEnquiry } from './components/ProjectEnquiry';
-import { ContactSection } from './components/ContactSection';
-import { FinalCTA } from './components/FinalCTA';
+import { HomePage } from './pages/HomePage';
+import { ServicesPage } from './pages/ServicesPage';
+import { PricingPage } from './pages/PricingPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { ThreeCanvas } from './components/ThreeCanvas';
 import { SpotlightEffect } from './components/SpotlightEffect';
-import { LegalModal, LegalTab } from './components/LegalModal';
+import { ScrollProgressBar } from './components/ScrollProgressBar';
+import { PageSkeletonScreen } from './components/PageSkeletonScreen';
+import { PageType } from './types';
+
+const VALID_PAGES: PageType[] = ['home', 'services', 'pricing', 'about', 'contact', 'terms', 'privacy'];
 
 export default function App() {
-  const [selectedPackage, setSelectedPackage] = useState<string>('Business — ₹3,499');
+  const [currentPage, setCurrentPage] = useState<PageType>(() => {
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    if (VALID_PAGES.includes(hash as PageType)) {
+      return hash as PageType;
+    }
+    return 'home';
+  });
+
+  const [isPageTransitioning, setIsPageTransitioning] = useState<boolean>(false);
+  const [targetPage, setTargetPage] = useState<PageType>(currentPage);
+  const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [selectedPackage, setSelectedPackage] = useState<string>('Business — ₹5,499');
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Business Website');
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>('');
-  const [isLegalOpen, setIsLegalOpen] = useState<boolean>(false);
-  const [legalTab, setLegalTab] = useState<LegalTab>('privacy');
 
-  const handleOpenLegal = useCallback((tab: LegalTab) => {
-    setLegalTab(tab);
-    setIsLegalOpen(true);
-  }, []);
+  // Sync state with URL hash
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (VALID_PAGES.includes(hash as PageType) && hash !== currentPage) {
+        const next = hash as PageType;
+        setTargetPage(next);
+        setIsPageTransitioning(true);
+        if (transitionTimerRef.current) {
+          clearTimeout(transitionTimerRef.current);
+        }
+        transitionTimerRef.current = setTimeout(() => {
+          setCurrentPage(next);
+          setIsPageTransitioning(false);
+        }, 340);
+      }
+    };
 
-  const handleCloseLegal = useCallback(() => {
-    setIsLegalOpen(false);
-  }, []);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
+      }
+    };
+  }, [currentPage]);
 
-  const scrollToElementWithOffset = useCallback((id: string, offset = 80) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+  const navigateToPage = useCallback((page: PageType) => {
+    if (page === currentPage && !isPageTransitioning) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
-  }, []);
 
-  const scrollToEnquiry = useCallback(() => {
-    scrollToElementWithOffset('enquiry', 80);
-  }, [scrollToElementWithOffset]);
+    if (transitionTimerRef.current) {
+      clearTimeout(transitionTimerRef.current);
+    }
 
-  const scrollToWork = useCallback(() => {
-    scrollToElementWithOffset('work', 80);
-  }, [scrollToElementWithOffset]);
+    setTargetPage(page);
+    setIsPageTransitioning(true);
+    window.location.hash = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    transitionTimerRef.current = setTimeout(() => {
+      setCurrentPage(page);
+      setIsPageTransitioning(false);
+    }, 340);
+  }, [currentPage, isPageTransitioning]);
+
+  const handleOpenLegal = useCallback((tab: 'privacy' | 'terms') => {
+    navigateToPage(tab === 'terms' ? 'terms' : 'privacy');
+  }, [navigateToPage]);
 
   const handleSelectPricingPlan = useCallback((planVal: string) => {
     setSelectedPackage(planVal);
-    scrollToEnquiry();
-  }, [scrollToEnquiry]);
+    navigateToPage('contact');
+  }, [navigateToPage]);
 
-  const handleDiscussService = useCallback((websiteType: string) => {
+  const handleSelectServiceType = useCallback((websiteType: string) => {
     setSelectedWebsiteType(websiteType);
-    scrollToEnquiry();
-  }, [scrollToEnquiry]);
+    navigateToPage('contact');
+  }, [navigateToPage]);
 
   const handleSelectAudience = useCallback((businessType: string) => {
     setSelectedBusinessType(businessType);
-    scrollToEnquiry();
-  }, [scrollToEnquiry]);
-
-  const handleNavbarNavigate = useCallback((id: string) => {
-    scrollToElementWithOffset(id, 80);
-  }, [scrollToElementWithOffset]);
+    navigateToPage('contact');
+  }, [navigateToPage]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
@@ -88,80 +115,88 @@ export default function App() {
       {/* Dynamic Cursor Spotlight Glow */}
       <SpotlightEffect />
 
-      {/* Fixed Navigation Header */}
-      <Navbar onNavigateToSection={handleNavbarNavigate} />
+      {/* Viewport Scroll Progress Bar */}
+      <ScrollProgressBar />
 
-      {/* Main Content Sections */}
-      <main className="flex-1 relative z-10">
-        {/* 1. Hero Section */}
-        <Hero
-          onExploreWorkClick={scrollToWork}
-          onGetWebsiteClick={scrollToEnquiry}
-        />
+      {/* Fixed Navigation Header with Page Tabs */}
+      <Navbar
+        currentPage={isPageTransitioning ? targetPage : currentPage}
+        onNavigatePage={navigateToPage}
+      />
 
-        {/* 2. Continuous Running Feature Marquee */}
-        <InfiniteMarquee />
+      {/* Page Content Container with Smooth Transition Animations */}
+      <main className="flex-1 relative z-10 pt-20 sm:pt-24 flex flex-col">
+        <AnimatePresence mode="wait">
+          {isPageTransitioning ? (
+            <PageSkeletonScreen
+              key={`skeleton-${targetPage}`}
+              targetPage={targetPage}
+            />
+          ) : (
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -16, filter: 'blur(4px)' }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full flex-1"
+            >
+              {currentPage === 'home' && (
+                <HomePage onNavigatePage={navigateToPage} />
+              )}
 
-        {/* 3. Trust & Core Value Benefits Strip */}
-        <TrustStrip />
+              {currentPage === 'services' && (
+                <ServicesPage
+                  onNavigatePage={navigateToPage}
+                  onSelectServiceType={handleSelectServiceType}
+                  onSelectAudienceType={handleSelectAudience}
+                />
+              )}
 
-        {/* 5. Complete Live Demo Projects Portfolio ("Our Work") */}
-        <PortfolioSection />
+              {currentPage === 'pricing' && (
+                <PricingPage
+                  onNavigatePage={navigateToPage}
+                  onSelectPlan={handleSelectPricingPlan}
+                />
+              )}
 
-        {/* 6. Services Section with Hover-Scale Animations */}
-        <ServicesSection onDiscussService={handleDiscussService} />
+              {currentPage === 'about' && (
+                <AboutPage onNavigatePage={navigateToPage} />
+              )}
 
-        {/* 7. Why Choose Webvia */}
-        <WhySitevia />
+              {currentPage === 'contact' && (
+                <ContactPage
+                  initialPackage={selectedPackage}
+                  initialWebsiteType={selectedWebsiteType}
+                  initialBusinessType={selectedBusinessType}
+                  onOpenLegal={handleOpenLegal}
+                  onNavigatePage={navigateToPage}
+                />
+              )}
 
-        {/* 8. How It Works (Timeline) */}
-        <HowItWorks />
+              {currentPage === 'terms' && (
+                <TermsPage onNavigatePage={navigateToPage} />
+              )}
 
-        {/* 9. Pricing Plans (3 Exact Launch Tiers) */}
-        <PricingSection onSelectPlan={handleSelectPricingPlan} />
-
-        {/* 10. Who We Build For (Niche Audiences) */}
-        <WhoWeBuildFor onSelectAudience={handleSelectAudience} />
-
-        {/* 11. About Webvia (Why We Exist) */}
-        <AboutSitevia />
-
-        {/* 12. Main Conversion: Project Enquiry Form (WhatsApp) */}
-        <ProjectEnquiry
-          initialPackage={selectedPackage}
-          initialWebsiteType={selectedWebsiteType}
-          initialBusinessType={selectedBusinessType}
-          onOpenLegal={handleOpenLegal}
-        />
-
-        {/* 13. FAQ Accordion */}
-        <FAQSection />
-
-        {/* 14. Direct Contact Section */}
-        <ContactSection onOpenLegal={handleOpenLegal} />
-
-        {/* 15. Final Call to Action */}
-        <FinalCTA
-          onGetWebsiteClick={scrollToEnquiry}
-          onViewWorkClick={scrollToWork}
-        />
+              {currentPage === 'privacy' && (
+                <PrivacyPage onNavigatePage={navigateToPage} />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
-      {/* Footer */}
-      <Footer onOpenLegal={handleOpenLegal} />
+      {/* Unified Footer */}
+      <Footer
+        onOpenLegal={handleOpenLegal}
+        onNavigatePage={navigateToPage}
+      />
 
       {/* Mobile Fixed Bottom CTA Bar */}
-      <MobileStickyCTA onGetWebsiteClick={scrollToEnquiry} />
+      <MobileStickyCTA onGetWebsiteClick={() => navigateToPage('contact')} />
 
       {/* Desktop Floating WhatsApp Button with Smart Tooltip */}
       <FloatingWhatsApp />
-
-      {/* Comprehensive Legal Modal (Privacy Policy & Terms of Service) */}
-      <LegalModal
-        isOpen={isLegalOpen}
-        initialTab={legalTab}
-        onClose={handleCloseLegal}
-      />
     </div>
   );
 }

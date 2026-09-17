@@ -23,7 +23,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return 'light';
       }
     }
-    // 3. Default to dark for ViteWEB
+    // 3. Default to dark for WEBVIA WORKS
     return 'dark';
   });
 

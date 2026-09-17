@@ -1,32 +1,33 @@
 import React from 'react';
 import { ViteWebLogo } from './SiteviaLogo';
-import { MessageCircle, Mail, ArrowUp, ShieldCheck, Scale } from 'lucide-react';
+import { MessageCircle, Mail, ArrowUp, ShieldCheck, Scale, Sparkles } from 'lucide-react';
 import { VITEWEB_EMAIL } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
-import { LegalTab } from './LegalModal';
+import { PageType } from '../types';
 
 interface FooterProps {
-  onOpenLegal?: (tab: LegalTab) => void;
+  onOpenLegal?: (tab: 'privacy' | 'terms') => void;
+  onNavigatePage?: (page: PageType) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Services', href: '#services' },
-    { label: 'Demos & Work', href: '#work' },
-    { label: 'Why ViteWEB', href: '#why-sitevia' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'Pricing Plans', href: '#pricing' },
-    { label: 'Who We Build For', href: '#who-we-build-for' },
-    { label: 'About ViteWEB', href: '#about' },
-    { label: 'Frequently Asked Questions', href: '#faq' },
-    { label: 'Project Enquiry', href: '#enquiry' },
-    { label: 'Contact', href: '#contact' },
+  const pages: { label: string; page: PageType }[] = [
+    { label: 'Home', page: 'home' },
+    { label: 'Services & Real Work', page: 'services' },
+    { label: 'Pricing & Cost Calculator', page: 'pricing' },
+    { label: 'About Our Story', page: 'about' },
+    { label: 'Contact & Project Enquiry', page: 'contact' },
   ];
+
+  const handlePageClick = (page: PageType) => {
+    if (onNavigatePage) {
+      onNavigatePage(page);
+    }
+  };
 
   return (
     <footer
@@ -37,20 +38,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-200 dark:border-slate-800/80">
           {/* Column 1: Brand & Tagline */}
           <div className="md:col-span-5 flex flex-col items-start">
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToTop();
-              }}
-              className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-              aria-label="ViteWEB Top"
+            <button
+              type="button"
+              onClick={() => handlePageClick('home')}
+              className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg text-left cursor-pointer"
+              aria-label="SITEVIA WORKS Top"
             >
               <ViteWebLogo variant="horizontal" size="md" />
-            </a>
+            </button>
 
             <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-4 max-w-sm tracking-wide">
-              "YOUR VISION, OUR CODE"
+              "Your Vison, Our code"
             </p>
 
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 max-w-sm leading-relaxed">
@@ -58,41 +56,33 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             </p>
 
             {/* Quick Trust Badges */}
-            <div className="flex flex-wrap items-center gap-3 mt-5">
-              <button
-                type="button"
-                onClick={() => onOpenLegal?.('privacy')}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-300 transition-colors shadow-xs cursor-pointer"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
-                <span>Verified Privacy Policy</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => onOpenLegal?.('terms')}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-300 transition-colors shadow-xs cursor-pointer"
-              >
-                <Scale className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Terms of Service</span>
-              </button>
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
+              <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                100% Code Ownership
+              </span>
+              <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
+                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                Transparent Pricing
+              </span>
             </div>
           </div>
 
           {/* Column 2: Navigation Links */}
           <div className="md:col-span-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-4">
-              Navigation
+              Explore Pages
             </h4>
-            <ul className="space-y-2.5">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+            <ul className="space-y-3">
+              {pages.map((p) => (
+                <li key={p.page}>
+                  <button
+                    type="button"
+                    onClick={() => handlePageClick(p.page)}
+                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer text-left"
                   >
-                    {link.label}
-                  </a>
+                    {p.label}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -141,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px]">
                 <button
                   type="button"
-                  onClick={() => onOpenLegal?.('privacy')}
+                  onClick={() => (onNavigatePage ? onNavigatePage('privacy') : onOpenLegal?.('privacy'))}
                   className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   Privacy Policy
@@ -149,7 +139,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 <span className="text-slate-300 dark:text-slate-700">•</span>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal?.('terms')}
+                  onClick={() => (onNavigatePage ? onNavigatePage('terms') : onOpenLegal?.('terms'))}
                   className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   Terms of Service
@@ -162,11 +152,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Bottom copyright row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-center sm:text-left">
-            <span>© 2026 ViteWEB. All rights reserved.</span>
+            <span>© 2026 SITEVIA WORKS. All rights reserved.</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <button
               type="button"
-              onClick={() => onOpenLegal?.('privacy')}
+              onClick={() => (onNavigatePage ? onNavigatePage('privacy') : onOpenLegal?.('privacy'))}
               className="text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 underline cursor-pointer"
             >
               Privacy Policy
@@ -174,7 +164,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <button
               type="button"
-              onClick={() => onOpenLegal?.('terms')}
+              onClick={() => (onNavigatePage ? onNavigatePage('terms') : onOpenLegal?.('terms'))}
               className="text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 underline cursor-pointer"
             >
               Terms of Service
@@ -184,7 +174,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-slate-500 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
+            aria-label="Back to top"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
@@ -194,4 +185,3 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
     </footer>
   );
 };
-
