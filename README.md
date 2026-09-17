@@ -1,159 +1,155 @@
-# 🌐 ViteWEB
+# SITEVIA Works
 
 ### Your Vision. Our Code.
 
-ViteWEB is a modern web design service focused on creating professional, responsive, and mobile-friendly websites for businesses, creators, and professionals.
+SITEVIA Works is a modern web design service focused on creating clean, responsive, mobile-first websites for small businesses, local shops, professionals, creators, and startups.
 
-We turn ideas into clean, modern digital experiences designed around each client's needs and brand.
-
----
-
-## ✨ What We Do
-
-ViteWEB creates modern websites for:
-
-- 🏪 Local Businesses
-- 🍽️ Restaurants & Cafés
-- 💇 Beauty Studios & Salons
-- 🏋️ Gyms & Fitness Centers
-- 📸 Photographers & Creators
-- 💼 Professionals
-- 👨‍💻 Developers
-- 🎨 Personal Portfolios
-- 🏢 Small Businesses & Startups
+We build professional websites that work smoothly across devices and help businesses establish a strong online presence.
 
 ---
 
-## 🚀 Services
+## 🚀 What We Do
 
-- Professional Website Design
-- Mobile-First Web Design
-- Responsive Websites
-- Business Websites
-- Portfolio Websites
-- Landing Pages
-- WhatsApp Integration
-- Google Maps Integration
-- Contact & Enquiry Forms
-- Domain & Deployment Setup
-- Website Updates & Support
-
----
-
-## 📱 Mobile-First
-
-Every ViteWEB website is designed with mobile users in mind.
-
-Our websites are optimized for:
-
-- 📱 Smartphones
-- 📲 Tablets
-- 💻 Laptops
-- 🖥️ Desktop Screens
-
-The goal is to provide a clean and smooth experience across different screen sizes.
+- 📱 Mobile-first website design
+- 💻 Responsive websites
+- 🎨 Modern and professional UI
+- 💬 WhatsApp integration
+- 📍 Google Maps integration
+- 📩 Contact forms
+- 🔗 Social media integration
+- 🔍 Basic SEO structure
+- ⚡ Fast-loading websites
+- 🖼️ Product, service & portfolio showcases
 
 ---
 
-## ⚙️ Our Process
+## 💰 Pricing
 
-### 01 — Understand
-We understand the client's business, goals, audience, and requirements.
+| Plan | Starting Price |
+|------|----------------|
+| **Starter** | ₹2,999 |
+| **Business** | ₹5,499 |
+| **Premium** | ₹7,999 |
 
-### 02 — Design
-We create a modern visual direction based on the business and brand.
+### Starter — ₹2,999
+- Up to 3 pages
+- Mobile-first design
+- WhatsApp integration
+- Contact section
+- Social media links
+- Basic SEO
+- Fast loading
+- 15 days support
 
-### 03 — Build
-The website is developed and customized according to the requirements.
+### Business — ₹5,499
+**Most Popular**
+- Up to 6 pages
+- Premium mobile-first design
+- WhatsApp integration
+- Contact form
+- Google Maps
+- Social media integration
+- Basic SEO
+- Fast loading
+- 1 month support
 
-### 04 — Review
-The client reviews the website and provides feedback.
+### Premium — ₹7,999
+- Up to 10 pages
+- Advanced website design
+- Premium animations & interactions
+- WhatsApp integration
+- Contact form
+- Google Maps
+- Social media integration
+- SEO-ready structure
+- Performance optimization
+- 2 months support
 
-### 05 — Launch
-The final website is deployed and made available online.
-
-### 06 — Support
-Updates and changes can be provided when required.
+> Prices are starting prices. Final pricing may vary depending on project requirements. Domain names and third-party services may be charged separately where applicable.
 
 ---
 
-## 🖥️ Portfolio
+## 🌐 Website Samples
 
-### Business & Creative Websites
+### Business & Local Websites
 
-- **Kabir Digital**  
-  https://kabirdigital1.vercel.app/
-
-- **Rohan Visuals**  
-  https://rohan-visuals.vercel.app/
-
-- **Ananya Kapoor**  
-  https://ananya-kapoor.vercel.app/
-
-- **Moss & Bean Café**  
-  https://mossbean-cafe1.vercel.app/
-
-- **Lumé Beauty Studio**  
-  https://lumebeautystudio.vercel.app/
-
-- **The Saffron Table**  
-  https://the-saffron-table.vercel.app/
-
-- **Forge Fitness**  
-  https://forge-fitness-opal-six.vercel.app/
+- [Kabir Digital](https://kabirdigital1.vercel.app/)
+- [The Saffron Table](https://the-saffron-table.vercel.app/)
+- [Mera Studio](https://mera-studio-eta.vercel.app/)
+- [Forge Fitness](https://forge-fitness-opal-six.vercel.app/)
 
 ### Portfolio Websites
 
-- **Vihan Sharma Portfolio**  
-  https://vihan-sharma-portfolio1.vercel.app/
+- [Rohan Visuals](https://rohan-visuals.vercel.app/)
+- [Ananya Kapoor](https://ananya-kapoor.vercel.app/)
+- [Vihan Sharma Portfolio](https://vihan-sharma-portfolio1.vercel.app/)
+- [Aarav Mehta Developer](https://aarav-mehtadev.vercel.app/)
 
-- **Aarav Mehta Developer**  
-  https://aarav-mehtadev.vercel.app/
+### Other Projects
 
-- **Mera Studio**  
-  https://mera-studio-eta.vercel.app/
+- [Moss & Bean Café](https://mossbean-cafe1.vercel.app/)
+- [Lumé Beauty Studio](https://lumebeautystudio.vercel.app/)
 
 ---
 
-## 🛠️ Technologies
-
-Depending on the project, ViteWEB may use:
+## 🛠️ Tech Stack
 
 - HTML
 - CSS
 - JavaScript
 - React
 - Vite
-- Modern UI/UX
-- Responsive Web Design
-- GitHub
-- Vercel
-- Cloudflare
+- Responsive Design
+- Modern Web Technologies
 
 ---
 
-## 🎯 Our Goal
+## 📱 Mobile First
 
-ViteWEB aims to make professional web design more accessible to small businesses, individuals, and growing brands.
+Every SITEVIA Works website is designed with mobile users in mind.
 
-We focus on creating websites that are:
+Our websites focus on:
 
-**Modern • Responsive • Fast • User-Friendly**
-
----
-
-## 📩 Contact
-
-Want a website for your business?
-
-**ViteWEB**
-
-📧 Email: mohit926631@gmail.com
-
-📱 WhatsApp: +91 95110 07593
+- Easy navigation
+- Touch-friendly interfaces
+- Responsive layouts
+- Fast loading
+- Clear calls-to-action
+- Modern mobile UI
 
 ---
 
-### Your Vision. Our Code.
+## 🔄 Our Process
 
-© 2026 ViteWEB
+**1. Understand**  
+We understand your business, goals, and requirements.
+
+**2. Design**  
+We create a modern website structure based on your needs.
+
+**3. Develop**  
+The website is built with responsive and modern web technologies.
+
+**4. Review**  
+We make required adjustments and improvements.
+
+**5. Launch**  
+The finished website is deployed and ready for customers.
+
+---
+
+## 📞 Contact
+
+**SITEVIA Works**  
+*Your Vision. Our Code.*
+
+📧 Email: **siteviaworks@zohomail.in**  
+📱 WhatsApp: **+91 95110 07593**
+
+---
+
+## 📄 License
+
+This repository contains project and business materials for SITEVIA Works.
+
+© SITEVIA Works. All rights reserved.
