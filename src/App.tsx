@@ -23,6 +23,26 @@ import { PageType } from './types';
 
 const VALID_PAGES: PageType[] = ['home', 'services', 'pricing', 'about', 'contact', 'terms', 'privacy'];
 
+const PAGE_TITLES: Record<PageType, string> = {
+  home: 'SITEVIA WORKS — Custom Websites for Businesses Starting at ₹2,999',
+  services: 'SITEVIA WORKS Services — Custom Business, Restaurant, Salon & Portfolio Websites',
+  pricing: 'SITEVIA WORKS Pricing — Custom Website Packages Starting ₹2,999 (6 Mo to 1.5 Yr Support)',
+  about: 'About SITEVIA WORKS — Your Vision, Our Code | Professional Web Design',
+  contact: 'Contact SITEVIA WORKS — Start Your Custom Website Project Today (WhatsApp +91 95110 07593)',
+  terms: 'Terms of Service — SITEVIA WORKS',
+  privacy: 'Privacy Policy — SITEVIA WORKS',
+};
+
+const PAGE_DESCRIPTIONS: Record<PageType, string> = {
+  home: 'SITEVIA WORKS creates modern, custom websites for businesses, creators, freelancers and professionals. Your Vision, Our Code.',
+  services: 'Custom web design & development for restaurants, salons, gyms, boutiques, freelancers and startups.',
+  pricing: 'Transparent website packages: Starter at ₹2,999 (6 mo support), Business at ₹5,499 (1 yr support), and Premium at ₹7,999 (1.5 yr support).',
+  about: 'Learn about SITEVIA WORKS — high-performance websites with fast loading speeds, mobile-first UX and direct WhatsApp integration.',
+  contact: 'Reach out to SITEVIA WORKS via WhatsApp or our instant brief form to start your business website today.',
+  terms: 'Terms of Service, project milestones and code ownership policies for SITEVIA WORKS.',
+  privacy: 'Privacy Policy and client data protection guidelines for SITEVIA WORKS.',
+};
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageType>(() => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
@@ -65,6 +85,33 @@ export default function App() {
         clearTimeout(transitionTimerRef.current);
       }
     };
+  }, [currentPage]);
+
+  // Synchronize document.title and Open Graph metadata for browser share button
+  useEffect(() => {
+    const title = PAGE_TITLES[currentPage] || PAGE_TITLES.home;
+    const desc = PAGE_DESCRIPTIONS[currentPage] || PAGE_DESCRIPTIONS.home;
+
+    document.title = title;
+
+    try {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', desc);
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', title);
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', desc);
+
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twitterTitle) twitterTitle.setAttribute('content', title);
+
+      const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twitterDesc) twitterDesc.setAttribute('content', desc);
+    } catch (e) {
+      // Ignore meta tag lookup errors in non-standard environments
+    }
   }, [currentPage]);
 
   const navigateToPage = useCallback((page: PageType) => {

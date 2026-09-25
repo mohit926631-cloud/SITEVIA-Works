@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { SiteviaLogo } from './SiteviaLogo';
-import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight, Sparkles, Share2, Check } from 'lucide-react';
 import { PageType } from '../types';
 import { motion } from 'motion/react';
+import { shareWebsite } from '../utils/share';
 
 interface NavbarProps {
   currentPage: PageType;
@@ -17,6 +18,15 @@ interface NavItem {
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [copiedShare, setCopiedShare] = useState(false);
+
+  const handleShareClick = async () => {
+    const res = await shareWebsite();
+    if (res.method === 'clipboard') {
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2400);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
             </nav>
 
             {/* Desktop Right Controls: "Start Project" Blue CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2.5">
               <button
                 id="header-get-started-cta"
                 type="button"
@@ -115,8 +125,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
               </button>
             </div>
 
-            {/* Mobile Actions: Hamburger Menu Toggle */}
-            <div className="md:hidden flex items-center gap-2">
+            {/* Mobile Actions: Hamburger Menu Toggle (3 lines) */}
+            <div className="md:hidden flex items-center">
               <button
                 id="mobile-menu-toggle-btn"
                 type="button"
@@ -178,7 +188,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
           </div>
 
           {/* Bottom Action inside Mobile Menu */}
-          <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-4 pb-4">
+          <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3 pb-4">
+            <button
+              id="mobile-drawer-share-btn"
+              type="button"
+              onClick={handleShareClick}
+              className="w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-center flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-800 text-sm cursor-pointer transition-colors"
+            >
+              {copiedShare ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-600" />
+                  <span className="text-emerald-600 font-bold">Link & Message Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-4 h-4 text-blue-600" />
+                  <span>Share Website</span>
+                </>
+              )}
+            </button>
+
             <button
               id="mobile-nav-get-started-btn"
               type="button"
