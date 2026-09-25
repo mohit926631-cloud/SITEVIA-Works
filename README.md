@@ -39,7 +39,7 @@ We build professional websites that work smoothly across devices and help busine
 - Social media links
 - Basic SEO
 - Fast loading
-- 15 days support
+- 6 months support
 
 ### Business — ₹5,499
 **Most Popular**
@@ -51,7 +51,7 @@ We build professional websites that work smoothly across devices and help busine
 - Social media integration
 - Basic SEO
 - Fast loading
-- 1 month support
+- 1 year support
 
 ### Premium — ₹7,999
 - Up to 10 pages
@@ -63,7 +63,7 @@ We build professional websites that work smoothly across devices and help busine
 - Social media integration
 - SEO-ready structure
 - Performance optimization
-- 2 months support
+- 1.5 years support
 
 > Prices are starting prices. Final pricing may vary depending on project requirements. Domain names and third-party services may be charged separately where applicable.
 

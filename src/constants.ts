@@ -373,7 +373,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Social media links',
       'Basic SEO',
       'Fast loading',
-      '15 days support',
+      '6 months support',
     ],
     ctaText: 'Choose Starter →',
     websiteTypeVal: 'Starter — ₹2,999',
@@ -396,7 +396,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Social media integration',
       'Basic SEO',
       'Fast loading',
-      '1 month support',
+      '1 year support',
     ],
     ctaText: 'Choose Business →',
     websiteTypeVal: 'Business — ₹5,499',
@@ -418,7 +418,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Social media integration',
       'SEO-ready structure',
       'Performance optimization',
-      '2 months support',
+      '1.5 years support',
     ],
     ctaText: 'Choose Premium →',
     websiteTypeVal: 'Premium — ₹7,999',
@@ -520,7 +520,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'How much does a website cost?',
-    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 15 days support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 month support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 2 months support). All packages include live deployment and 100% code ownership.',
+    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 6 months support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 year support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 1.5 years support). All packages include live deployment and 100% code ownership.',
   },
   {
     id: 'faq-2',
@@ -560,7 +560,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     id: 'faq-9',
     question: 'What kind of support is included after launch?',
-    answer: 'Every package includes dedicated post-launch technical warranty support (15 days for Starter, 30 days for Business, 60 days for Premium) to ensure your contact forms, links, Google Maps pins, and WhatsApp triggers operate without a hitch.',
+    answer: 'Every package includes dedicated post-launch technical warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium) to ensure your contact forms, links, Google Maps pins, and WhatsApp triggers operate without a hitch.',
   },
   {
     id: 'faq-10',

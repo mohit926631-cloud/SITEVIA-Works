@@ -103,7 +103,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               <ShieldCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
               <div>
                 <strong className="block text-slate-900 dark:text-white font-bold mb-0.5">Post-Launch Support</strong>
-                <p className="text-xs text-slate-600 dark:text-slate-300">Every plan includes 15 to 60 days of warranty support to fix any glitches.</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Every plan includes 6 months to 1.5 years of warranty support to fix any glitches.</p>
               </div>
             </div>
           </div>
@@ -143,30 +143,30 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
                 <div className="flex items-center justify-between mb-1.5">
                   <h4 className="font-bold text-slate-900 dark:text-white text-base">STARTER PACKAGE — ₹2,999 (One-Time)</h4>
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">15 Days Support</span>
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">6 Months Support</span>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Suitable for individuals and small businesses. Includes up to 3 custom pages, professional responsive design, WhatsApp integration, contact section, social media links, basic SEO, fast loading speeds, and 15 days of post-launch warranty support.
+                  Suitable for individuals and small businesses. Includes up to 3 custom pages, professional responsive design, WhatsApp integration, contact section, social media links, basic SEO, fast loading speeds, and 6 months of post-launch warranty support.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-blue-50/50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60">
                 <div className="flex items-center justify-between mb-1.5">
                   <h4 className="font-bold text-blue-950 dark:text-cyan-300 text-base">BUSINESS PACKAGE — ₹5,499 (One-Time) • Most Popular</h4>
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300">1 Month Support</span>
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300">1 Year Support</span>
                 </div>
                 <p className="text-sm text-slate-700 dark:text-slate-300">
-                  Suitable for growing businesses. Includes up to 6 custom pages, premium mobile-first design, WhatsApp integration, contact form, Google Maps embed, social media integration, basic SEO, fast loading speeds, and 1 month of dedicated support.
+                  Suitable for growing businesses. Includes up to 6 custom pages, premium mobile-first design, WhatsApp integration, contact form, Google Maps embed, social media integration, basic SEO, fast loading speeds, and 1 year of dedicated support.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
                 <div className="flex items-center justify-between mb-1.5">
                   <h4 className="font-bold text-slate-900 dark:text-white text-base">PREMIUM PACKAGE — ₹7,999 (One-Time)</h4>
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">2 Months Support</span>
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">1.5 Years Support</span>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Suitable for businesses requiring advanced web presence. Includes up to 10 custom pages, advanced custom design, premium interactions and animations, WhatsApp integration, contact form, Google Maps, social media integration, SEO-ready structure, performance optimization, and 2 months of support.
+                  Suitable for businesses requiring advanced web presence. Includes up to 10 custom pages, advanced custom design, premium interactions and animations, WhatsApp integration, contact form, Google Maps, social media integration, SEO-ready structure, performance optimization, and 1.5 years of support.
                 </p>
               </div>
             </div>
@@ -253,7 +253,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               All rates are quoted in Indian Rupees (INR) as fixed, one-time fees. Payment milestones (typically an initial deposit followed by the remaining balance upon staging approval) are confirmed prior to project kickoff.
             </p>
             <p>
-              Every project comes with post-launch warranty support (15 days for Starter, 30 days for Business, 60 days for Premium) covering technical bug fixes, link testing, and launch verification.
+              Every project comes with post-launch warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium) covering technical bug fixes, link testing, and launch verification.
             </p>
           </section>
         </div>
