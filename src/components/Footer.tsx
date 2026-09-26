@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
             <div className="mt-6 flex flex-wrap items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
               <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                100% Code Ownership
+                Dedicated Post-Launch Support
               </span>
               <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
                 <Sparkles className="w-3.5 h-3.5 text-blue-500" />

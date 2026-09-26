@@ -226,7 +226,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigatePage }) => {
             <span className="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 block mb-1">Related Document</span>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Looking for our Terms of Service?</h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Read about our project deliverables, milestone pricing, 100% source code ownership, and warranties.
+              Read about our project deliverables, milestone pricing, post-launch support, and warranties.
             </p>
           </div>
 

@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
           >
             We engineer high-speed, modern websites for businesses, creators, clinics, and brands with{' '}
             <strong className="text-slate-900 dark:text-white font-semibold">
-              direct WhatsApp ordering, zero bloated code, and 100% ownership
+              direct WhatsApp ordering, zero recurring platform fees, and dedicated post-launch support
             </strong>
             . Delivered in just 7 days.
           </motion.p>
@@ -178,7 +178,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-              <span>100% Full Code Ownership</span>
+              <span>Dedicated Post-Launch Support</span>
             </div>
           </motion.div>
         </motion.div>

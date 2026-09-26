@@ -55,7 +55,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-3xl">
-            Clear, honest terms governing our web design and development engagements, project milestones, transparent pricing, and 100% full source code ownership.
+            Clear, honest terms governing our web design and development engagements, project milestones, transparent pricing, and dedicated post-launch support.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mt-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -76,10 +76,10 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800 shadow-sm flex items-start gap-3">
-              <Code2 className="w-5 h-5 text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+              <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
               <div>
-                <strong className="block text-slate-900 dark:text-white font-bold mb-0.5">100% Code Ownership</strong>
-                <p className="text-xs text-slate-600 dark:text-slate-300">You own the full source code and digital assets on final project delivery. Zero recurring royalty fees.</p>
+                <strong className="block text-slate-900 dark:text-white font-bold mb-0.5">Comprehensive Post-Launch Support</strong>
+                <p className="text-xs text-slate-600 dark:text-slate-300">Included technical warranty up to 1.5 years based on your plan with prompt fixes.</p>
               </div>
             </div>
 
@@ -215,13 +215,13 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-sm font-black">
                 5
               </span>
-              <span>100% Code Ownership & Intellectual Property</span>
+              <span>Zero Recurring Platform Fees & Deliverables</span>
             </h3>
             <p>
-              We firmly believe you should own what you pay for. Upon completion of the project and settlement of the agreed one-time fee, <strong>full intellectual property rights and ownership of the customized website codebase are transferred directly to you</strong>.
+              We believe in simple, transparent value. Upon completion of the project and settlement of the agreed one-time package fee, your website is delivered ready for live deployment.
             </p>
             <p>
-              There are zero monthly licensing fees, zero proprietary locks, and zero restrictions on migrating your site to any host of your choice. SITEVIA WORKS reserves the standard industry right to display the completed work, screenshots, and live URL in our public design portfolio.
+              There are zero monthly builder subscription fees, zero recurring platform royalties, and zero cancellation lock-ins. SITEVIA WORKS reserves the standard industry right to display the completed work, screenshots, and live URL in our public design portfolio.
             </p>
           </section>
 

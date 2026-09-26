@@ -520,12 +520,12 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'How much does a website cost?',
-    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 6 months support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 year support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 1.5 years support). All packages include live deployment and 100% code ownership.',
+    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 6 months support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 year support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 1.5 years support). All packages include live deployment and dedicated technical support.',
   },
   {
     id: 'faq-2',
-    question: 'Do I own the website code once completed?',
-    answer: 'Yes, absolutely! 100% full ownership of the custom code, design layouts, and digital assets belongs to you upon project delivery. There are no proprietary lock-ins, recurring platform commissions, or cancellation hurdles. You can host it anywhere you like.',
+    question: 'Are there any recurring monthly platform fees?',
+    answer: 'No! All SITEVIA WORKS packages are based on a transparent one-time project fee. We do not charge recurring monthly website builder subscriptions or hidden platform commissions. Your domain and standard global hosting can run independently with zero lock-ins.',
   },
   {
     id: 'faq-3',

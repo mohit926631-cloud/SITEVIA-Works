@@ -31,7 +31,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
           Clear Pricing. No Hidden Charges.
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
-          Choose the package that fits your business needs. Transparent one-time pricing, zero hidden charges, and 100% full ownership transferred on launch.
+          Choose the package that fits your business needs. Transparent one-time pricing, zero hidden charges, and dedicated post-launch technical support on launch.
         </p>
       </div>
 

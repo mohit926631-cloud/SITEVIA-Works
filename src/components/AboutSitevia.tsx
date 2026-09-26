@@ -62,8 +62,8 @@ export const AboutWebvia: React.FC = () => {
       id: 'social-dependence',
       icon: Smartphone,
       problem: lang === 'en' ? 'Dependence Only on Instagram/WhatsApp' : 'सिर्फ इंस्टाग्राम या व्हाट्सऐप पर निर्भरता',
-      problemDesc: lang === 'en' ? 'No digital ownership, algorithm changes drop your customer reach.' : 'कोई डिजिटल ओनरशिप नहीं, एल्गोरिदम बदलने पर रीच गिर जाती है।',
-      solution: lang === 'en' ? '100% Owned Digital Asset' : '100% आपकी अपनी डिजिटल प्रॉपर्टी',
+      problemDesc: lang === 'en' ? 'No permanent web presence, algorithm changes drop your customer reach.' : 'कोई स्थायी वेब प्रेजेंस नहीं, एल्गोरिदम बदलने पर रीच गिर जाती है।',
+      solution: lang === 'en' ? 'Permanent Digital Storefront' : 'स्थायी डिजिटल ऑनलाइन शोरूम',
       solutionDesc: lang === 'en' ? 'A permanent online storefront you control with full pricing & menu catalogs.' : 'एक स्थायी ऑनलाइन शोरूम जिसपर आपका पूरा नियंत्रण होता है।',
     },
   ];

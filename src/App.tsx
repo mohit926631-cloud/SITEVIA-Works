@@ -39,7 +39,7 @@ const PAGE_DESCRIPTIONS: Record<PageType, string> = {
   pricing: 'Transparent website packages: Starter at ₹2,999 (6 mo support), Business at ₹5,499 (1 yr support), and Premium at ₹7,999 (1.5 yr support).',
   about: 'Learn about SITEVIA WORKS — high-performance websites with fast loading speeds, mobile-first UX and direct WhatsApp integration.',
   contact: 'Reach out to SITEVIA WORKS via WhatsApp or our instant brief form to start your business website today.',
-  terms: 'Terms of Service, project milestones and code ownership policies for SITEVIA WORKS.',
+  terms: 'Terms of Service, project milestones and support policies for SITEVIA WORKS.',
   privacy: 'Privacy Policy and client data protection guidelines for SITEVIA WORKS.',
 };
 

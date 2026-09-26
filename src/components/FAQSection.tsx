@@ -36,7 +36,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigatePage }) => {
             Frequently Asked Questions.
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2 max-w-2xl mx-auto">
-            Clear, transparent answers about our pricing packages, development timelines, WhatsApp integration, and 100% source code ownership.
+            Clear, transparent answers about our pricing packages, development timelines, WhatsApp integration, and dedicated post-launch support.
           </p>
         </motion.div>
 
