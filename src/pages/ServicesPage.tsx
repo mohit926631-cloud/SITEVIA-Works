@@ -3,7 +3,7 @@ import { ServicesSection } from '../components/ServicesSection';
 import { PortfolioSection } from '../components/PortfolioSection';
 import { WhoWeBuildFor } from '../components/WhoWeBuildFor';
 import { PageType } from '../types';
-import { ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 
 interface ServicesPageProps {
@@ -31,10 +31,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     <div className="py-8 sm:py-12 space-y-12 sm:space-y-16">
       {/* Services Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-cyan-400 text-xs font-semibold mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Services & Real Work</span>
-        </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Websites Engineered for Real Business Results.
         </h1>

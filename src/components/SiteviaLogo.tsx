@@ -73,10 +73,10 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
           <div className="h-[2px] w-6 sm:w-10 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#9333EA]" />
         </div>
 
-        {/* Slogan Quote: Your Vison, Our code */}
-        <div className="mt-2.5 px-3 py-1 rounded-full bg-blue-500/10 dark:bg-blue-400/10 border border-blue-500/20">
+        {/* Slogan Quote: Your Vision, Our Code */}
+        <div className="mt-2.5">
           <span className="text-[11px] sm:text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-[0.18em] uppercase">
-            Your Vison, Our code
+            Your Vision, Our Code
           </span>
         </div>
       </div>
@@ -106,7 +106,7 @@ export const ViteWebLogo: React.FC<ViteWebLogoProps> = ({
         </div>
         <div className="flex items-center gap-1.5 mt-1">
           <span className="text-[8px] sm:text-[9px] font-bold text-slate-500 dark:text-slate-400 tracking-wider uppercase">
-            Your Vison, Our code
+            Your Vision, Our Code
           </span>
         </div>
       </div>

@@ -170,9 +170,8 @@ export const AboutWebvia: React.FC = () => {
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{lang === 'en' ? 'OUR STORY & PURPOSE' : 'हमारा उद्देश्य और शुरुआत'}</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-400 block mb-1">
+                  {lang === 'en' ? 'OUR STORY & PURPOSE' : 'हमारा उद्देश्य और शुरुआत'}
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
                   {lang === 'en' ? 'SITEVIA WORKS started with a simple idea:' : 'साइटविया वर्क्स (SITEVIA WORKS) की शुरुआत एक सरल विचार से हुई:'}

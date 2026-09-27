@@ -45,11 +45,6 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
 
         {/* Page Hero Header - BIG & PROMINENT */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-8 mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider mb-4">
-            <Scale className="w-4 h-4" />
-            <span>Legal Agreement & Terms</span>
-          </div>
-
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15] mb-4">
             Terms of Service
           </h1>

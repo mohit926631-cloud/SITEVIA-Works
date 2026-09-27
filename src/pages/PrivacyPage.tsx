@@ -45,11 +45,6 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigatePage }) => {
 
         {/* Page Hero Header - BIG & PROMINENT */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-8 mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-cyan-300 text-xs font-bold uppercase tracking-wider mb-4">
-            <Shield className="w-4 h-4" />
-            <span>Data Protection & Privacy</span>
-          </div>
-
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15] mb-4">
             Privacy Policy
           </h1>

@@ -2,7 +2,7 @@ import React from 'react';
 import { AboutSitevia } from '../components/AboutSitevia';
 import { WhySitevia } from '../components/WhySitevia';
 import { PageType } from '../types';
-import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import { MessageCircle, ArrowRight } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigatePage: (page: PageType) => void;
@@ -13,12 +13,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigatePage }) => {
     <div className="py-8 sm:py-12 space-y-12 sm:space-y-16">
       {/* About Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-cyan-400 text-xs font-semibold mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Our Story & Mission</span>
-        </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          "Your Vison, Our code"
+          "Your Vision, Our Code"
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
           At SITEVIA WORKS, we believe every business deserves a fast, beautiful, and reliable online presence without agency markups or confusing technical jargon.

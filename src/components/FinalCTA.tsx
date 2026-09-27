@@ -42,11 +42,6 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({
         transition={{ type: 'spring', stiffness: 260, damping: 24 }}
         className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 text-blue-700 dark:text-cyan-300 text-xs font-semibold mb-6 font-mono animate-specular-shimmer">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>PRODUCTION-READY DEPLOYMENT</span>
-        </div>
-
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
           Ready to Elevate Your Business Online?
         </h2>

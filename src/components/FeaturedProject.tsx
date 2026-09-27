@@ -38,9 +38,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({ onBuildSimilar
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-2 sm:p-4">
             {/* Left: Project Details & Action */}
             <div className="lg:col-span-5 flex flex-col items-start text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 text-blue-700 dark:text-cyan-300 text-xs font-semibold mb-4 font-mono backdrop-blur-md">
-                <span>VERIFIED PROTOTYPE</span>
-                <span>•</span>
+              <div className="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-cyan-400 mb-3 font-mono uppercase tracking-wider">
                 <span>{featured.categoryLabel}</span>
               </div>
 

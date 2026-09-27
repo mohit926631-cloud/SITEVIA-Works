@@ -3,7 +3,7 @@ import { PricingSection } from '../components/PricingSection';
 import { HowItWorks } from '../components/HowItWorks';
 import { FAQSection } from '../components/FAQSection';
 import { PageType } from '../types';
-import { Sparkles, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 interface PricingPageProps {
   onNavigatePage: (page: PageType) => void;
@@ -23,10 +23,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
     <div className="py-8 sm:py-12 space-y-12 sm:space-y-16">
       {/* Pricing Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-semibold mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Simple, Honest & Transparent</span>
-        </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Clear Pricing. No Hidden Charges.
         </h1>

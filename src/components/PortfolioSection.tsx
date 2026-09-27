@@ -42,11 +42,6 @@ export const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-6 sm:mb-10"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-2.5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Website Blueprints</span>
-          </div>
-
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-2 leading-snug">
             View Demos
           </h2>
@@ -117,8 +112,8 @@ export const PortfolioSection: React.FC = () => {
                         loading="lazy"
                       />
                       
-                      {/* Top Left Live Status Pill */}
-                      <div className="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md border border-white/15 rounded-full px-2.5 py-1 text-[11px] font-bold text-white flex items-center gap-1.5 shadow-md z-10">
+                      {/* Top Left Live Status */}
+                      <div className="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md border border-white/15 rounded-lg px-2.5 py-1 text-[11px] font-bold text-white flex items-center gap-1.5 shadow-md z-10">
                         <span className="flex h-2 w-2 relative">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -127,7 +122,7 @@ export const PortfolioSection: React.FC = () => {
                       </div>
 
                       {/* Category Label */}
-                      <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md border border-white/20 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm z-10">
+                      <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md border border-white/20 rounded-lg px-2.5 py-1 text-xs font-bold text-white shadow-sm z-10">
                         {project.categoryLabel}
                       </div>
                     </div>
