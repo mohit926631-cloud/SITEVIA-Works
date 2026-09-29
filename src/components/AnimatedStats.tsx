@@ -52,15 +52,14 @@ const StatCounter: React.FC<StatItemProps> = ({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col items-center text-center relative overflow-hidden group card-hover-glow transition-all"
+      transition={{ duration: 0.35 }}
+      className="p-5 sm:p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col items-center text-center relative overflow-hidden transition-colors"
     >
-      <div className={`p-3 rounded-xl ${color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+      <div className={`p-2.5 rounded-lg ${color} mb-3`}>
+        <Icon className="w-5 h-5" />
       </div>
 
       <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
@@ -86,8 +85,8 @@ export const AnimatedStats: React.FC = () => {
       icon: Clock,
       targetValue: 7,
       suffix: ' Days',
-      label: 'Guaranteed Launch',
-      sublabel: 'From kickoff to live deployment',
+      label: 'Standard Delivery',
+      sublabel: 'Typical kickoff to live launch',
       color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
     },
     {

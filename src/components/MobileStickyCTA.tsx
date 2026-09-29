@@ -36,7 +36,7 @@ export const MobileStickyCTA: React.FC<MobileStickyCTAProps> = ({ onGetWebsiteCl
     <aside
       id="mobile-sticky-bottom-cta-bar"
       aria-label="Quick Actions"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#070C18]/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-3 pt-2 pb-[calc(0.6rem+env(safe-area-inset-bottom,0px))] shadow-2xl transition-all animate-in fade-in slide-in-from-bottom duration-300"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#070A10]/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-3 pt-2 pb-[calc(0.6rem+env(safe-area-inset-bottom,0px))] shadow-lg transition-all animate-in fade-in slide-in-from-bottom duration-200"
     >
       <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
         {/* WhatsApp Button */}
@@ -45,7 +45,7 @@ export const MobileStickyCTA: React.FC<MobileStickyCTAProps> = ({ onGetWebsiteCl
           href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I would like to build a website for my business.')}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-sm shadow-sm min-h-[46px] transition-transform active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold text-xs shadow-sm min-h-[44px] transition-transform active:scale-[0.98]"
         >
           <MessageCircle className="w-4 h-4 fill-white/20 text-white" />
           <span className="truncate">WhatsApp</span>
@@ -56,7 +56,7 @@ export const MobileStickyCTA: React.FC<MobileStickyCTAProps> = ({ onGetWebsiteCl
           id="mobile-sticky-get-website-btn"
           href="#contact"
           onClick={handleGetWebsite}
-          className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm shadow-sm min-h-[46px] transition-transform active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold text-xs shadow-sm min-h-[44px] transition-transform active:scale-[0.98]"
         >
           <Rocket className="w-4 h-4" />
           <span className="truncate">Get Quote</span>

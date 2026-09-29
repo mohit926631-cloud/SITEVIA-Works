@@ -15,7 +15,7 @@ export const ThreeCanvas: React.FC = () => {
 
   // Dynamic Theme Material Color Updates
   useEffect(() => {
-    const isDark = theme === 'dark';
+    const isDark = (theme as string) === 'dark';
     if (sceneRef.current) {
       sceneRef.current.fog = new THREE.FogExp2(
         isDark ? 0x070a12 : 0xf8fafc,
@@ -56,7 +56,7 @@ export const ThreeCanvas: React.FC = () => {
     // Scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    const isDark = theme === 'dark';
+    const isDark = (theme as string) === 'dark';
     scene.fog = new THREE.FogExp2(isDark ? 0x070a12 : 0xf8fafc, isDark ? 0.002 : 0.0015);
 
     // Camera

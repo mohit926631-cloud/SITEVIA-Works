@@ -49,9 +49,9 @@ export const WEBSITE_TYPES = [
 ];
 
 export const PACKAGES = [
-  'Starter — ₹1,999',
-  'Business — ₹3,499',
-  'Professional — ₹5,999',
+  'Starter — ₹2,999',
+  'Business — ₹5,499',
+  'Premium — ₹7,999',
   'Not Sure',
 ];
 
@@ -242,7 +242,7 @@ export const SERVICES: ServiceItem[] = [
     features: ['Custom branded layout', 'Mobile-first design', 'WhatsApp integration', 'Google Maps integration', 'Services & products section', 'Deployment'],
     recommendedFor: 'Local businesses, corporate services, clinics, firms',
     websiteTypeVal: 'Business Website',
-    startingPrice: '₹1,999',
+    startingPrice: '₹2,999',
   },
   {
     id: 'restaurant-cafe-websites',
@@ -253,7 +253,7 @@ export const SERVICES: ServiceItem[] = [
     features: ['Interactive digital menu', 'Photo & food gallery', 'One-tap WhatsApp table booking', 'Google Maps location pin', 'Opening hours banner', 'Deployment'],
     recommendedFor: 'Restaurants, cafés, bakeries, food trucks, cloud kitchens',
     websiteTypeVal: 'Restaurant & Café Website',
-    startingPrice: '₹3,499',
+    startingPrice: '₹5,499',
   },
   {
     id: 'salon-beauty-websites',
@@ -264,7 +264,7 @@ export const SERVICES: ServiceItem[] = [
     features: ['Service price menu', 'Style lookbook gallery', 'WhatsApp booking', 'Google Maps location', 'Testimonial section', 'Deployment'],
     recommendedFor: 'Salons, spas, beauty studios, dermatologists, wellness clinics',
     websiteTypeVal: 'Salon & Beauty Website',
-    startingPrice: '₹3,499',
+    startingPrice: '₹5,499',
   },
   {
     id: 'portfolio-websites',
@@ -275,7 +275,7 @@ export const SERVICES: ServiceItem[] = [
     features: ['Project case studies', 'Resume / CV view & download', 'Skills & tech matrix', 'Direct client enquiry form', 'High-res image galleries', 'Deployment'],
     recommendedFor: 'Developers, designers, photographers, consultants, students',
     websiteTypeVal: 'Portfolio',
-    startingPrice: '₹1,999',
+    startingPrice: '₹2,999',
   },
   {
     id: 'landing-pages',
@@ -286,73 +286,67 @@ export const SERVICES: ServiceItem[] = [
     features: ['Single-focus conversion goal', 'Fast 1-second load times', 'Compelling benefit hierarchy', 'Sticky mobile CTA', 'Social proof layouts', 'Deployment'],
     recommendedFor: 'Product launches, marketing campaigns, events, coaches',
     websiteTypeVal: 'Landing Page',
-    startingPrice: '₹1,999',
+    startingPrice: '₹2,999',
   },
 ];
 
 export const WHY_REASONS: WhyReason[] = [
   {
     number: '01',
-    title: 'CUSTOM MODERN DESIGN',
-    description: 'Every website is shaped with clean layouts and typography tailored to your business.',
+    title: 'RESPONSIVE WEBSITES',
+    description: 'Designed around the way your customers actually browse — fast, fluid, and crisp on all smartphones, tablets, and desktops.',
   },
   {
     number: '02',
-    title: 'MOBILE-FIRST RESPONSIVE',
-    description: 'Designed around the way your customers actually browse — fast and smooth on phones.',
+    title: 'CUSTOM MODERN DESIGN',
+    description: 'Every layout is tailored to your business identity and audience without generic template clutter.',
   },
   {
     number: '03',
     title: 'WHATSAPP INTEGRATION',
-    description: 'Direct WhatsApp links make it effortless for customers to message and enquire instantly.',
+    description: 'Direct WhatsApp links make it effortless for customers to message, inquire, and order instantly.',
   },
   {
     number: '04',
-    title: 'GOOGLE MAPS & LOCATION',
-    description: 'Pinpoint your store, clinic, or restaurant on Google Maps for easy customer directions.',
+    title: 'SEO BASICS & GOOGLE MAPS',
+    description: 'Clean semantic structure, metadata, and pinpointed Google Maps so local customers find and reach you easily.',
   },
   {
     number: '05',
-    title: 'GALLERY & SERVICES',
-    description: 'Highlight your top services, products, lookbooks, and customer reviews with ease.',
+    title: 'FAST DELIVERY',
+    description: 'Standard packages are developed and deployed in 3 to 7 days with live staging previews along the way.',
   },
   {
     number: '06',
-    title: 'FAST DEPLOYMENT',
-    description: 'We build, polish, and deploy your website quickly so you can start getting leads.',
+    title: 'POST-LAUNCH SUPPORT',
+    description: 'Dedicated technical warranty for up to 1.5 years ensures your contact forms, links, and updates run smoothly.',
   },
 ];
 
 export const HOW_IT_WORKS: WorkStep[] = [
   {
     step: '01',
-    title: 'YOU TELL US',
-    description: 'Tell us about your business and what you want.',
-    detail: 'Share your vision, color preferences, reference websites, and key details over a quick WhatsApp chat or project brief form.',
+    title: 'Tell Us Your Requirement',
+    description: 'Share your business details, required pages, and preferred style.',
+    detail: 'Tell us about your business, reference websites, services, and color preferences via a quick WhatsApp chat or brief form.',
   },
   {
     step: '02',
-    title: 'WE PLAN',
-    description: 'We understand your requirements and recommend the right structure.',
-    detail: 'We outline the page hierarchy, content flow, and confirm the project timeline and transparent pricing upfront.',
+    title: 'Design',
+    description: 'We craft and develop your custom, mobile-first website.',
+    detail: 'We structure the page hierarchy, build the responsive interface, and configure WhatsApp triggers, forms, and Google Maps.',
   },
   {
     step: '03',
-    title: 'WE BUILD',
-    description: 'We design and develop your website.',
-    detail: 'We build a modern, high-speed, mobile-first website with interactive components, maps, and WhatsApp integration.',
+    title: 'Review',
+    description: 'You test the live staging site and request revisions.',
+    detail: 'You review the interactive staging preview on your phone and computer. We adjust text, colors, and layout until you are satisfied.',
   },
   {
     step: '04',
-    title: 'YOU REVIEW',
-    description: 'You review the website and request agreed changes.',
-    detail: 'You test the live staging site on your phone and computer, providing feedback so we can refine every detail.',
-  },
-  {
-    step: '05',
-    title: 'WE LAUNCH',
-    description: 'Once everything is approved, your website goes live.',
-    detail: 'We connect your domain, configure hosting, and deliver your live, ready-to-use business website.',
+    title: 'Launch',
+    description: 'Your website goes live on your domain with full support.',
+    detail: 'We connect your domain, set up fast hosting with free SSL, hand over full ownership, and activate your post-launch support.',
   },
 ];
 
@@ -518,53 +512,53 @@ export const TARGET_AUDIENCES: TargetAudience[] = [
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    id: 'faq-1',
-    question: 'How much does a website cost?',
-    answer: 'Our transparent one-time pricing offers 3 clear packages with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, mobile-first design, WhatsApp integration, 6 months support), Business at ₹5,499 (up to 6 custom pages, premium design, WhatsApp integration, Google Maps, 1 year support - MOST POPULAR), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions and 1.5 years support). All packages include live deployment and dedicated technical support.',
+    id: 'faq-what-is-included',
+    question: 'What is included in each website package?',
+    answer: 'Every SITEVIA WORKS package includes a custom-designed, mobile-first website, direct WhatsApp inquiry routing, contact sections, Google Maps pin integration (Business & Premium), basic on-page SEO metadata, deployment on high-speed global infrastructure with free SSL, and post-launch technical warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium).',
   },
   {
-    id: 'faq-2',
-    question: 'Are there any recurring monthly platform fees?',
-    answer: 'No! All SITEVIA WORKS packages are based on a transparent one-time project fee. We do not charge recurring monthly website builder subscriptions or hidden platform commissions. Your domain and standard global hosting can run independently with zero lock-ins.',
+    id: 'faq-pricing',
+    question: 'How much does a website cost and are there recurring platform fees?',
+    answer: 'Our pricing is a transparent, one-time investment with zero recurring platform commissions: Starter at ₹2,999 (up to 3 custom pages, 6 months support), Business at ₹5,499 (up to 6 custom pages, 1 year support — Most Popular), and Premium at ₹7,999 (up to 10 custom pages with advanced interactions, 1.5 years support). You never pay monthly website builder subscriptions to us.',
   },
   {
-    id: 'faq-3',
-    question: 'How long does a website take to build?',
-    answer: 'A standard Starter or Business website is typically designed, developed, reviewed on staging, and deployed live within 3 to 7 business days once we receive your brand materials and details. Premium or complex multi-page projects generally take 7 to 10 business days.',
+    id: 'faq-delivery-time',
+    question: 'What is the delivery time?',
+    answer: 'Starter websites are delivered in 3 to 4 business days. Business websites typically take 5 to 6 business days. Premium and multi-page projects take 7 to 9 business days. We provide a live staging preview link so you can review the website before launch.',
   },
   {
-    id: 'faq-4',
-    question: 'Can you build a website for my specific business or industry?',
-    answer: 'Yes! We specialize in custom business websites for cafés, restaurants, salons, clinics, fitness centers, freelance consultants, boutiques, local service providers, and personal brand portfolios. Every site is tailored with fast loading speeds, local SEO structure, and high-conversion mobile layouts.',
+    id: 'faq-domain-hosting',
+    question: 'Do you provide domain and hosting?',
+    answer: 'We assist you in configuring your custom domain (e.g., yourbusiness.com or yourbusiness.in) and connect it to reliable, high-speed cloud hosting (such as Cloudflare Pages or Vercel) with an automatic free SSL certificate. You retain full account ownership of your domain.',
   },
   {
-    id: 'faq-5',
-    question: 'How does the WhatsApp integration work?',
-    answer: 'Every website comes configured with custom one-tap WhatsApp trigger buttons and floating action triggers. When potential clients click to inquire, order, or book an appointment, a pre-formatted message opens directly in their WhatsApp chat with your business number.',
-  },
-  {
-    id: 'faq-6',
+    id: 'faq-revisions',
     question: 'Can I request revisions before the website goes live?',
-    answer: 'Yes! Every project includes a dedicated staging review milestone. We send you a private preview link so you can test the site live on your mobile phone and computer. We adjust copy, colors, imagery, and component alignment until you are fully confident and satisfied before launch.',
+    answer: 'Yes! Every project includes a dedicated staging review phase. We share a private staging URL so you can test the website on your phone and computer. We refine copy, color schemes, imagery, and layout based on your feedback before connecting the final domain.',
   },
   {
-    id: 'faq-7',
-    question: 'Do you help connect my custom domain name?',
-    answer: 'Yes! We guide you step-by-step through configuring your custom domain name (e.g. yourbusiness.com) to high-speed global hosting infrastructure (like Vercel, Cloudflare, or Netlify) with free SSL encryption certificate for secure HTTPS browsing.',
+    id: 'faq-maintenance-support',
+    question: 'How do maintenance and post-launch support work?',
+    answer: 'Every package includes dedicated post-launch technical warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium). This covers technical bug fixes, WhatsApp button checks, contact form routing verification, link monitoring, and minor text/image updates as your business evolves.',
   },
   {
-    id: 'faq-8',
-    question: 'What do I need to provide to get started?',
-    answer: 'Simply share your business name, logo (if you have one), list of services or products, basic contact details, and any color or style preferences. If you don’t have prepared copy or photos yet, we can help structure clean placeholder layouts and guide you on what to include.',
+    id: 'faq-ownership',
+    question: 'Do I own my website and code?',
+    answer: 'Yes, 100%. You own your domain, your content, and the website codebase. There is zero vendor lock-in. If you ever wish to migrate, export, or host elsewhere in the future, you have full freedom to do so.',
   },
   {
-    id: 'faq-9',
-    question: 'What kind of support is included after launch?',
-    answer: 'Every package includes dedicated post-launch technical warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium) to ensure your contact forms, links, Google Maps pins, and WhatsApp triggers operate without a hitch.',
+    id: 'faq-payment-process',
+    question: 'What is your payment process?',
+    answer: 'We follow a simple, transparent milestone structure: 50% upfront deposit to initiate planning, design, and development, and the remaining 50% only after you review and approve the live staging site before official domain launch. Payments are made via secure UPI or direct bank transfer with immediate receipts.',
   },
   {
-    id: 'faq-10',
-    question: 'How do I get started with SITEVIA WORKS?',
-    answer: 'Click "Contact & Enquiry" or reach out directly on WhatsApp (+91 95110 07593). Tell us about your business goals and the package that fits your needs, and we will get back to you immediately with a clear scope and timeline.',
+    id: 'faq-whatsapp-integration',
+    question: 'How does the WhatsApp integration work?',
+    answer: 'We configure custom one-tap WhatsApp trigger buttons and action bars. When a customer taps to inquire, book a table, or request an appointment, their WhatsApp app opens automatically with a pre-composed message detailing their inquiry, sent straight to your business number.',
+  },
+  {
+    id: 'faq-industry-fit',
+    question: 'Can you build a website for my specific business or industry?',
+    answer: 'Yes! We build tailored websites for restaurants, cafés, salons, beauty clinics, gyms, fitness coaches, boutiques, fashion brands, local retail stores, doctor clinics, freelance consultants, creators, and professionals. Each site is customized for its target customer journey.',
   },
 ];

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Check, Sparkles, Clock } from 'lucide-react';
+import { Check, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PRICING_PLANS } from '../constants';
-import { TiltCard } from './TiltCard';
 import { MagneticButton } from './MagneticButton';
 
 interface PricingSectionProps {
@@ -15,21 +14,19 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 25, scale: 0.97 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: 'spring',
-        stiffness: 260,
-        damping: 24,
+        duration: 0.35,
+        ease: 'easeOut',
       },
     },
   };
@@ -55,57 +52,58 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
 
           return (
             <motion.div key={plan.id} variants={cardVariants} className="h-full flex">
-              <TiltCard
-                maxTilt={5}
+              <div
                 id={`pricing-card-${plan.id}`}
-                className={`w-full p-6 sm:p-8 rounded-3xl flex flex-col justify-between transition-all duration-300 relative overflow-hidden ${
+                className={`w-full p-6 sm:p-8 rounded-2xl flex flex-col justify-between transition-all duration-200 relative ${
                   isPopular
-                    ? 'bg-gradient-to-b from-blue-50/90 to-white dark:from-blue-950/40 dark:to-slate-900/90 border-2 border-blue-600 dark:border-cyan-400 shadow-xl relative md:-translate-y-2'
-                    : 'bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-lg'
+                    ? 'bg-slate-50 dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 shadow-md relative md:-translate-y-1'
+                    : 'bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
-                {/* Most Popular Badge */}
+                {/* Subtle Most Popular Indicator */}
                 {isPopular && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-l from-blue-600 to-cyan-500 text-white text-[10px] font-black tracking-wider uppercase px-4 py-1.5 rounded-bl-2xl shadow-md z-20 flex items-center gap-1.5 animate-specular-shimmer">
-                    <span>🔥 MOST POPULAR</span>
+                  <div className="mb-4">
+                    <span className="text-[11px] font-bold tracking-wider uppercase text-blue-600 dark:text-blue-400">
+                      Recommended for most businesses
+                    </span>
                   </div>
                 )}
 
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                       {plan.name}
                     </h3>
                   </div>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-5 leading-relaxed min-h-[34px]">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 leading-relaxed min-h-[34px]">
                     {plan.subtitle}
                   </p>
 
                   {/* Price Block: Clearly labeled as one-time */}
-                  <div className="flex items-baseline gap-2 mb-3">
-                    <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${
-                      isPopular ? 'text-blue-600 dark:text-cyan-400' : 'text-slate-900 dark:text-white'
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight tabular-nums ${
+                      isPopular ? 'text-blue-600 dark:text-blue-400' : 'text-slate-900 dark:text-white'
                     }`}>
                       {plan.price}
                     </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
                       one-time
                     </span>
                   </div>
 
                   {/* Turnaround Metadata */}
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 mb-6">
+                  <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">
                     <Clock className="w-3.5 h-3.5 text-blue-500" />
                     <span>Launch in {turnaround}</span>
                   </div>
 
                   {/* Features List */}
-                  <div className="space-y-2.5 mb-8 pt-5 border-t border-slate-200/80 dark:border-slate-800">
+                  <div className="space-y-3 mb-8 pt-5 border-t border-slate-200/80 dark:border-slate-800">
                     {plan.features.map((feat) => (
                       <div key={feat} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0 stroke-[2.5] mt-0.5" />
-                        <span className="font-medium leading-tight">{feat}</span>
+                        <span className="leading-snug">{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -114,12 +112,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
                 <MagneticButton
                   onClick={() => onSelectPlan(`${plan.name} — ${plan.price}`)}
                   variant={isPopular ? 'primary' : 'secondary'}
-                  shimmer={isPopular}
-                  className="w-full py-3.5 px-4 text-sm font-bold shadow-md cursor-pointer"
+                  className="w-full py-3.5 px-4 text-sm font-bold shadow-sm cursor-pointer"
                 >
                   {plan.ctaText}
                 </MagneticButton>
-              </TiltCard>
+              </div>
             </motion.div>
           );
         })}
@@ -127,3 +124,4 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
     </div>
   );
 };
+

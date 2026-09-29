@@ -7,21 +7,21 @@ import {
   CreditCard,
   MapPin,
   Clock,
-  Sparkles,
+  Palette,
   ShieldCheck,
 } from 'lucide-react';
 
 export const InfiniteMarquee: React.FC = () => {
   const tickerItems = [
-    { icon: Clock, text: '7-Day Fast Delivery' },
+    { icon: Clock, text: '7-Day Delivery' },
     { icon: Smartphone, text: '100% Mobile Ready' },
-    { icon: MessageCircle, text: 'Direct WhatsApp Leads' },
-    { icon: Zap, text: '1.5s Ultra-Fast Speed' },
-    { icon: Search, text: 'Google SEO Optimized' },
+    { icon: MessageCircle, text: 'Direct WhatsApp Inquiries' },
+    { icon: Zap, text: 'Fast Loading Speed' },
+    { icon: Search, text: 'Google SEO Ready' },
     { icon: MapPin, text: 'Google Maps Integration' },
     { icon: CreditCard, text: 'Online Payments & QR' },
-    { icon: ShieldCheck, text: 'Free 30-Day Support' },
-    { icon: Sparkles, text: 'Custom Business Design' },
+    { icon: ShieldCheck, text: 'Dedicated Post-Launch Support' },
+    { icon: Palette, text: 'Custom Business Design' },
   ];
 
   const displayItems = [...tickerItems, ...tickerItems, ...tickerItems];
@@ -30,7 +30,7 @@ export const InfiniteMarquee: React.FC = () => {
     <div
       id="infinite-feature-marquee"
       aria-label="Features banner"
-      className="relative w-full overflow-hidden py-3.5 bg-gradient-to-r from-blue-900/40 via-indigo-950/50 to-blue-900/40 dark:from-[#060D1E] dark:via-[#0A1638] dark:to-[#060D1E] border-y border-blue-500/20 dark:border-blue-500/15 backdrop-blur-md"
+      className="relative w-full overflow-hidden py-3 bg-slate-100/60 dark:bg-slate-900/60 border-y border-slate-200/80 dark:border-slate-800/80"
     >
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white dark:from-[#070A10] to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white dark:from-[#070A10] to-transparent z-10 pointer-events-none" />
@@ -41,13 +41,13 @@ export const InfiniteMarquee: React.FC = () => {
           return (
             <div
               key={index}
-              className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 whitespace-nowrap select-none"
+              className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap select-none"
             >
-              <div className="p-1 rounded-md bg-blue-500/10 dark:bg-cyan-500/15 text-blue-600 dark:text-cyan-400">
-                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <div className="p-1 rounded bg-slate-200/70 dark:bg-slate-800 text-blue-600 dark:text-blue-400">
+                <Icon className="w-3.5 h-3.5" />
               </div>
               <span>{item.text}</span>
-              <span className="text-blue-400/40 dark:text-cyan-400/40 ml-3 sm:ml-5 font-black">•</span>
+              <span className="text-slate-300 dark:text-slate-700 ml-3 sm:ml-5 font-bold">·</span>
             </div>
           );
         })}
@@ -55,3 +55,4 @@ export const InfiniteMarquee: React.FC = () => {
     </div>
   );
 };
+

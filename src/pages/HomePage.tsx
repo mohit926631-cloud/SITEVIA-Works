@@ -2,6 +2,8 @@ import React from 'react';
 import { Hero } from '../components/Hero';
 import { InfiniteMarquee } from '../components/InfiniteMarquee';
 import { TrustStrip } from '../components/TrustStrip';
+import { WhySitevia } from '../components/WhySitevia';
+import { HowItWorks } from '../components/HowItWorks';
 import { FAQSection } from '../components/FAQSection';
 import { FinalCTA } from '../components/FinalCTA';
 import { PageType } from '../types';
@@ -25,13 +27,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigatePage }) => {
       {/* 3. Trust & Core Value Benefits Strip */}
       <TrustStrip />
 
-      {/* 4. Final Call to Action */}
+      {/* 4. Why SITEVIA WORKS Genuine Advantages */}
+      <WhySitevia />
+
+      {/* 5. 4-Step Simple Process */}
+      <HowItWorks />
+
+      {/* 6. Final Call to Action */}
       <FinalCTA
         onGetWebsiteClick={() => onNavigatePage('contact')}
         onViewWorkClick={() => onNavigatePage('services')}
       />
 
-      {/* 5. Dedicated FAQ Accordion Section */}
+      {/* 7. Dedicated FAQ Accordion Section */}
       <FAQSection onNavigatePage={onNavigatePage} />
     </div>
   );

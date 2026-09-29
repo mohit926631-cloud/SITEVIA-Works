@@ -128,10 +128,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     '🔍 On-Page SEO & Google Ranking',
   ]);
   const [timeline, setTimeline] = useState<string>('🚀 Standard (4-6 Days)');
+  const [budget, setBudget] = useState<string>(initialPackage || '₹5,499 (Business Plan - Most Popular)');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [notes, setNotes] = useState('');
+  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
+  const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedSummary, setCopiedSummary] = useState(false);
 
@@ -140,6 +143,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       setSelectedType(initialWebsiteType);
     }
   }, [initialWebsiteType]);
+
+  useEffect(() => {
+    if (initialPackage) {
+      setBudget(initialPackage);
+    }
+  }, [initialPackage]);
 
   const toggleFeature = (featureLabel: string) => {
     setSelectedFeatures((prev) =>
@@ -162,10 +171,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   const handleCopySummary = async () => {
     const summaryText = `Project Scope for SITEVIA WORKS:
 - Type: ${selectedType}
+- Package/Budget: ${budget}
 - Timeline: ${timeline}
 - Features: ${selectedFeatures.join(', ')}
 - Name: ${name || 'Prospective Client'}
-- Phone: ${phone || 'Not provided'}`;
+- WhatsApp: ${phone || 'Not provided'}
+- Email: ${email || 'Not provided'}
+- Notes: ${notes || 'None'}`;
 
     try {
       await navigator.clipboard.writeText(summaryText);
@@ -179,6 +191,24 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   const handleSubmitWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const newErrors: { name?: string; phone?: string } = {};
+    if (!name.trim()) {
+      newErrors.name = 'Please enter your name or business name.';
+    }
+    if (!phone.trim()) {
+      newErrors.phone = 'Please enter your WhatsApp contact number.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      const firstId = newErrors.name ? 'contact-input-name' : 'contact-input-phone';
+      document.getElementById(firstId)?.focus();
+      return;
+    }
+
+    setErrors({});
+    setSubmitted(true);
+
     // Trigger celebratory confetti
     confetti({
       particleCount: 75,
@@ -191,6 +221,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       `👋 Hi SITEVIA WORKS! I customized my project scope on your website:`,
       ``,
       `*📌 Website Type:* ${selectedType}`,
+      `*💰 Selected Budget:* ${budget}`,
       `*⏱️ Preferred Timeline:* ${timeline}`,
       `*✨ Selected Features:* ${selectedFeatures.length > 0 ? selectedFeatures.join(', ') : 'Standard package features'}`,
     ];
@@ -230,22 +261,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({
           <div className="lg:col-span-7 xl:col-span-8 space-y-8">
             <form onSubmit={handleSubmitWhatsApp} className="space-y-8">
               {/* STEP 1: Select Website Type (Visual Cards) */}
-              <div className="bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm">
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-8 h-8 rounded-xl bg-blue-600 text-white font-bold text-sm flex items-center justify-center shadow-sm">
+                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
                     1
                   </span>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
                       Select Website Category
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Pick the category that best matches your vision
+                      Pick the category that best matches your project
                     </p>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {WEB_TYPES.map((type) => {
                     const Icon = type.icon;
                     const isSelected = selectedType === type.id;
@@ -254,33 +285,33 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         key={type.id}
                         type="button"
                         onClick={() => setSelectedType(type.id)}
-                        className={`relative text-left p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[110px] ${
+                        className={`relative text-left p-3.5 rounded-lg border transition-colors cursor-pointer flex flex-col justify-between min-h-[95px] ${
                           isSelected
-                            ? 'bg-blue-50/90 dark:bg-blue-950/40 border-blue-500 dark:border-blue-500 ring-2 ring-blue-500/20 shadow-md'
-                            : 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                            ? 'bg-blue-50/80 dark:bg-blue-950/30 border-blue-500 dark:border-blue-500'
+                            : 'bg-slate-50/50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                         }`}
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 mb-1.5">
                             <div className="flex items-center gap-2">
                               <div
-                                className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                                className={`w-6 h-6 rounded-md flex items-center justify-center ${
                                   isSelected
                                     ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                                    : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                                 }`}
                               >
-                                <Icon className="w-4 h-4" />
+                                <Icon className="w-3.5 h-3.5" />
                               </div>
-                              <span className="font-bold text-sm text-slate-900 dark:text-white">
+                              <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
                                 {type.title}
                               </span>
                             </div>
                             <span
-                              className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                              className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
                                 isSelected
                                   ? 'bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
-                                  : 'bg-slate-200/70 dark:bg-slate-700/60 text-slate-600 dark:text-slate-400'
+                                  : 'bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                               }`}
                             >
                               {type.badge}
@@ -292,7 +323,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         </div>
 
                         {isSelected && (
-                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-bold text-blue-600 dark:text-cyan-400">
+                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400">
                             <CheckCircle2 className="w-3.5 h-3.5" />
                             <span>Selected</span>
                           </div>
@@ -304,22 +335,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               {/* STEP 2: Feature Tags (Click to toggle) */}
-              <div className="bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm">
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-8 h-8 rounded-xl bg-blue-600 text-white font-bold text-sm flex items-center justify-center shadow-sm">
+                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
                     2
                   </span>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
                       Include Desired Features
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Tap each tag to toggle requirements for your website
+                      Tap each item to toggle requirements
                     </p>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {FEATURE_LIST.map((feat) => {
                     const isChecked = selectedFeatures.includes(feat.label);
                     return (
@@ -327,14 +358,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         key={feat.id}
                         type="button"
                         onClick={() => toggleFeature(feat.label)}
-                        className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 border transition-all cursor-pointer ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 border transition-colors cursor-pointer ${
                           isChecked
-                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 shadow-sm'
-                            : 'bg-slate-50/80 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-500 text-emerald-800 dark:text-emerald-300'
+                            : 'bg-slate-50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300'
                         }`}
                       >
                         <div
-                          className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${
+                          className={`w-3.5 h-3.5 rounded flex items-center justify-center text-[10px] ${
                             isChecked
                               ? 'bg-emerald-500 text-white'
                               : 'border border-slate-300 dark:border-slate-600'
@@ -350,24 +381,24 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               {/* STEP 3: Timeline & Contact Details */}
-              <div className="bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm space-y-5">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-blue-600 text-white font-bold text-sm flex items-center justify-center shadow-sm">
+                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
                     3
                   </span>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
                       Target Launch & Contact Details
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      When would you like this live, and how can we address you?
+                      When would you like this live, and how can we reach you?
                     </p>
                   </div>
                 </div>
 
                 {/* Timeline Selection */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2.5">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                     Launch Timeline
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -376,10 +407,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         key={item.id}
                         type="button"
                         onClick={() => setTimeline(item.label)}
-                        className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                        className={`p-2.5 rounded-lg border text-left cursor-pointer transition-colors ${
                           timeline === item.label
-                            ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-500 text-blue-900 dark:text-blue-100 ring-2 ring-blue-500/20'
-                            : 'bg-slate-50/60 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                            ? 'bg-blue-50 dark:bg-blue-950/30 border-blue-500 text-blue-900 dark:text-blue-100'
+                            : 'bg-slate-50/50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         <p className="text-xs font-bold">{item.label}</p>
@@ -391,81 +422,128 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   </div>
                 </div>
 
-                {/* Name, Phone, Email & Message */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Name, Phone, Budget, Email & Message */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Your Name / Business Name
+                    <label htmlFor="contact-input-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Your Name / Business Name <span className="text-rose-500">*</span>
                     </label>
                     <input
+                      id="contact-input-name"
                       type="text"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                      }}
                       placeholder="e.g. Rahul Sharma / Brew Café"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border ${
+                        errors.name ? 'border-rose-500 ring-1 ring-rose-500' : 'border-slate-200 dark:border-slate-800'
+                      } text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500`}
                     />
+                    {errors.name && <p className="text-[11px] text-rose-500 mt-1">{errors.name}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                      WhatsApp Number
+                    <label htmlFor="contact-input-phone" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      WhatsApp Number <span className="text-rose-500">*</span>
                     </label>
                     <input
+                      id="contact-input-phone"
                       type="tel"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
+                      }}
                       placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border ${
+                        errors.phone ? 'border-rose-500 ring-1 ring-rose-500' : 'border-slate-200 dark:border-slate-800'
+                      } text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500`}
                     />
+                    {errors.phone && <p className="text-[11px] text-rose-500 mt-1">{errors.phone}</p>}
                   </div>
 
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <div>
+                    <label htmlFor="contact-input-budget" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Budget / Package Preference
+                    </label>
+                    <select
+                      id="contact-input-budget"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500 font-mono"
+                    >
+                      <option value="₹2,999 (Starter Plan)">₹2,999 (Starter Plan)</option>
+                      <option value="₹5,499 (Business Plan - Most Popular)">₹5,499 (Business Plan - Most Popular)</option>
+                      <option value="₹7,999 (Premium Plan)">₹7,999 (Premium Plan)</option>
+                      <option value="Flexible / Let's discuss">Flexible / Let's discuss</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-input-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Email Address (Optional)
                     </label>
                     <input
+                      id="contact-input-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="youremail@example.com"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Any specific preferences or existing website link?
+                    <label htmlFor="contact-input-notes" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Project Notes / Specific Requirements / Reference Links
                     </label>
                     <textarea
+                      id="contact-input-notes"
                       rows={3}
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      placeholder="e.g. We need a dark mode design, online menu with direct WhatsApp order button, and links to Instagram."
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                      placeholder="e.g. Clean design, digital menu with direct WhatsApp order button, link to Instagram or competitors."
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500 resize-none"
                     />
                   </div>
                 </div>
+
+                {submitted && (
+                  <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-emerald-900 dark:text-emerald-100">
+                        Project Brief Formatted Successfully!
+                      </p>
+                      <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
+                        WhatsApp is opening with your formatted project brief. You can also copy the brief below or chat with us directly anytime.
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 {/* Primary Action Button */}
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white font-bold text-base flex items-center justify-center gap-3 shadow-lg shadow-emerald-500/20 cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99]"
+                    className="w-full py-3.5 px-6 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm cursor-pointer transition-colors"
                   >
-                    <MessageCircle className="w-5 h-5 fill-white/20" />
+                    <MessageCircle className="w-4 h-4 fill-white/20" />
                     <span>Send Project Scope on WhatsApp</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <div className="flex items-center justify-between mt-3 text-xs text-slate-500 dark:text-slate-400 px-1">
                     <span className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                      100% Free consultation & transparent quote
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                      Free consultation & transparent quote
                     </span>
                     <button
                       type="button"
                       onClick={handleCopySummary}
-                      className="hover:text-blue-600 dark:hover:text-cyan-400 flex items-center gap-1 cursor-pointer"
+                      className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 cursor-pointer"
                     >
                       {copiedSummary ? (
                         <>
@@ -488,19 +566,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({
           {/* RIGHT: Instant Contact Hub (5 cols) */}
           <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-24">
             {/* Direct Contact Cards Hub */}
-            <div className="bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-sm space-y-5">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
               <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span>Direct Contact Hub</span>
               </h3>
 
               {/* WhatsApp Item */}
-              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-800">
+              <div className="flex items-center justify-between p-3.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/70 dark:border-slate-800">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                    <MessageCircle className="w-5 h-5 fill-current/20" />
+                  <div className="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                    <MessageCircle className="w-4 h-4 fill-current/20" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Direct WhatsApp</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Direct WhatsApp</p>
                     <p className="text-sm font-bold font-mono text-slate-900 dark:text-white">
                       +91 95110 07593
                     </p>
@@ -510,21 +588,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   href={`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
                 >
                   Chat
                 </a>
               </div>
 
               {/* Email Item with 1-click Copy */}
-              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-800">
+              <div className="flex items-center justify-between p-3.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/70 dark:border-slate-800">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Official Email</p>
-                    <p className="text-xs sm:text-sm font-semibold font-mono text-slate-900 dark:text-white truncate">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Official Email</p>
+                    <p className="text-xs font-semibold font-mono text-slate-900 dark:text-white truncate">
                       {VITEWEB_EMAIL}
                     </p>
                   </div>
@@ -532,7 +610,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors shrink-0 cursor-pointer flex items-center gap-1"
+                  className="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors shrink-0 cursor-pointer flex items-center gap-1"
                 >
                   {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedEmail ? 'Copied' : 'Copy'}</span>
@@ -542,12 +620,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               {/* Operating Hours & Speed */}
               <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-2 border-t border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-slate-400" />
-                  <span>Support Hours: Monday – Saturday (9:00 AM – 10:00 PM IST)</span>
+                  <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Support: Mon – Sat (9:00 AM – 10:00 PM IST)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-amber-500" />
-                  <span>Replies typically within 15 minutes on WhatsApp</span>
+                  <Zap className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Replies typically under 15 mins on WhatsApp</span>
                 </div>
               </div>
 

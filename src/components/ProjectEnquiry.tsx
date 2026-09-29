@@ -41,6 +41,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (initialPackage) setFormData((prev) => ({ ...prev, package: initialPackage }));
@@ -89,6 +90,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
       colors: ['#10b981', '#06b6d4', '#3b82f6', '#ffffff'],
     });
 
+    setSubmitted(true);
     const waUrl = createWhatsAppUrl(formData);
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
@@ -102,21 +104,18 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
   };
 
   return (
-    <section id="enquiry" className="py-20 sm:py-28 bg-slate-50 dark:bg-[#070A10] border-t border-slate-200/80 dark:border-slate-800/80 relative transition-colors">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-emerald-500/10 dark:bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-
+    <section id="enquiry" className="py-16 sm:py-24 bg-slate-50 dark:bg-[#070A10] border-t border-slate-200/80 dark:border-slate-800/80 relative transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold mb-3">
+        <div className="text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold mb-3">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Direct WhatsApp Project Intake</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
             Launch Your Website Project.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-2 max-w-xl mx-auto font-normal">
             Configure your brief below. We review your requirements and reply directly on WhatsApp within 15 minutes.
           </p>
         </div>
@@ -125,7 +124,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
         <form
           id="project-enquiry-form"
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-slate-900/90 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-lg dark:shadow-[0_30px_90px_rgba(0,0,0,0.8)] backdrop-blur-xl space-y-8"
+          className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-7"
           noValidate
         >
           {/* Group 1: Contact Information */}
@@ -353,21 +352,35 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
             />
           </div>
 
+          {submitted && (
+            <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm flex items-start gap-3">
+              <Check className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-emerald-900 dark:text-emerald-100">
+                  Project Brief Prepared Successfully!
+                </p>
+                <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
+                  WhatsApp is opening with your formatted requirements. We review and reply within 15 minutes.
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Action Submission Buttons */}
           <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center gap-4">
             <button
               id="submit-project-brief-whatsapp-btn"
               type="submit"
-              className="w-full sm:flex-1 py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-[0.98] text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xl shadow-emerald-700/20 dark:shadow-emerald-950/80 transition-all min-h-[54px]"
+              className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition-colors min-h-[50px] cursor-pointer"
             >
-              <Send className="w-5 h-5" />
-              <span>SEND BRIEF VIA WHATSAPP →</span>
+              <Send className="w-4 h-4" />
+              <span>Send Brief via WhatsApp →</span>
             </button>
 
             <button
               type="button"
               onClick={handleCopyMessage}
-              className="w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-950 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-800 transition-colors min-h-[54px]"
+              className="w-full sm:w-auto py-3 px-5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-700 transition-colors min-h-[50px] cursor-pointer"
             >
               {copied ? (
                 <>

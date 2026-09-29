@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQ_ITEMS } from '../constants';
-import { ChevronDown, HelpCircle, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { ChevronDown, HelpCircle, MessageCircle, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { PageType } from '../types';
@@ -102,16 +102,15 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigatePage }) => {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-12 p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-blue-50 via-indigo-50/50 to-slate-100 dark:from-slate-900 dark:via-blue-950/30 dark:to-slate-900 border border-blue-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-5"
+          transition={{ duration: 0.4 }}
+          className="mt-12 p-6 sm:p-7 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-5"
         >
           <div className="text-center sm:text-left">
-            <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center justify-center sm:justify-start gap-2">
-              <Sparkles className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-              <span>Still have a question?</span>
+            <h4 className="text-base font-bold text-slate-900 dark:text-white">
+              Still have a question?
             </h4>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
-              We respond quickly to any project inquiry or custom architecture request.
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+              We respond quickly to any project question or custom website requirement.
             </p>
           </div>
 
@@ -120,7 +119,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigatePage }) => {
               href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I have a question about getting a website built.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm transition-all shadow-sm"
             >
               <MessageCircle className="w-4 h-4 fill-white/20" />
               <span>Ask on WhatsApp</span>
@@ -132,7 +131,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigatePage }) => {
                 onClick={() => onNavigatePage('contact')}
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer"
               >
-                <span>Send Enquiry</span>
+                <span>Send Inquiry</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             )}

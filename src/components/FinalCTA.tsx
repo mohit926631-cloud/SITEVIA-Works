@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, Compass } from 'lucide-react';
+import { ArrowRight, Compass } from 'lucide-react';
 import { motion } from 'motion/react';
 import { MagneticButton } from './MagneticButton';
 
@@ -31,49 +31,45 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({
   };
 
   return (
-    <section id="final-cta" className="py-24 sm:py-32 relative overflow-hidden transition-colors">
-      {/* 3D Atmospheric Nebula Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-blue-500/15 via-cyan-500/15 to-indigo-500/15 rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="final-cta" className="py-20 sm:py-28 relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-slate-800/80">
       <motion.div
-        initial={{ opacity: 0, y: 30, scale: 0.97 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+        transition={{ duration: 0.4 }}
+        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
       >
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
-          Ready to Elevate Your Business Online?
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
+          Ready to Get Your Business Website Online?
         </h2>
 
-        <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-          Tell us your vision. We engineer a bespoke website tailored to convert your traffic into long-term clients.
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed font-normal">
+          Tell us about your business. We'll build a fast, clean website with direct WhatsApp inquiries and dedicated support. Ready in 3 to 7 days.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
           <MagneticButton
             id="final-cta-get-website-btn"
             variant="primary"
-            shimmer={true}
             onClick={handleGetWebsite}
-            className="w-full sm:w-auto text-sm px-8 py-4 rounded-2xl shadow-xl shadow-blue-600/30 dark:shadow-blue-900/60 min-h-[54px]"
+            className="w-full sm:w-auto text-sm px-7 py-3.5 rounded-xl shadow-sm min-h-[50px]"
           >
             <span>Get Your Website</span>
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
 
-          <MagneticButton
+          <button
             id="final-cta-view-work-btn"
-            variant="secondary"
-            shimmer={false}
+            type="button"
             onClick={handleViewWork}
-            className="w-full sm:w-auto text-sm px-7 py-4 rounded-2xl min-h-[54px]"
+            className="w-full sm:w-auto text-sm px-6 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-colors flex items-center justify-center gap-2 min-h-[50px] font-semibold cursor-pointer"
           >
-            <Compass className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
+            <Compass className="w-4 h-4 text-blue-500" />
             <span>Explore Live Demos</span>
-          </MagneticButton>
+          </button>
         </div>
       </motion.div>
     </section>
   );
 };
+

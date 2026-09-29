@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { TargetAudience } from '../types';
-import { TiltCard } from './TiltCard';
 
 interface WhoWeBuildForProps {
   onSelectAudience?: (businessType: string) => void;
@@ -56,79 +55,76 @@ export const WhoWeBuildFor: React.FC<WhoWeBuildForProps> = ({ onSelectAudience }
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.97 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: 'spring',
-        stiffness: 260,
-        damping: 24,
+        duration: 0.3,
+        ease: 'easeOut',
       },
     },
   };
 
   return (
-    <section id="who-we-build-for" className="py-16 sm:py-24 bg-slate-100/50 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="who-we-build-for" className="py-16 sm:py-20 bg-slate-50/50 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+          transition={{ duration: 0.4 }}
+          className="text-center max-w-2xl mx-auto mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Built For Businesses Like Yours.
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Built For Your Industry
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-3">
-            We understand the specific requirements, user flows, and conversion elements each type of business needs.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2">
+            Tailored features and customer inquiry workflows configured for your specific business category.
           </p>
         </motion.div>
 
-        {/* 11 Audience Cards with 3D Parallax Tilt and Staggered Entrance */}
+        {/* Audience Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
           {TARGET_AUDIENCES.map((item: TargetAudience) => {
             const Icon = getAudienceIcon(item.iconName);
             return (
               <motion.div key={item.id} variants={itemVariants} className="h-full">
-                <TiltCard
-                  maxTilt={6}
-                  className="h-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-cyan-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-sm dark:shadow-none"
+                <div
+                  className="h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between transition-colors hover:border-slate-400 dark:hover:border-slate-700 shadow-sm"
                 >
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-cyan-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <Icon className="w-5 h-5" />
+                      <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400">
+                        <Icon className="w-4 h-4" />
                       </div>
-                      <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">
                         {item.title}
                       </h3>
                     </div>
 
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
                       {item.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-1 mb-4">
                       {item.featuresNeeded.map((f) => (
                         <span
                           key={f}
-                          className="text-[10px] bg-slate-100 dark:bg-slate-950 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 px-2 py-0.5 rounded-md font-medium"
+                          className="text-[10px] bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 px-2 py-0.5 rounded font-medium"
                         >
                           {f}
                         </span>
@@ -136,21 +132,21 @@ export const WhoWeBuildFor: React.FC<WhoWeBuildForProps> = ({ onSelectAudience }
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px]">
-                      Demo: {item.sampleWebsite}
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-500 font-medium truncate max-w-[130px]">
+                      {item.sampleWebsite}
                     </span>
 
                     <button
                       type="button"
                       onClick={() => onSelectAudience?.(item.title.split('&')[0].trim())}
-                      className="text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:text-blue-700 dark:hover:text-cyan-300 flex items-center gap-1 p-1 cursor-pointer transition-colors"
+                      className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 cursor-pointer transition-colors"
                     >
-                      <span>Enquire</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Inquire</span>
+                      <ArrowRight className="w-3 h-3" />
                     </button>
                   </div>
-                </TiltCard>
+                </div>
               </motion.div>
             );
           })}
@@ -159,3 +155,4 @@ export const WhoWeBuildFor: React.FC<WhoWeBuildForProps> = ({ onSelectAudience }
     </section>
   );
 };
+

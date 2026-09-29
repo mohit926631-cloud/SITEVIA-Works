@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { WebviaLogo, SiteviaLogo } from './SiteviaLogo';
+import { SiteviaLogo } from './SiteviaLogo';
 import { 
   MessageCircle, 
   ArrowRight, 
@@ -26,7 +26,7 @@ import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { TiltCard } from './TiltCard';
 import { MagneticButton } from './MagneticButton';
 
-export const AboutWebvia: React.FC = () => {
+export const AboutSitevia: React.FC = () => {
   const [lang, setLang] = useState<'en' | 'hi'>('en');
 
   const scrollToPricing = () => {
@@ -160,14 +160,12 @@ export const AboutWebvia: React.FC = () => {
           
           {/* Section 1: The Core Mission & Problem Statement */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-            className="p-8 sm:p-12 rounded-3xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 mb-16 relative overflow-hidden shadow-sm"
+            transition={{ duration: 0.35 }}
+            className="p-6 sm:p-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-14 relative overflow-hidden shadow-sm"
           >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-400 block mb-1">
@@ -177,12 +175,12 @@ export const AboutWebvia: React.FC = () => {
                   {lang === 'en' ? 'SITEVIA WORKS started with a simple idea:' : 'साइटविया वर्क्स (SITEVIA WORKS) की शुरुआत एक सरल विचार से हुई:'}
                 </h3>
               </div>
-              <WebviaLogo variant="horizontal" size="md" />
+              <SiteviaLogo variant="horizontal" size="md" />
             </div>
 
             {/* Big Impact Callout */}
-            <div className="my-8 p-6 rounded-2xl bg-gradient-to-r from-blue-600/10 via-cyan-500/10 to-indigo-600/10 border-l-4 border-blue-600 dark:border-cyan-400">
-              <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed">
+            <div className="my-6 p-5 rounded-xl bg-blue-50 dark:bg-slate-950 border-l-4 border-blue-600 dark:border-blue-400">
+              <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed">
                 "{lang === 'en' 
                   ? 'Every small business deserves a strong, professional online presence.' 
                   : 'हर छोटे व्यवसाय का हक है कि उसका एक मजबूत और पेशेवर ऑनलाइन वजूद हो।'}"
@@ -256,21 +254,20 @@ export const AboutWebvia: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
           >
             {struggles.map((item) => {
               const Icon = item.icon;
               return (
                 <motion.div key={item.id} variants={itemVariants} className="h-full">
-                  <TiltCard
-                    maxTilt={5}
-                    className="h-full p-6 sm:p-7 rounded-3xl bg-slate-50/90 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all"
+                  <div
+                    className="h-full p-6 sm:p-7 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
                   >
                     <div>
                       {/* Problem Header (Red X) */}
-                      <div className="flex items-start gap-3.5 mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-900/40">
-                        <div className="p-1.5 rounded-xl bg-rose-500 text-white shrink-0 mt-0.5">
-                          <XIcon className="w-4 h-4 stroke-[3]" />
+                      <div className="flex items-start gap-3.5 mb-4 p-3.5 rounded-lg bg-rose-50 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/30">
+                        <div className="p-1 rounded bg-rose-500 text-white shrink-0 mt-0.5">
+                          <XIcon className="w-3.5 h-3.5 stroke-[3]" />
                         </div>
                         <div>
                           <h4 className="text-sm font-bold text-rose-700 dark:text-rose-400">
@@ -283,36 +280,36 @@ export const AboutWebvia: React.FC = () => {
                       </div>
 
                       {/* Solution Block (Green Check) */}
-                      <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/40">
-                        <div className="p-1.5 rounded-xl bg-emerald-500 text-white shrink-0 mt-0.5">
-                          <Check className="w-4 h-4 stroke-[3]" />
+                      <div className="flex items-start gap-3.5 p-3.5 rounded-lg bg-emerald-50/80 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/30">
+                        <div className="p-1 rounded bg-emerald-500 text-white shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] uppercase font-black tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/50 px-2 py-0.5 rounded-md">
-                              {lang === 'en' ? 'SITEVIA WORKS SOLUTION' : 'साइटविया वर्क्स समाधान'}
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-700 dark:text-emerald-400">
+                              {lang === 'en' ? 'SITEVIA WORKS Solution' : 'साइटविया समाधान'}
                             </span>
                           </div>
-                          <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-1.5">
+                          <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-1">
                             {item.solution}
                           </h4>
-                          <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                          <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
                             {item.solutionDesc}
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                         <span>{lang === 'en' ? 'Fast 7-Day Setup' : '7 दिन में पूरा सेटअप'}</span>
                       </span>
-                      <span className="font-mono text-blue-600 dark:text-cyan-400 font-semibold">
+                      <span className="font-mono text-blue-600 dark:text-blue-400 font-semibold">
                         {lang === 'en' ? 'ROI Positive' : 'सीधे ग्राहक बढ़ें'}
                       </span>
                     </div>
-                  </TiltCard>
+                  </div>
                 </motion.div>
               );
             })}
@@ -328,104 +325,92 @@ export const AboutWebvia: React.FC = () => {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-3xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-800/60 text-center flex flex-col items-center shadow-sm"
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-14">
+            <div 
+              className="p-6 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center flex flex-col items-center shadow-sm"
             >
-              <div className="p-3.5 rounded-2xl bg-blue-600 text-white mb-4 shadow-md shadow-blue-600/30">
-                <PhoneCall className="w-6 h-6" />
+              <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 mb-3.5">
+                <PhoneCall className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+              <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">
                 {lang === 'en' ? '1. More Direct Calls' : '1. ज्यादा डायरेक्ट कॉल्स'}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {lang === 'en'
                   ? 'Mobile sticky call buttons convert local searchers into urgent live callers immediately.'
                   : 'मोबाइल स्क्रीन पर लगा डायरेक्ट कॉल बटन ग्राहकों को तुरंत आपसे सीधे बात करने की सुविधा देता है।'}
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-3xl bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-200/80 dark:border-cyan-800/60 text-center flex flex-col items-center shadow-sm"
+            <div 
+              className="p-6 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center flex flex-col items-center shadow-sm"
             >
-              <div className="p-3.5 rounded-2xl bg-cyan-600 text-white mb-4 shadow-md shadow-cyan-600/30">
-                <Calendar className="w-6 h-6" />
+              <div className="p-3 rounded-lg bg-cyan-100 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 mb-3.5">
+                <Calendar className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+              <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">
                 {lang === 'en' ? '2. More Bookings' : '2. ज्यादा ऑनलाइन बुकिंग्स'}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {lang === 'en'
-                  ? 'Smooth consultation & service booking forms that capture clients even when you are asleep.'
+                  ? 'Smooth consultation & service booking forms that capture clients even after business hours.'
                   : 'जब आपकी दुकान बंद हो या आप सो रहे हों, तब भी ग्राहक आपकी सेवाएं और स्लॉट ऑनलाइन बुक कर सकते हैं।'}
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-3xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 text-center flex flex-col items-center shadow-sm"
+            <div 
+              className="p-6 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center flex flex-col items-center shadow-sm"
             >
-              <div className="p-3.5 rounded-2xl bg-emerald-600 text-white mb-4 shadow-md shadow-emerald-600/30">
-                <Users className="w-6 h-6" />
+              <div className="p-3 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 mb-3.5">
+                <Users className="w-5 h-5" />
               </div>
-              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+              <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">
                 {lang === 'en' ? '3. More Customers' : '3. ज्यादा लॉयल कस्टमर्स'}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {lang === 'en'
                   ? 'Build unquestioned trust and brand credibility over competitors with a fast, modern website.'
                   : 'एक आधुनिक और तेज वेबसाइट आपके बिजनेस को प्रतिस्पर्धियों से कई गुना आगे और भरोसेमंद बनाती है।'}
               </p>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Bottom Action CTA Banner with Specular Shimmer & Magnetic Buttons */}
+          {/* Bottom Action CTA Banner */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-            className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 text-white text-center flex flex-col items-center shadow-2xl relative overflow-hidden"
+            transition={{ duration: 0.35 }}
+            className="p-8 sm:p-10 rounded-2xl bg-slate-900 border border-slate-800 text-white text-center flex flex-col items-center shadow-lg relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
-
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-cyan-200 text-xs font-bold uppercase tracking-wider mb-4 border border-white/15 animate-specular-shimmer">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{lang === 'en' ? 'LAUNCH YOUR SITE IN 7 DAYS' : 'सिर्फ 7 दिन में अपनी वेबसाइट शुरू करें'}</span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-black text-white mb-2 tracking-tight">
-              {lang === 'en' ? 'Ready to Give Your Business the Online Home It Deserves?' : 'क्या आप अपने बिजनेस को वह पहचान देने के लिए तैयार हैं जिसका वह हकदार है?'}
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 tracking-tight">
+              {lang === 'en' ? 'Ready to Give Your Business the Online Presence It Deserves?' : 'क्या आप अपने बिजनेस को वह पहचान देने के लिए तैयार हैं जिसका वह हकदार है?'}
             </h3>
-            <p className="text-sm sm:text-base text-blue-100 max-w-xl mb-7 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl mb-7 leading-relaxed font-normal">
               {lang === 'en'
-                ? 'Stop losing customers to competitors. Talk to our website specialists today on WhatsApp.'
+                ? 'Stop losing customers to competitors. Talk to our team today on WhatsApp to plan your project.'
                 : 'ग्राहकों को खोना बंद करें। आज ही व्हाट्सऐप पर हमारी टीम से सीधे बात करें और सही पैकेज चुनें।'}
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               <MagneticButton
                 href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I read your story and I want to build a website for my business.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="emerald"
-                shimmer={true}
-                className="w-full sm:w-auto px-7 py-3.5 text-sm font-bold shadow-lg shadow-emerald-950/50 min-h-[48px]"
+                className="w-full sm:w-auto px-7 py-3 text-sm font-bold min-h-[46px]"
               >
                 <MessageCircle className="w-4 h-4 fill-white/20" />
                 <span>{lang === 'en' ? 'Chat on WhatsApp (+91 95110 07593)' : 'व्हाट्सऐप पर बात करें (+91 95110 07593)'}</span>
               </MagneticButton>
 
-              <MagneticButton
+              <button
+                type="button"
                 onClick={scrollToPricing}
-                variant="secondary"
-                shimmer={false}
-                className="w-full sm:w-auto px-7 py-3.5 bg-white/10 hover:bg-white/20 border-white/25 text-white font-bold text-sm min-h-[48px]"
+                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold text-sm min-h-[46px] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>{lang === 'en' ? 'View Pricing Plans' : 'प्राइसिंग प्लान्स देखें'}</span>
                 <ArrowRight className="w-4 h-4" />
-              </MagneticButton>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -435,6 +420,6 @@ export const AboutWebvia: React.FC = () => {
 };
 
 // Backwards compatibility alias
-export const AboutSitevia = AboutWebvia;
+export const AboutWebvia = AboutSitevia;
 
 

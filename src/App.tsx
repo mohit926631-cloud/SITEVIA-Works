@@ -15,8 +15,6 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { ThreeCanvas } from './components/ThreeCanvas';
-import { SpotlightEffect } from './components/SpotlightEffect';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { PageSkeletonScreen } from './components/PageSkeletonScreen';
 import { PageType } from './types';
@@ -156,12 +154,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
-      {/* 3D WebGL Background Scene */}
-      <ThreeCanvas />
-
-      {/* Dynamic Cursor Spotlight Glow */}
-      <SpotlightEffect />
-
       {/* Viewport Scroll Progress Bar */}
       <ScrollProgressBar />
 

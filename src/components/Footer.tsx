@@ -1,7 +1,7 @@
 import React from 'react';
-import { ViteWebLogo } from './SiteviaLogo';
-import { MessageCircle, Mail, ArrowUp, ShieldCheck, Scale, Sparkles } from 'lucide-react';
-import { VITEWEB_EMAIL } from '../constants';
+import { SiteviaLogo } from './SiteviaLogo';
+import { MessageCircle, Mail, ArrowUp, ShieldCheck, Check, Clock } from 'lucide-react';
+import { VITEWEB_EMAIL, VITEWEB_WHATSAPP_NUMBER } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { PageType } from '../types';
 
@@ -17,10 +17,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
 
   const pages: { label: string; page: PageType }[] = [
     { label: 'Home', page: 'home' },
-    { label: 'Services & Real Work', page: 'services' },
-    { label: 'Pricing & Cost Calculator', page: 'pricing' },
-    { label: 'About Our Story', page: 'about' },
-    { label: 'Contact & Project Enquiry', page: 'contact' },
+    { label: 'Services & Packages', page: 'services' },
+    { label: 'Pricing & Plans', page: 'pricing' },
+    { label: 'About Us', page: 'about' },
+    { label: 'Contact & Enquiry', page: 'contact' },
   ];
 
   const handlePageClick = (page: PageType) => {
@@ -44,11 +44,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
               className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg text-left cursor-pointer"
               aria-label="SITEVIA WORKS Top"
             >
-              <ViteWebLogo variant="horizontal" size="md" />
+              <SiteviaLogo variant="horizontal" size="md" />
             </button>
 
             <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-4 max-w-sm tracking-wide">
-              "Your Vison, Our code"
+              "Your Vision, Our Code"
             </p>
 
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 max-w-sm leading-relaxed">
@@ -57,13 +57,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
 
             {/* Quick Trust Badges */}
             <div className="mt-6 flex flex-wrap items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
-              <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
+              <span className="inline-flex items-center gap-1.5 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
                 Dedicated Post-Launch Support
               </span>
-              <span className="inline-flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
-                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-                Transparent Pricing
+              <span className="inline-flex items-center gap-1.5 bg-slate-200/60 dark:bg-slate-800/60 px-2.5 py-1 rounded-md">
+                <Check className="w-3.5 h-3.5 text-blue-500" />
+                Transparent One-Time Pricing
               </span>
             </div>
           </div>
@@ -95,7 +95,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
             </h4>
             <div className="space-y-3">
               <a
-                href={createQuickWhatsAppUrl()}
+                href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I would like to get a website built for my business.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
@@ -121,6 +121,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
                   <span className="font-mono text-xs truncate">{VITEWEB_EMAIL}</span>
                 </div>
               </a>
+
+              <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 pt-1">
+                <Clock className="w-3.5 h-3.5 text-slate-400" />
+                <span>Mon – Sat: 9:00 AM – 9:00 PM IST</span>
+              </div>
             </div>
 
             {/* Legal Information Section */}
