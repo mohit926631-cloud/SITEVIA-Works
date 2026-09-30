@@ -17,8 +17,9 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
 
   const activeProject = DEMO_PROJECTS[activeProjectIndex];
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     startPos.current = {
       x: e.clientX,
       y: e.clientY,
@@ -27,7 +28,7 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
     };
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging) return;
     const deltaX = e.clientX - startPos.current.x;
     const deltaY = e.clientY - startPos.current.y;
@@ -35,8 +36,13 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
     setRotX(Math.max(-25, Math.min(25, startPos.current.initRotX - deltaY * 0.25)));
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
     setIsDragging(false);
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      // Ignore if pointer capture already released
+    }
   };
 
   const resetRotation = () => {
@@ -151,12 +157,12 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
 
         {/* 3D Interactive Spatial Stage */}
         <div
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           style={{ perspective: '1600px' }}
-          className="relative min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] rounded-3xl bg-gradient-to-b from-slate-900/40 to-slate-950/80 border border-white/10 p-6 sm:p-12 flex items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-hidden backdrop-blur-xl shadow-2xl"
+          className="relative min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] rounded-3xl bg-gradient-to-b from-slate-900/40 to-slate-950/80 border border-white/10 p-6 sm:p-12 flex items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-hidden backdrop-blur-xl shadow-2xl touch-none"
         >
           {/* Subtle 3D Floor Grid */}
           <div

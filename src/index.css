@@ -61,9 +61,36 @@
   scrollbar-width: none;
 }
 
-/* Respect reduced motion */
+/* Infinite Running Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+.animate-marquee:active {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion (keeping continuous marquee smoothly running) */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *:not(.animate-marquee), ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

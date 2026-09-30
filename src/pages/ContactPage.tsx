@@ -1,30 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import confetti from 'canvas-confetti';
-import {
-  MessageCircle,
-  Phone,
-  Mail,
-  Clock,
-  Sparkles,
-  CheckCircle2,
-  Copy,
-  Check,
-  Globe,
-  ArrowRight,
-  ShieldCheck,
-  Send,
-  Calendar,
-  Layers,
-  Store,
-  Utensils,
-  User,
-  HeartPulse,
-  ShoppingBag,
-  Cpu,
-  Zap,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { MessageCircle, Mail, Zap, Check, Copy } from 'lucide-react';
 import { VITEWEB_WHATSAPP_NUMBER, VITEWEB_EMAIL } from '../constants';
+import { ProjectEnquiry } from '../components/ProjectEnquiry';
 import { PageType } from '../types';
 
 interface ContactPageProps {
@@ -35,128 +12,13 @@ interface ContactPageProps {
   onNavigatePage?: (page: PageType) => void;
 }
 
-interface WebTypeOption {
-  id: string;
-  title: string;
-  icon: React.ElementType;
-  badge: string;
-  desc: string;
-  suggestedPlan: string;
-}
-
-const WEB_TYPES: WebTypeOption[] = [
-  {
-    id: 'Business Website',
-    title: 'Business Website',
-    icon: Store,
-    badge: 'Popular',
-    desc: 'Local service, agency, or corporate brand showcase.',
-    suggestedPlan: 'Business Plan (₹5,499)',
-  },
-  {
-    id: 'Restaurant & Café',
-    title: 'Restaurant & Café',
-    icon: Utensils,
-    badge: 'High Conversion',
-    desc: 'Digital food menu, WhatsApp reservations & location map.',
-    suggestedPlan: 'Business Plan (₹5,499)',
-  },
-  {
-    id: 'Portfolio / Personal',
-    title: 'Portfolio & Creator',
-    icon: User,
-    badge: 'Sleek & Fast',
-    desc: 'Showcase photos, design work, CV, or freelance skills.',
-    suggestedPlan: 'Starter Plan (₹2,999)',
-  },
-  {
-    id: 'Clinic & Healthcare',
-    title: 'Clinic & Healthcare',
-    icon: HeartPulse,
-    badge: 'Trust & Care',
-    desc: 'Doctor profiles, treatments, WhatsApp appointment triggers.',
-    suggestedPlan: 'Business Plan (₹5,499)',
-  },
-  {
-    id: 'E-Commerce / Catalog',
-    title: 'Store / Catalog',
-    icon: ShoppingBag,
-    badge: 'Sell Products',
-    desc: 'Product catalog with WhatsApp ordering & payment links.',
-    suggestedPlan: 'Premium Plan (₹7,999)',
-  },
-  {
-    id: 'Custom Web App',
-    title: 'Custom Web App',
-    icon: Cpu,
-    badge: 'Tailored Logic',
-    desc: 'Interactive calculators, booking workflows & dynamic tools.',
-    suggestedPlan: 'Custom Quote',
-  },
-];
-
-const FEATURE_LIST = [
-  { id: 'mobile', label: '📱 Mobile-First Fast UI', defaultChecked: true },
-  { id: 'whatsapp', label: '💬 WhatsApp Direct Orders / Chat', defaultChecked: true },
-  { id: 'maps', label: '📍 Google Maps Location Pin', defaultChecked: true },
-  { id: 'domain', label: '🌐 Custom Domain Setup Help', defaultChecked: true },
-  { id: 'seo', label: '🔍 On-Page SEO & Google Ranking', defaultChecked: true },
-  { id: 'speed', label: '⚡ 95+ Google PageSpeed Optimization', defaultChecked: true },
-  { id: 'qr', label: '💳 UPI / Payment QR Integration', defaultChecked: false },
-  { id: 'gallery', label: '📸 High-Resolution Image Gallery', defaultChecked: false },
-];
-
-const TIMELINE_OPTIONS = [
-  { id: 'express', label: '⚡ Urgent (2-3 Days)', note: 'Priority expedited delivery' },
-  { id: 'standard', label: '🚀 Standard (4-6 Days)', note: 'Recommended standard pace' },
-  { id: 'flexible', label: '🗓️ Flexible (1-2 Weeks)', note: 'Plan according to your launch' },
-];
-
 export const ContactPage: React.FC<ContactPageProps> = ({
   initialPackage,
   initialWebsiteType,
   initialBusinessType,
   onOpenLegal,
-  onNavigatePage,
 }) => {
-  const [selectedType, setSelectedType] = useState<string>(initialWebsiteType || 'Business Website');
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([
-    '📱 Mobile-First Fast UI',
-    '💬 WhatsApp Direct Orders / Chat',
-    '📍 Google Maps Location Pin',
-    '🌐 Custom Domain Setup Help',
-    '🔍 On-Page SEO & Google Ranking',
-  ]);
-  const [timeline, setTimeline] = useState<string>('🚀 Standard (4-6 Days)');
-  const [budget, setBudget] = useState<string>(initialPackage || '₹5,499 (Business Plan - Most Popular)');
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [notes, setNotes] = useState('');
-  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
-  const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedSummary, setCopiedSummary] = useState(false);
-
-  useEffect(() => {
-    if (initialWebsiteType) {
-      setSelectedType(initialWebsiteType);
-    }
-  }, [initialWebsiteType]);
-
-  useEffect(() => {
-    if (initialPackage) {
-      setBudget(initialPackage);
-    }
-  }, [initialPackage]);
-
-  const toggleFeature = (featureLabel: string) => {
-    setSelectedFeatures((prev) =>
-      prev.includes(featureLabel)
-        ? prev.filter((f) => f !== featureLabel)
-        : [...prev, featureLabel]
-    );
-  };
 
   const handleCopyEmail = async () => {
     try {
@@ -168,491 +30,81 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     }
   };
 
-  const handleCopySummary = async () => {
-    const summaryText = `Project Scope for SITEVIA WORKS:
-- Type: ${selectedType}
-- Package/Budget: ${budget}
-- Timeline: ${timeline}
-- Features: ${selectedFeatures.join(', ')}
-- Name: ${name || 'Prospective Client'}
-- WhatsApp: ${phone || 'Not provided'}
-- Email: ${email || 'Not provided'}
-- Notes: ${notes || 'None'}`;
-
-    try {
-      await navigator.clipboard.writeText(summaryText);
-      setCopiedSummary(true);
-      setTimeout(() => setCopiedSummary(false), 2500);
-    } catch {
-      // Fallback
-    }
-  };
-
-  const handleSubmitWhatsApp = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newErrors: { name?: string; phone?: string } = {};
-    if (!name.trim()) {
-      newErrors.name = 'Please enter your name or business name.';
-    }
-    if (!phone.trim()) {
-      newErrors.phone = 'Please enter your WhatsApp contact number.';
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      const firstId = newErrors.name ? 'contact-input-name' : 'contact-input-phone';
-      document.getElementById(firstId)?.focus();
-      return;
-    }
-
-    setErrors({});
-    setSubmitted(true);
-
-    // Trigger celebratory confetti
-    confetti({
-      particleCount: 75,
-      spread: 60,
-      origin: { y: 0.6 },
-      colors: ['#10b981', '#3b82f6', '#06b6d4', '#ffffff'],
-    });
-
-    const lines = [
-      `👋 Hi SITEVIA WORKS! I customized my project scope on your website:`,
-      ``,
-      `*📌 Website Type:* ${selectedType}`,
-      `*💰 Selected Budget:* ${budget}`,
-      `*⏱️ Preferred Timeline:* ${timeline}`,
-      `*✨ Selected Features:* ${selectedFeatures.length > 0 ? selectedFeatures.join(', ') : 'Standard package features'}`,
-    ];
-
-    if (name.trim()) lines.push(`*👤 My Name:* ${name.trim()}`);
-    if (phone.trim()) lines.push(`*📞 Phone/WhatsApp:* ${phone.trim()}`);
-    if (email.trim()) lines.push(`*📧 Email:* ${email.trim()}`);
-    if (notes.trim()) lines.push(`*📝 Project Notes:* ${notes.trim()}`);
-
-    lines.push(``);
-    lines.push(`Let's discuss bringing this website live! 🚀`);
-
-    const encoded = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
-  };
-
   return (
-    <div className="py-12 sm:py-16 lg:py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-            Let’s Build Something{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-teal-500 to-emerald-500">
-              Exceptional Together.
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
-            Customize your website scope below in 3 simple steps, or reach out directly on WhatsApp for an immediate consultation.
-          </p>
-        </div>
-
-        {/* 2-Column Layout: Left Interactive Scope Builder, Right Live Scope Summary & Direct Hub */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* LEFT: 3-Step Interactive Project Builder (8 cols) */}
-          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
-            <form onSubmit={handleSubmitWhatsApp} className="space-y-8">
-              {/* STEP 1: Select Website Type (Visual Cards) */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
-                    1
-                  </span>
-                  <div>
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                      Select Website Category
-                    </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Pick the category that best matches your project
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {WEB_TYPES.map((type) => {
-                    const Icon = type.icon;
-                    const isSelected = selectedType === type.id;
-                    return (
-                      <button
-                        key={type.id}
-                        type="button"
-                        onClick={() => setSelectedType(type.id)}
-                        className={`relative text-left p-3.5 rounded-lg border transition-colors cursor-pointer flex flex-col justify-between min-h-[95px] ${
-                          isSelected
-                            ? 'bg-blue-50/80 dark:bg-blue-950/30 border-blue-500 dark:border-blue-500'
-                            : 'bg-slate-50/50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
-                        }`}
-                      >
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-1.5">
-                            <div className="flex items-center gap-2">
-                              <div
-                                className={`w-6 h-6 rounded-md flex items-center justify-center ${
-                                  isSelected
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                                }`}
-                              >
-                                <Icon className="w-3.5 h-3.5" />
-                              </div>
-                              <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
-                                {type.title}
-                              </span>
-                            </div>
-                            <span
-                              className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
-                                isSelected
-                                  ? 'bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
-                                  : 'bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
-                              }`}
-                            >
-                              {type.badge}
-                            </span>
-                          </div>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
-                            {type.desc}
-                          </p>
-                        </div>
-
-                        {isSelected && (
-                          <div className="mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            <span>Selected</span>
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+    <div className="py-8 sm:py-14 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {/* Direct Contact Fast Channels */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* WhatsApp Direct Line */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-200/50 dark:border-emerald-800/50">
+                <MessageCircle className="w-5 h-5" />
               </div>
-
-              {/* STEP 2: Feature Tags (Click to toggle) */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
-                    2
-                  </span>
-                  <div>
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                      Include Desired Features
-                    </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Tap each item to toggle requirements
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {FEATURE_LIST.map((feat) => {
-                    const isChecked = selectedFeatures.includes(feat.label);
-                    return (
-                      <button
-                        key={feat.id}
-                        type="button"
-                        onClick={() => toggleFeature(feat.label)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2 border transition-colors cursor-pointer ${
-                          isChecked
-                            ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-500 text-emerald-800 dark:text-emerald-300'
-                            : 'bg-slate-50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300'
-                        }`}
-                      >
-                        <div
-                          className={`w-3.5 h-3.5 rounded flex items-center justify-center text-[10px] ${
-                            isChecked
-                              ? 'bg-emerald-500 text-white'
-                              : 'border border-slate-300 dark:border-slate-600'
-                          }`}
-                        >
-                          {isChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
-                        </div>
-                        <span>{feat.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+              <div>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Direct WhatsApp</p>
+                <p className="text-sm font-bold font-mono text-slate-900 dark:text-white">
+                  +91 95110 07593
+                </p>
               </div>
-
-              {/* STEP 3: Timeline & Contact Details */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-7 shadow-sm space-y-5">
-                <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
-                    3
-                  </span>
-                  <div>
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                      Target Launch & Contact Details
-                    </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      When would you like this live, and how can we reach you?
-                    </p>
-                  </div>
-                </div>
-
-                {/* Timeline Selection */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
-                    Launch Timeline
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                    {TIMELINE_OPTIONS.map((item) => (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => setTimeline(item.label)}
-                        className={`p-2.5 rounded-lg border text-left cursor-pointer transition-colors ${
-                          timeline === item.label
-                            ? 'bg-blue-50 dark:bg-blue-950/30 border-blue-500 text-blue-900 dark:text-blue-100'
-                            : 'bg-slate-50/50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
-                        }`}
-                      >
-                        <p className="text-xs font-bold">{item.label}</p>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                          {item.note}
-                        </p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Name, Phone, Budget, Email & Message */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <div>
-                    <label htmlFor="contact-input-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Your Name / Business Name <span className="text-rose-500">*</span>
-                    </label>
-                    <input
-                      id="contact-input-name"
-                      type="text"
-                      value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                        if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
-                      }}
-                      placeholder="e.g. Rahul Sharma / Brew Café"
-                      className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border ${
-                        errors.name ? 'border-rose-500 ring-1 ring-rose-500' : 'border-slate-200 dark:border-slate-800'
-                      } text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500`}
-                    />
-                    {errors.name && <p className="text-[11px] text-rose-500 mt-1">{errors.name}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-input-phone" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      WhatsApp Number <span className="text-rose-500">*</span>
-                    </label>
-                    <input
-                      id="contact-input-phone"
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => {
-                        setPhone(e.target.value);
-                        if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
-                      }}
-                      placeholder="+91 98765 43210"
-                      className={`w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border ${
-                        errors.phone ? 'border-rose-500 ring-1 ring-rose-500' : 'border-slate-200 dark:border-slate-800'
-                      } text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500`}
-                    />
-                    {errors.phone && <p className="text-[11px] text-rose-500 mt-1">{errors.phone}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-input-budget" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Budget / Package Preference
-                    </label>
-                    <select
-                      id="contact-input-budget"
-                      value={budget}
-                      onChange={(e) => setBudget(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500 font-mono"
-                    >
-                      <option value="₹2,999 (Starter Plan)">₹2,999 (Starter Plan)</option>
-                      <option value="₹5,499 (Business Plan - Most Popular)">₹5,499 (Business Plan - Most Popular)</option>
-                      <option value="₹7,999 (Premium Plan)">₹7,999 (Premium Plan)</option>
-                      <option value="Flexible / Let's discuss">Flexible / Let's discuss</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-input-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Email Address (Optional)
-                    </label>
-                    <input
-                      id="contact-input-email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="youremail@example.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label htmlFor="contact-input-notes" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Project Notes / Specific Requirements / Reference Links
-                    </label>
-                    <textarea
-                      id="contact-input-notes"
-                      rows={3}
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      placeholder="e.g. Clean design, digital menu with direct WhatsApp order button, link to Instagram or competitors."
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500 resize-none"
-                    />
-                  </div>
-                </div>
-
-                {submitted && (
-                  <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-emerald-900 dark:text-emerald-100">
-                        Project Brief Formatted Successfully!
-                      </p>
-                      <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
-                        WhatsApp is opening with your formatted project brief. You can also copy the brief below or chat with us directly anytime.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Primary Action Button */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 px-6 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm cursor-pointer transition-colors"
-                  >
-                    <MessageCircle className="w-4 h-4 fill-white/20" />
-                    <span>Send Project Scope on WhatsApp</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-
-                  <div className="flex items-center justify-between mt-3 text-xs text-slate-500 dark:text-slate-400 px-1">
-                    <span className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      Free consultation & transparent quote
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleCopySummary}
-                      className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 cursor-pointer"
-                    >
-                      {copiedSummary ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
-                          <span className="text-emerald-500">Summary Copied</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copy Summary</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
+            </div>
+            <a
+              href={`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors cursor-pointer"
+            >
+              Chat
+            </a>
           </div>
 
-          {/* RIGHT: Instant Contact Hub (5 cols) */}
-          <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-24">
-            {/* Direct Contact Cards Hub */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span>Direct Contact Hub</span>
-              </h3>
-
-              {/* WhatsApp Item */}
-              <div className="flex items-center justify-between p-3.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/70 dark:border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                    <MessageCircle className="w-4 h-4 fill-current/20" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Direct WhatsApp</p>
-                    <p className="text-sm font-bold font-mono text-slate-900 dark:text-white">
-                      +91 95110 07593
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href={`https://wa.me/${VITEWEB_WHATSAPP_NUMBER}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
-                >
-                  Chat
-                </a>
+          {/* Official Email */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 flex items-center justify-center shrink-0 border border-blue-200/50 dark:border-blue-800/50">
+                <Mail className="w-5 h-5" />
               </div>
-
-              {/* Email Item with 1-click Copy */}
-              <div className="flex items-center justify-between p-3.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/70 dark:border-slate-800">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Official Email</p>
-                    <p className="text-xs font-semibold font-mono text-slate-900 dark:text-white truncate">
-                      {VITEWEB_EMAIL}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors shrink-0 cursor-pointer flex items-center gap-1"
-                >
-                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedEmail ? 'Copied' : 'Copy'}</span>
-                </button>
+              <div className="min-w-0">
+                <p className="text-xs text-slate-500 dark:text-slate-400">Official Email</p>
+                <p className="text-xs font-bold font-mono text-slate-900 dark:text-white truncate">
+                  {VITEWEB_EMAIL}
+                </p>
               </div>
+            </div>
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors shrink-0 cursor-pointer flex items-center gap-1"
+            >
+              {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedEmail ? 'Copied' : 'Copy'}</span>
+            </button>
+          </div>
 
-              {/* Operating Hours & Speed */}
-              <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-2 border-t border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Support: Mon – Sat (9:00 AM – 10:00 PM IST)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Replies typically under 15 mins on WhatsApp</span>
-                </div>
-              </div>
-
-              {/* Privacy & Terms links */}
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
-                <span>Verified Studio</span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => (onNavigatePage ? onNavigatePage('privacy') : onOpenLegal?.('privacy'))}
-                    className="hover:underline cursor-pointer"
-                  >
-                    Privacy Policy
-                  </button>
-                  <span>•</span>
-                  <button
-                    type="button"
-                    onClick={() => (onNavigatePage ? onNavigatePage('terms') : onOpenLegal?.('terms'))}
-                    className="hover:underline cursor-pointer"
-                  >
-                    Terms
-                  </button>
-                </div>
-              </div>
+          {/* Fast Response SLA */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-200/50 dark:border-amber-800/50">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Fast Turnaround</p>
+              <p className="text-xs font-bold text-slate-900 dark:text-white">
+                Replies under 15 mins
+              </p>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500">
+                Mon – Sat (9:00 AM – 10:00 PM)
+              </p>
             </div>
           </div>
         </div>
+
+        {/* Live Project Brief Form with Smart Progress */}
+        <ProjectEnquiry
+          initialPackage={initialPackage}
+          initialWebsiteType={initialWebsiteType}
+          initialBusinessType={initialBusinessType}
+          onOpenLegal={onOpenLegal}
+        />
       </div>
     </div>
   );

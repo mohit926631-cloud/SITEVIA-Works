@@ -12,6 +12,7 @@ import {
 import { ProjectFormData } from '../types';
 import { createWhatsAppUrl } from '../utils/whatsapp';
 import { MessageSquare, Send, Check, Copy, ShieldCheck, Lock } from 'lucide-react';
+
 interface ProjectEnquiryProps {
   initialPackage?: string;
   initialWebsiteType?: string;
@@ -39,6 +40,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
     requirements: '',
   });
 
+  const [activeSection, setActiveSection] = useState<number | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -66,6 +68,107 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
     });
   };
 
+  // Section completion calculators
+  const isSectionComplete = (sectionNum: number): boolean => {
+    switch (sectionNum) {
+      case 1:
+        return formData.name.trim().length >= 2 && formData.phone.trim().length >= 7;
+      case 2:
+        return Boolean(formData.businessType && formData.websiteType);
+      case 3:
+        return Boolean(formData.package && formData.pages && formData.budget);
+      case 4:
+        return formData.features.length > 0;
+      case 5:
+        return formData.requirements.trim().length >= 5;
+      default:
+        return false;
+    }
+  };
+
+
+  // Section Status Indicator Icon
+  const renderSectionStatusIcon = (sectionNum: number) => {
+    const complete = isSectionComplete(sectionNum);
+    const active = activeSection === sectionNum;
+
+    if (complete) {
+      return (
+        <span
+          aria-label={`Section ${sectionNum} complete`}
+          className="w-5 h-5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 transition-all duration-300 ease-out transform scale-100"
+        >
+          <Check className="w-3 h-3 stroke-[2.5]" />
+        </span>
+      );
+    }
+
+    if (active) {
+      return (
+        <span
+          aria-label={`Section ${sectionNum} active`}
+          className="w-5 h-5 rounded-full bg-blue-500/10 dark:bg-cyan-500/20 border border-blue-500/40 dark:border-cyan-400/40 flex items-center justify-center shrink-0 transition-all duration-300"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-cyan-400 animate-pulse" />
+        </span>
+      );
+    }
+
+    return (
+      <span
+        aria-label={`Section ${sectionNum} pending`}
+        className="w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 text-[10px] font-mono font-bold flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700/60"
+      >
+        0{sectionNum}
+      </span>
+    );
+  };
+
+  // Section Status Text Badge
+  const renderSectionStatusBadge = (sectionNum: number) => {
+    const complete = isSectionComplete(sectionNum);
+    const active = activeSection === sectionNum;
+
+    if (complete) {
+      return (
+        <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+          <span>✓ Done</span>
+        </span>
+      );
+    }
+
+    if (active) {
+      return (
+        <span className="text-[11px] font-mono text-blue-600 dark:text-cyan-400 font-semibold flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-cyan-400 animate-ping" />
+          <span>Active</span>
+        </span>
+      );
+    }
+
+    if (sectionNum === 1) {
+      return (
+        <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500 font-normal">
+          Required *
+        </span>
+      );
+    }
+
+    if (sectionNum === 5) {
+      return (
+        <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500 font-normal">
+          Optional
+        </span>
+      );
+    }
+
+    return (
+      <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500 font-normal">
+        Configured
+      </span>
+    );
+  };
+
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = 'Please enter your name.';
@@ -77,7 +180,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
-      const firstErrorKey = Object.keys(errors)[0];
+      const firstErrorKey = Object.keys(errors)[0] || 'name';
       const el = document.getElementById(`field-${firstErrorKey}`);
       el?.focus();
       return;
@@ -124,15 +227,27 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
         <form
           id="project-enquiry-form"
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-7"
+          className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-6"
           noValidate
         >
           {/* Group 1: Contact Information */}
-          <div>
-            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-blue-500 dark:bg-cyan-400"></span>
-              1. CONTACT & IDENTITY
-            </h3>
+          <div
+            className={`rounded-2xl p-4 sm:p-5 transition-all duration-300 ease-out border ${
+              activeSection === 1
+                ? 'border-blue-500/40 dark:border-cyan-400/40 bg-blue-500/[0.025] dark:bg-cyan-500/[0.03] shadow-sm shadow-blue-500/5 ring-1 ring-blue-500/20 dark:ring-cyan-400/20'
+                : 'border-slate-200/80 dark:border-slate-800/80 bg-transparent'
+            }`}
+            onFocus={() => setActiveSection(1)}
+            onClick={() => setActiveSection(1)}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                {renderSectionStatusIcon(1)}
+                <span>01. CONTACT & IDENTITY</span>
+              </h3>
+              {renderSectionStatusBadge(1)}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="field-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
@@ -201,11 +316,23 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
           </div>
 
           {/* Group 2: Classification */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-              2. INDUSTRY & FORMAT
-            </h3>
+          <div
+            className={`rounded-2xl p-4 sm:p-5 transition-all duration-300 ease-out border ${
+              activeSection === 2
+                ? 'border-blue-500/40 dark:border-cyan-400/40 bg-blue-500/[0.025] dark:bg-cyan-500/[0.03] shadow-sm shadow-blue-500/5 ring-1 ring-blue-500/20 dark:ring-cyan-400/20'
+                : 'border-slate-200/80 dark:border-slate-800/80 bg-transparent'
+            }`}
+            onFocus={() => setActiveSection(2)}
+            onClick={() => setActiveSection(2)}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                {renderSectionStatusIcon(2)}
+                <span>02. INDUSTRY & FORMAT</span>
+              </h3>
+              {renderSectionStatusBadge(2)}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="field-businessType" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
@@ -246,11 +373,23 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
           </div>
 
           {/* Group 3: Scope & Budget */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              3. PACKAGE, PAGES & BUDGET
-            </h3>
+          <div
+            className={`rounded-2xl p-4 sm:p-5 transition-all duration-300 ease-out border ${
+              activeSection === 3
+                ? 'border-blue-500/40 dark:border-cyan-400/40 bg-blue-500/[0.025] dark:bg-cyan-500/[0.03] shadow-sm shadow-blue-500/5 ring-1 ring-blue-500/20 dark:ring-cyan-400/20'
+                : 'border-slate-200/80 dark:border-slate-800/80 bg-transparent'
+            }`}
+            onFocus={() => setActiveSection(3)}
+            onClick={() => setActiveSection(3)}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                {renderSectionStatusIcon(3)}
+                <span>03. PACKAGE, PAGES & BUDGET</span>
+              </h3>
+              {renderSectionStatusBadge(3)}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="field-package" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
@@ -309,10 +448,23 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
           </div>
 
           {/* Group 4: Required Features */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80">
-            <label className="block text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3 font-mono">
-              4. INTEGRATIONS & MODULES
-            </label>
+          <div
+            className={`rounded-2xl p-4 sm:p-5 transition-all duration-300 ease-out border ${
+              activeSection === 4
+                ? 'border-blue-500/40 dark:border-cyan-400/40 bg-blue-500/[0.025] dark:bg-cyan-500/[0.03] shadow-sm shadow-blue-500/5 ring-1 ring-blue-500/20 dark:ring-cyan-400/20'
+                : 'border-slate-200/80 dark:border-slate-800/80 bg-transparent'
+            }`}
+            onFocus={() => setActiveSection(4)}
+            onClick={() => setActiveSection(4)}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                {renderSectionStatusIcon(4)}
+                <span>04. INTEGRATIONS & MODULES</span>
+              </h3>
+              {renderSectionStatusBadge(4)}
+            </div>
+
             <div className="flex flex-wrap gap-2">
               {FEATURE_OPTIONS.map((feature) => {
                 const isSelected = formData.features.includes(feature);
@@ -321,7 +473,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
                     key={feature}
                     type="button"
                     onClick={() => toggleFeature(feature)}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-150 flex items-center gap-1.5 min-h-[40px] ${
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-150 flex items-center gap-1.5 min-h-[40px] cursor-pointer ${
                       isSelected
                         ? 'bg-blue-600 text-white border border-blue-400 dark:border-cyan-400 shadow-sm'
                         : 'bg-slate-100 dark:bg-slate-950 text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:text-black dark:hover:text-slate-200'
@@ -338,10 +490,23 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
           </div>
 
           {/* Group 5: Additional Requirements */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80">
-            <label htmlFor="field-requirements" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-              5. Project Brief Notes / Inspiration / Reference URLs
-            </label>
+          <div
+            className={`rounded-2xl p-4 sm:p-5 transition-all duration-300 ease-out border ${
+              activeSection === 5
+                ? 'border-blue-500/40 dark:border-cyan-400/40 bg-blue-500/[0.025] dark:bg-cyan-500/[0.03] shadow-sm shadow-blue-500/5 ring-1 ring-blue-500/20 dark:ring-cyan-400/20'
+                : 'border-slate-200/80 dark:border-slate-800/80 bg-transparent'
+            }`}
+            onFocus={() => setActiveSection(5)}
+            onClick={() => setActiveSection(5)}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <label htmlFor="field-requirements" className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono cursor-pointer">
+                {renderSectionStatusIcon(5)}
+                <span>05. REQUIREMENTS & INSPIRATION</span>
+              </label>
+              {renderSectionStatusBadge(5)}
+            </div>
+
             <textarea
               id="field-requirements"
               rows={3}
@@ -350,6 +515,75 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
               onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
               className="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-blue-500 dark:focus:border-cyan-400 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none"
             />
+          </div>
+
+          {/* Live Brief Summary Preview */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/90 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80 transition-all duration-300">
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+                  Your Brief Summary
+                </h4>
+              </div>
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                Live Preview
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {formData.websiteType && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-xs">
+                  <span className="text-slate-400 text-[10px]">Type:</span>
+                  <strong className="font-semibold">{formData.websiteType}</strong>
+                </span>
+              )}
+
+              {formData.businessType && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-xs">
+                  <span className="text-slate-400 text-[10px]">Industry:</span>
+                  <strong className="font-semibold">{formData.businessType}</strong>
+                </span>
+              )}
+
+              {formData.package && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/50 text-blue-700 dark:text-cyan-300 shadow-xs">
+                  <span className="text-blue-500/70 text-[10px]">Plan:</span>
+                  <strong className="font-semibold font-mono">{formData.package}</strong>
+                </span>
+              )}
+
+              {formData.pages && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-xs">
+                  <span className="text-slate-400 text-[10px]">Scope:</span>
+                  <strong className="font-semibold font-mono">{formData.pages}</strong>
+                </span>
+              )}
+
+              {formData.budget && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-300 shadow-xs">
+                  <span className="text-emerald-600/70 text-[10px]">Budget:</span>
+                  <strong className="font-semibold font-mono">{formData.budget}</strong>
+                </span>
+              )}
+
+              {formData.businessName.trim() && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-50 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/40 text-amber-800 dark:text-amber-300 shadow-xs">
+                  <span className="text-amber-600/70 text-[10px]">Brand:</span>
+                  <strong className="font-semibold">{formData.businessName.trim()}</strong>
+                </span>
+              )}
+
+              {formData.features.map((feat) => (
+                <span
+                  key={feat}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-900/80 border border-slate-200/70 dark:border-slate-800/70 text-slate-600 dark:text-slate-400"
+                >
+                  <span className="text-emerald-500 font-bold">✓</span>
+                  {feat}
+                </span>
+              ))}
+            </div>
           </div>
 
           {submitted && (
@@ -367,7 +601,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
           )}
 
           {/* Action Submission Buttons */}
-          <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
             <button
               id="submit-project-brief-whatsapp-btn"
               type="submit"

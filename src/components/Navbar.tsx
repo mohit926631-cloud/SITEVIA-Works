@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleNavClick = (dest: 'home' | 'services' | 'pricing' | 'portfolio' | 'faq' | 'contact') => {
+  const handleNavClick = (dest: 'home' | 'services' | 'pricing' | 'portfolio' | 'about' | 'faq' | 'contact') => {
     setMobileMenuOpen(false);
 
     if (dest === 'home') {
@@ -55,6 +55,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (dest === 'pricing') {
       onNavigatePage('pricing');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (dest === 'about') {
+      onNavigatePage('about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (dest === 'portfolio') {
       if (currentPage === 'services') {
@@ -83,9 +86,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
   const navLinks = [
     { id: 'home', label: 'Home', active: currentPage === 'home' },
     { id: 'services', label: 'Services', active: currentPage === 'services' },
+    { id: 'portfolio', label: 'Work', active: false },
     { id: 'pricing', label: 'Pricing', active: currentPage === 'pricing' },
-    { id: 'portfolio', label: 'Portfolio', active: false },
-    { id: 'faq', label: 'FAQ', active: false },
+    { id: 'about', label: 'About', active: currentPage === 'about' },
     { id: 'contact', label: 'Contact', active: currentPage === 'contact' },
   ];
 

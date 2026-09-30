@@ -33,6 +33,7 @@ export interface PricingPlan {
   name: string;
   price: string;
   priceNum: number;
+  purpose: string;
   subtitle: string;
   badge?: string;
   isPopular?: boolean;
@@ -40,6 +41,13 @@ export interface PricingPlan {
   features: string[];
   ctaText: string;
   websiteTypeVal: string;
+}
+
+export interface PricingComparisonRow {
+  feature: string;
+  starter: string | boolean;
+  business: string | boolean;
+  premium: string | boolean;
 }
 
 export interface FAQItem {

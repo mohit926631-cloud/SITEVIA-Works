@@ -2,6 +2,7 @@ import {
   ProjectItem,
   ServiceItem,
   PricingPlan,
+  PricingComparisonRow,
   FAQItem,
   WorkStep,
   WhyReason,
@@ -9,19 +10,13 @@ import {
 } from './types';
 
 export const VITEWEB_WHATSAPP_NUMBER = "919511007593";
-export const VITEWEB_EMAIL = "siteviaworks@zohomail.in";
-export const VITEWEB_INSTAGRAM = "https://instagram.com";
-export const VITEWEB_GITHUB = "https://github.com";
+export const VITEWEB_EMAIL = "siteviaworks@gmail.com";
 
-// SITEVIA WORKS official constants
+// SITEVIA WORKS official canonical contact constants
 export const SITEVIA_WORKS_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
 export const SITEVIA_WORKS_EMAIL = VITEWEB_EMAIL;
-export const SITEVIA_WORKS_INSTAGRAM = VITEWEB_INSTAGRAM;
-export const SITEVIA_WORKS_GITHUB = VITEWEB_GITHUB;
 export const SITEVIA_WHATSAPP_NUMBER = VITEWEB_WHATSAPP_NUMBER;
 export const SITEVIA_EMAIL = VITEWEB_EMAIL;
-export const SITEVIA_INSTAGRAM = VITEWEB_INSTAGRAM;
-export const SITEVIA_GITHUB = VITEWEB_GITHUB;
 
 export const BUSINESS_TYPES = [
   'Restaurant',
@@ -283,7 +278,7 @@ export const SERVICES: ServiceItem[] = [
     shortDesc: 'Focused pages designed around a specific product, service or campaign.',
     fullDesc: 'High-conversion, single-page experiences built to drive WhatsApp clicks, phone calls, registrations, or ad campaign conversions.',
     iconName: 'Target',
-    features: ['Single-focus conversion goal', 'Fast 1-second load times', 'Compelling benefit hierarchy', 'Sticky mobile CTA', 'Social proof layouts', 'Deployment'],
+    features: ['Single-focus conversion goal', 'Fast mobile loading speed', 'Compelling benefit hierarchy', 'Sticky mobile CTA', 'Social proof layouts', 'Deployment'],
     recommendedFor: 'Product launches, marketing campaigns, events, coaches',
     websiteTypeVal: 'Landing Page',
     startingPrice: '₹2,999',
@@ -356,18 +351,16 @@ export const PRICING_PLANS: PricingPlan[] = [
     name: 'Starter',
     price: '₹2,999',
     priceNum: 2999,
-    subtitle: 'Suitable for individuals and small businesses',
-    pages: 'Up to 3 custom pages',
+    purpose: 'Get Online',
+    subtitle: 'Establish a credible, fast mobile presence for small businesses & creators.',
+    pages: '3 Pages',
     features: [
-      'Professional responsive website',
-      'Up to 3 custom pages',
-      'Mobile-first design',
-      'WhatsApp integration',
-      'Contact section',
-      'Social media links',
-      'Basic SEO',
-      'Fast loading',
-      '6 months support',
+      '3 Custom Pages',
+      'Mobile Responsive & Fast',
+      'WhatsApp Integration',
+      'Basic SEO & Search Ready',
+      '1 Design Change Included',
+      '6 Months Dedicated Support',
     ],
     ctaText: 'Choose Starter →',
     websiteTypeVal: 'Starter — ₹2,999',
@@ -377,20 +370,18 @@ export const PRICING_PLANS: PricingPlan[] = [
     name: 'Business',
     price: '₹5,499',
     priceNum: 5499,
-    subtitle: 'Suitable for growing businesses',
-    badge: 'MOST POPULAR',
+    purpose: 'Grow Your Business',
+    subtitle: 'Generate consistent inquiries and convert visitors into clients.',
+    badge: 'Most Popular',
     isPopular: true,
-    pages: 'Up to 6 custom pages',
+    pages: '6 Pages',
     features: [
-      'Up to 6 custom pages',
-      'Premium mobile-first design',
-      'WhatsApp integration',
-      'Contact form',
-      'Google Maps',
-      'Social media integration',
-      'Basic SEO',
-      'Fast loading',
-      '1 year support',
+      '6 Custom Pages',
+      'Custom Responsive Design',
+      'WhatsApp & Contact Form',
+      'Basic SEO & Google Maps',
+      '3 Design Changes Included',
+      '12 Months Dedicated Support',
     ],
     ctaText: 'Choose Business →',
     websiteTypeVal: 'Business — ₹5,499',
@@ -400,22 +391,119 @@ export const PRICING_PLANS: PricingPlan[] = [
     name: 'Premium',
     price: '₹7,999',
     priceNum: 7999,
-    subtitle: 'Suitable for businesses wanting a more advanced website',
-    pages: 'Up to 10 custom pages',
+    purpose: 'Build Your Brand',
+    subtitle: 'High-end design polish, animations, and multi-page expansion.',
+    pages: '10 Pages',
     features: [
-      'Up to 10 custom pages',
-      'Advanced custom design',
-      'Premium animations/interactions',
-      'WhatsApp integration',
-      'Contact form',
-      'Google Maps',
-      'Social media integration',
-      'SEO-ready structure',
-      'Performance optimization',
-      '1.5 years support',
+      '10 Custom Pages',
+      'Advanced Custom Design',
+      'Premium Animations',
+      'WhatsApp, Form & Maps',
+      '5 Design Changes Included',
+      '18 Months Dedicated Support',
     ],
     ctaText: 'Choose Premium →',
     websiteTypeVal: 'Premium — ₹7,999',
+  },
+];
+
+export const PRICING_COMPARISON_ROWS: PricingComparisonRow[] = [
+  {
+    feature: 'Pages',
+    starter: '3',
+    business: '6',
+    premium: '10',
+  },
+  {
+    feature: 'Mobile Responsive',
+    starter: true,
+    business: true,
+    premium: true,
+  },
+  {
+    feature: 'WhatsApp Integration',
+    starter: true,
+    business: true,
+    premium: true,
+  },
+  {
+    feature: 'Contact Form',
+    starter: false,
+    business: true,
+    premium: true,
+  },
+  {
+    feature: 'Basic SEO',
+    starter: true,
+    business: true,
+    premium: true,
+  },
+  {
+    feature: 'Custom Design',
+    starter: true,
+    business: true,
+    premium: true,
+  },
+  {
+    feature: 'Animations',
+    starter: 'Basic',
+    business: 'Advanced',
+    premium: 'Premium',
+  },
+  {
+    feature: 'Design Changes',
+    starter: '1',
+    business: '3',
+    premium: '5',
+  },
+  {
+    feature: 'Support',
+    starter: '6 months',
+    business: '12 months',
+    premium: '18 months',
+  },
+];
+
+export const WHAT_YOU_GET_ITEMS = [
+  {
+    title: 'Mobile-Responsive Website',
+    desc: 'Fluid layout optimized for phones, tablets, and desktops.',
+    iconName: 'Smartphone',
+  },
+  {
+    title: 'WhatsApp Integration',
+    desc: 'Direct click-to-chat inquiry buttons for fast mobile leads.',
+    iconName: 'MessageCircle',
+  },
+  {
+    title: 'SEO-Ready Structure',
+    desc: 'Semantic HTML, OpenGraph tags, and Google crawl-ready setup.',
+    iconName: 'Search',
+  },
+  {
+    title: 'Contact Section',
+    desc: 'Lead forms, direct call buttons, and email communication.',
+    iconName: 'Mail',
+  },
+  {
+    title: 'Deployment Assistance',
+    desc: 'Domain setup help connecting to fast cloud hosting with SSL.',
+    iconName: 'Globe',
+  },
+  {
+    title: 'Social Links',
+    desc: 'Clean routing to your verified social profiles and Google Maps.',
+    iconName: 'Share2',
+  },
+  {
+    title: 'Performance-Focused Design',
+    desc: 'Clean code and lightweight assets for fast mobile loading.',
+    iconName: 'Zap',
+  },
+  {
+    title: 'Post-Launch Support',
+    desc: '6 to 18 months of technical warranty and maintenance support.',
+    iconName: 'ShieldCheck',
   },
 ];
 

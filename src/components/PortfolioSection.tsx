@@ -131,7 +131,7 @@ export const PortfolioSection: React.FC = () => {
                           {project.name}
                         </h3>
                         <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
-                          {project.category === 'portfolio' ? 'Portfolio Demo' : 'Business Demo'}
+                          {project.category === 'portfolio' ? 'Creator Prototype' : 'Business Prototype'}
                         </span>
                       </div>
                       <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-2">
@@ -179,13 +179,13 @@ export const PortfolioSection: React.FC = () => {
                     <a
                       id={`get-similar-btn-${project.id}`}
                       href={createQuickWhatsAppUrl(
-                        `Hi SITEVIA WORKS! I tested your "${project.name}" (${project.categoryLabel}) live demo and would like to build a similar website for my business.`
+                        `Hi SITEVIA WORKS! I tested your "${project.name}" (${project.categoryLabel}) live demo and would like to build something similar for my business.`
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-2.5 px-3 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1.5 transition-colors cursor-pointer text-center"
                     >
-                      <span>Get Similar Website</span>
+                      <span>Build Something Similar</span>
                       <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                     </a>
                   </div>

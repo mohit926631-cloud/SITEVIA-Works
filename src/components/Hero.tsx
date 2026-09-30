@@ -139,7 +139,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
           >
             <div className="flex items-center gap-1.5">
               <Zap className="w-3.5 h-3.5 text-blue-500" />
-              <span>99+ PageSpeed</span>
+              <span>Fast Mobile Loading</span>
             </div>
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
             <div className="flex items-center gap-1.5">

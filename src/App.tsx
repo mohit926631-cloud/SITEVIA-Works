@@ -181,7 +181,10 @@ export default function App() {
               className="w-full flex-1"
             >
               {currentPage === 'home' && (
-                <HomePage onNavigatePage={navigateToPage} />
+                <HomePage
+                  onNavigatePage={navigateToPage}
+                  onOpenLegal={handleOpenLegal}
+                />
               )}
 
               {currentPage === 'services' && (
@@ -231,8 +234,10 @@ export default function App() {
         onNavigatePage={navigateToPage}
       />
 
-      {/* Mobile Fixed Bottom CTA Bar */}
-      <MobileStickyCTA onGetWebsiteClick={() => navigateToPage('contact')} />
+      {/* Mobile Fixed Bottom CTA Bar (hidden on contact page to avoid duplicate CTAs and prevent covering form fields) */}
+      {currentPage !== 'contact' && (
+        <MobileStickyCTA onGetWebsiteClick={() => navigateToPage('contact')} />
+      )}
 
       {/* Desktop Floating WhatsApp Button with Smart Tooltip */}
       <FloatingWhatsApp />
