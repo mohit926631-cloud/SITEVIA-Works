@@ -62,14 +62,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
                 }`}
               >
                 <div>
-                  {/* Top Badge: Purpose & Popular */}
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="text-[11px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700/60">
+                  {/* Top Metadata: Purpose & Popular */}
+                  <div className="flex items-center justify-between gap-2 mb-4 text-xs font-semibold">
+                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                       {plan.purpose}
                     </span>
 
                     {isPopular && (
-                      <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                      <span className="text-[11px] font-extrabold tracking-wider uppercase text-blue-600 dark:text-blue-400">
                         Most Popular
                       </span>
                     )}
@@ -132,10 +132,6 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
       {/* Clean Pricing Comparison Table */}
       <div id="pricing-comparison" className="w-full pt-4">
         <div className="text-center max-w-xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-            <span>Side-by-Side Breakdown</span>
-          </div>
           <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Compare Plan Features
           </h3>
@@ -227,11 +223,18 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
           </div>
 
           {/* Pricing Disclaimer Note */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-start gap-2">
-            <HelpCircle className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-            <p className="leading-relaxed">
-              <strong>Need custom requirements?</strong> Final pricing may adjust depending on specific custom workflows, dynamic database logic, or third-party APIs beyond standard package scopes. Every project receives an exact, transparent quote before development starts.
-            </p>
+          <div className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <div className="flex items-start gap-2">
+              <HelpCircle className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+              <p className="leading-relaxed">
+                <strong className="text-slate-700 dark:text-slate-300">Domain & Hosting Charges:</strong> Domain registration and cloud hosting server fees are paid directly by the client to the provider. SITEVIA WORKS provides free setup, DNS connection, and SSL deployment.
+              </p>
+            </div>
+            <div className="flex items-start gap-2 text-slate-400 dark:text-slate-500 pl-6">
+              <p className="leading-relaxed">
+                Development pricing is a fixed, transparent one-time fee with zero monthly platform builder fees.
+              </p>
+            </div>
           </div>
         </div>
       </div>

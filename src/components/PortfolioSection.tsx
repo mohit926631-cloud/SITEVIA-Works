@@ -42,10 +42,6 @@ export const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.4 }}
           className="text-center max-w-2xl mx-auto mb-6 sm:mb-10"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-bold mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Demo Prototypes</span>
-          </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-2 leading-snug">
             Interactive Website Demos
           </h2>
@@ -130,7 +126,7 @@ export const PortfolioSection: React.FC = () => {
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {project.name}
                         </h3>
-                        <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                        <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
                           {project.category === 'portfolio' ? 'Creator Prototype' : 'Business Prototype'}
                         </span>
                       </div>
@@ -149,14 +145,12 @@ export const PortfolioSection: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-2 py-0.5 rounded"
-                          >
-                            {tag}
-                          </span>
+                      <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        {project.tags.map((tag, i) => (
+                          <React.Fragment key={tag}>
+                            {i > 0 && <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>}
+                            <span>{tag}</span>
+                          </React.Fragment>
                         ))}
                       </div>
                     </div>

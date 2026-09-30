@@ -25,12 +25,32 @@ import { motion, AnimatePresence } from 'motion/react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { TiltCard } from './TiltCard';
 import { MagneticButton } from './MagneticButton';
+import { PageType } from '../types';
 
-export const AboutSitevia: React.FC = () => {
+export interface AboutSiteviaProps {
+  onNavigatePage?: (page: PageType) => void;
+  onNavigatePricing?: () => void;
+}
+
+export const AboutSitevia: React.FC<AboutSiteviaProps> = ({ onNavigatePage, onNavigatePricing }) => {
   const [lang, setLang] = useState<'en' | 'hi'>('en');
 
   const scrollToPricing = () => {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    if (onNavigatePricing) {
+      onNavigatePricing();
+      return;
+    }
+    if (onNavigatePage) {
+      onNavigatePage('pricing');
+      return;
+    }
+    const el = document.getElementById('pricing');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    // Fallback: update URL hash to trigger App.tsx router
+    window.location.hash = 'pricing';
   };
 
   const struggles = [
@@ -107,14 +127,14 @@ export const AboutSitevia: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-cyan-400/20 via-transparent to-transparent pointer-events-none" />
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Bilingual Language Switcher Pill */}
-          <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 text-xs font-semibold">
+          {/* Bilingual Language Switcher */}
+          <div className="inline-flex items-center gap-1.5 p-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 mb-6 text-xs font-semibold">
             <Languages className="w-3.5 h-3.5 ml-2 text-cyan-300" />
             <button
               type="button"
               onClick={() => setLang('en')}
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
-                lang === 'en' ? 'bg-white text-blue-900 shadow-md font-bold' : 'text-blue-100 hover:text-white'
+              className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+                lang === 'en' ? 'bg-white text-blue-900 shadow-sm font-bold' : 'text-blue-100 hover:text-white'
               }`}
             >
               English
@@ -122,8 +142,8 @@ export const AboutSitevia: React.FC = () => {
             <button
               type="button"
               onClick={() => setLang('hi')}
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
-                lang === 'hi' ? 'bg-white text-blue-900 shadow-md font-bold' : 'text-blue-100 hover:text-white'
+              className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+                lang === 'hi' ? 'bg-white text-blue-900 shadow-sm font-bold' : 'text-blue-100 hover:text-white'
               }`}
             >
               हिंदी (Hindi)

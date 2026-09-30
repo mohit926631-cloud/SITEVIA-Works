@@ -229,7 +229,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               <span>Hosting, Domains & Third-Party Platforms</span>
             </h3>
             <p>
-              SITEVIA WORKS assists in connecting your custom domain name (e.g., <code>yourbusiness.com</code>) to reliable, global high-speed hosting (such as Vercel, Cloudflare, or AWS). Annual domain registration renewal fees remain the property and responsibility of the client.
+              Domain name registration and hosting server renewal charges are the direct financial responsibility of the client, paid to their chosen provider (e.g., GoDaddy, Namecheap, Hostinger, Cloudflare). SITEVIA WORKS provides technical setup, DNS configuration, and SSL deployment assistance.
             </p>
             <p>
               Third-party APIs and platforms (such as the WhatsApp chat redirect and Google Maps embeds) operate subject to their respective terms of service and uptime policies.

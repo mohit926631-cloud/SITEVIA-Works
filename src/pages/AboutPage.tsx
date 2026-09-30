@@ -22,7 +22,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigatePage }) => {
       </div>
 
       {/* Main About Story, Hindi/English Toggle & Solutions Grid */}
-      <AboutSitevia />
+      <AboutSitevia
+        onNavigatePage={onNavigatePage}
+        onNavigatePricing={() => onNavigatePage('pricing')}
+      />
 
       {/* Why Choose SITEVIA WORKS */}
       <WhySitevia />

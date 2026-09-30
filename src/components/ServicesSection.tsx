@@ -13,12 +13,19 @@ import {
   Star,
 } from 'lucide-react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
+import { PageType } from '../types';
 
 interface ServicesSectionProps {
   onDiscussService: (websiteType: string) => void;
+  onNavigatePage?: (page: PageType) => void;
+  onNavigatePricing?: () => void;
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onDiscussService }) => {
+export const ServicesSection: React.FC<ServicesSectionProps> = ({
+  onDiscussService,
+  onNavigatePage,
+  onNavigatePricing,
+}) => {
   // Interactive booking calendar demo state for Salon/Clinic Booking card
   const [selectedDay, setSelectedDay] = useState<number>(8);
   const [selectedSlot, setSelectedSlot] = useState<string>('10:00 AM');
@@ -39,7 +46,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onDiscussServi
   };
 
   const scrollToPricing = () => {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    if (onNavigatePricing) {
+      onNavigatePricing();
+      return;
+    }
+    if (onNavigatePage) {
+      onNavigatePage('pricing');
+      return;
+    }
+    const el = document.getElementById('pricing');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    window.location.hash = 'pricing';
   };
 
   return (

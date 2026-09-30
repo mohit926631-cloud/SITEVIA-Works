@@ -341,7 +341,7 @@ export const HOW_IT_WORKS: WorkStep[] = [
     step: '04',
     title: 'Launch',
     description: 'Your website goes live on your domain with full support.',
-    detail: 'We connect your domain, set up fast hosting with free SSL, hand over full ownership, and activate your post-launch support.',
+    detail: 'We connect your custom domain, configure fast cloud hosting with free SSL, perform final launch checks, and activate your post-launch support.',
   },
 ];
 
@@ -461,6 +461,18 @@ export const PRICING_COMPARISON_ROWS: PricingComparisonRow[] = [
     starter: '6 months',
     business: '12 months',
     premium: '18 months',
+  },
+  {
+    feature: 'Domain & Hosting Cost',
+    starter: 'Paid by Client',
+    business: 'Paid by Client',
+    premium: 'Paid by Client',
+  },
+  {
+    feature: 'Setup Assistance',
+    starter: 'Free Included',
+    business: 'Free Included',
+    premium: 'Free Included',
   },
 ];
 
@@ -616,8 +628,8 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     id: 'faq-domain-hosting',
-    question: 'Do you provide domain and hosting?',
-    answer: 'We assist you in configuring your custom domain (e.g., yourbusiness.com or yourbusiness.in) and connect it to reliable, high-speed cloud hosting (such as Cloudflare Pages or Vercel) with an automatic free SSL certificate. You retain full account ownership of your domain.',
+    question: 'Are domain and hosting charges included in the package?',
+    answer: 'Domain name registration and hosting charges are paid directly by the client to their selected provider (such as GoDaddy, Hostinger, Namecheap, etc.). SITEVIA WORKS provides complete, free setup assistance to help you choose the right domain, configure DNS records, and connect fast cloud hosting with SSL.',
   },
   {
     id: 'faq-revisions',
@@ -630,9 +642,9 @@ export const FAQ_ITEMS: FAQItem[] = [
     answer: 'Every package includes dedicated post-launch technical warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium). This covers technical bug fixes, WhatsApp button checks, contact form routing verification, link monitoring, and minor text/image updates as your business evolves.',
   },
   {
-    id: 'faq-ownership',
-    question: 'Do I own my website and code?',
-    answer: 'Yes, 100%. You own your domain, your content, and the website codebase. There is zero vendor lock-in. If you ever wish to migrate, export, or host elsewhere in the future, you have full freedom to do so.',
+    id: 'faq-domain-renewals',
+    question: 'Who manages and pays for domain and hosting renewals?',
+    answer: 'Domain and hosting accounts are registered under your own name and account, so all annual renewal fees are paid directly by you to your service provider. SITEVIA WORKS charges only a transparent, one-time development fee with zero monthly platform subscriptions.',
   },
   {
     id: 'faq-payment-process',

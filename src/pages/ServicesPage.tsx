@@ -40,7 +40,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
       </div>
 
       {/* Services Section */}
-      <ServicesSection onDiscussService={handleDiscussService} />
+      <ServicesSection
+        onDiscussService={handleDiscussService}
+        onNavigatePage={onNavigatePage}
+        onNavigatePricing={() => onNavigatePage('pricing')}
+      />
 
       {/* Live Portfolio Demos */}
       <PortfolioSection />

@@ -211,10 +211,6 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold mb-3">
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Direct WhatsApp Project Intake</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
             Launch Your Website Project.
           </h2>
@@ -531,58 +527,73 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-slate-700 dark:text-slate-300">
               {formData.websiteType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-xs">
-                  <span className="text-slate-400 text-[10px]">Type:</span>
-                  <strong className="font-semibold">{formData.websiteType}</strong>
+                <span>
+                  <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Type:</span>
+                  <strong className="font-semibold text-slate-900 dark:text-white">{formData.websiteType}</strong>
                 </span>
               )}
 
               {formData.businessType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-xs">
-                  <span className="text-slate-400 text-[10px]">Industry:</span>
-                  <strong className="font-semibold">{formData.businessType}</strong>
-                </span>
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Industry:</span>
+                    <strong className="font-semibold text-slate-900 dark:text-white">{formData.businessType}</strong>
+                  </span>
+                </>
               )}
 
               {formData.package && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/50 text-blue-700 dark:text-cyan-300 shadow-xs">
-                  <span className="text-blue-500/70 text-[10px]">Plan:</span>
-                  <strong className="font-semibold font-mono">{formData.package}</strong>
-                </span>
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Plan:</span>
+                    <strong className="font-semibold font-mono text-blue-600 dark:text-cyan-400">{formData.package}</strong>
+                  </span>
+                </>
               )}
 
               {formData.pages && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-xs">
-                  <span className="text-slate-400 text-[10px]">Scope:</span>
-                  <strong className="font-semibold font-mono">{formData.pages}</strong>
-                </span>
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Scope:</span>
+                    <strong className="font-semibold font-mono text-slate-900 dark:text-white">{formData.pages}</strong>
+                  </span>
+                </>
               )}
 
               {formData.budget && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-300 shadow-xs">
-                  <span className="text-emerald-600/70 text-[10px]">Budget:</span>
-                  <strong className="font-semibold font-mono">{formData.budget}</strong>
-                </span>
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Budget:</span>
+                    <strong className="font-semibold font-mono text-emerald-600 dark:text-emerald-400">{formData.budget}</strong>
+                  </span>
+                </>
               )}
 
               {formData.businessName.trim() && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-50 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/40 text-amber-800 dark:text-amber-300 shadow-xs">
-                  <span className="text-amber-600/70 text-[10px]">Brand:</span>
-                  <strong className="font-semibold">{formData.businessName.trim()}</strong>
-                </span>
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Brand:</span>
+                    <strong className="font-semibold text-slate-900 dark:text-white">{formData.businessName.trim()}</strong>
+                  </span>
+                </>
               )}
 
-              {formData.features.map((feat) => (
-                <span
-                  key={feat}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-100 dark:bg-slate-900/80 border border-slate-200/70 dark:border-slate-800/70 text-slate-600 dark:text-slate-400"
-                >
-                  <span className="text-emerald-500 font-bold">✓</span>
-                  {feat}
-                </span>
-              ))}
+              {formData.features.length > 0 && (
+                <>
+                  <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+                  <span>
+                    <span className="text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-wider mr-1">Features:</span>
+                    <span className="text-slate-600 dark:text-slate-400">{formData.features.join(', ')}</span>
+                  </span>
+                </>
+              )}
             </div>
           </div>
 

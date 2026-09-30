@@ -61,7 +61,7 @@ export const FloatingWhatsApp: React.FC = () => {
           href={createQuickWhatsAppUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white pl-4 pr-5 py-3 rounded-full shadow-lg transition-colors cursor-pointer"
+          className="flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white pl-4 pr-5 py-3 rounded-xl shadow-lg transition-colors cursor-pointer"
           aria-label="Chat with SITEVIA WORKS on WhatsApp"
         >
           <div className="relative">

@@ -59,10 +59,6 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-3 backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive 3D Spatial Simulator</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Inspect Any Live Website in 3D.
           </h2>
@@ -175,7 +171,7 @@ export const InteractiveDevice3D: React.FC<InteractiveDevice3DProps> = ({ onOpen
           />
 
           {/* Interactive Drag Hint */}
-          <div className="absolute top-4 left-4 z-20 flex items-center gap-2 text-[11px] font-mono text-cyan-400/90 bg-slate-900/80 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-xl shadow-lg">
+          <div className="absolute top-4 left-4 z-20 flex items-center gap-2 text-[11px] font-mono text-cyan-400/90 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-xl shadow-lg">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
             <span>DRAG TO ROTATE 3D VIEWPORT [X: {Math.round(rotX)}°, Y: {Math.round(rotY)}°]</span>
           </div>

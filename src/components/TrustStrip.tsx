@@ -8,7 +8,6 @@ import {
   Share2,
   Zap,
   ShieldCheck,
-  CheckCircle2,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { WHAT_YOU_GET_ITEMS } from '../constants';
@@ -45,10 +44,6 @@ export const TrustStrip: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-bold mb-3">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Standard Across All Packages</span>
-          </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             What You Get With Every Website
           </h2>

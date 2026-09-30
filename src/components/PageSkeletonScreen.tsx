@@ -49,7 +49,7 @@ export const PageSkeletonScreen: React.FC<PageSkeletonScreenProps> = ({ targetPa
           initial={{ y: -8, opacity: 0, scale: 0.95 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -8, opacity: 0, scale: 0.95 }}
-          className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 dark:bg-[#0B1120]/95 backdrop-blur-xl border border-blue-500/30 dark:border-blue-500/40 shadow-xl shadow-blue-500/10 text-xs font-semibold text-slate-800 dark:text-slate-100"
+          className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/95 dark:bg-[#0B1120]/95 backdrop-blur-xl border border-blue-500/30 dark:border-blue-500/40 shadow-xl shadow-blue-500/10 text-xs font-semibold text-slate-800 dark:text-slate-100"
         >
           <div className="relative flex items-center justify-center">
             <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-500 opacity-40" />
@@ -66,9 +66,6 @@ export const PageSkeletonScreen: React.FC<PageSkeletonScreenProps> = ({ targetPa
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
         {/* Top Hero Skeleton Block */}
         <div className="flex flex-col items-center text-center space-y-4 pt-4 sm:pt-8 max-w-3xl mx-auto">
-          {/* Tag Pill Skeleton */}
-          <div className="h-6 w-36 rounded-full bg-slate-200/80 dark:bg-slate-800/80 animate-pulse" />
-
           {/* Heading Skeleton Bar */}
           <div className="h-10 sm:h-14 w-4/5 sm:w-full rounded-2xl bg-slate-200/90 dark:bg-slate-800/90 animate-pulse" />
 
