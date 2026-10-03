@@ -235,6 +235,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
                 Development pricing is a fixed, transparent one-time fee with zero monthly platform builder fees.
               </p>
             </div>
+            <div className="flex items-start gap-2 pt-2 border-t border-slate-200/70 dark:border-slate-800/70">
+              <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+              <p className="leading-relaxed">
+                <strong className="text-slate-700 dark:text-slate-300">Support Scope:</strong> Support includes technical bug fixes, broken-link checks, integration troubleshooting, and minor content updates. New pages, redesigns, or major feature additions are charged separately.
+              </p>
+            </div>
           </div>
         </div>
       </div>

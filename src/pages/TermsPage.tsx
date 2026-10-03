@@ -141,7 +141,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
                   <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">6 Months Support</span>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Suitable for individuals and small businesses. Includes up to 3 custom pages, professional responsive design, WhatsApp integration, contact section, social media links, basic SEO, fast loading speeds, and 6 months of post-launch warranty support.
+                  Suitable for individuals and small businesses. Includes up to 3 custom pages, professional responsive design, no admin panel (clean static build; content updates handled by SITEVIA WORKS), WhatsApp integration, contact section, social media links, basic SEO, fast loading speeds, and 6 months of post-launch warranty support.
                 </p>
               </div>
 
@@ -151,7 +151,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
                   <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300">1 Year Support</span>
                 </div>
                 <p className="text-sm text-slate-700 dark:text-slate-300">
-                  Suitable for growing businesses. Includes up to 6 custom pages, premium mobile-first design, WhatsApp integration, contact form, Google Maps embed, social media integration, basic SEO, fast loading speeds, and 1 year of dedicated support.
+                  Suitable for growing businesses. Includes up to 6 custom pages, basic non-technical admin panel (edit text, banner images, and customer enquiry inbox), premium mobile-first design, WhatsApp integration, contact form, Google Maps embed, social media integration, basic SEO, fast loading speeds, and 1 year of dedicated support.
                 </p>
               </div>
 
@@ -161,7 +161,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
                   <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">1.5 Years Support</span>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Suitable for businesses requiring advanced web presence. Includes up to 10 custom pages, advanced custom design, premium interactions and animations, WhatsApp integration, contact form, Google Maps, social media integration, SEO-ready structure, performance optimization, and 1.5 years of support.
+                  Suitable for businesses requiring advanced web presence. Includes up to 10 custom pages, full advanced admin dashboard (enquiry management CRM, content/media library, services/products management, website settings & basic analytics), advanced custom design, premium interactions, WhatsApp integration, contact form, Google Maps, SEO-ready structure, performance optimization, and 1.5 years of support.
                 </p>
               </div>
             </div>
@@ -248,7 +248,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigatePage }) => {
               All rates are quoted in Indian Rupees (INR) as fixed, one-time fees. Payment milestones (typically an initial deposit followed by the remaining balance upon staging approval) are confirmed prior to project kickoff.
             </p>
             <p>
-              Every project comes with post-launch warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium) covering technical bug fixes, link testing, and launch verification.
+              Every project comes with post-launch warranty support (6 months for Starter, 1 year for Business, 1.5 years for Premium). Support includes technical bug fixes, broken-link checks, integration troubleshooting, and minor content updates. New pages, redesigns, or major feature additions are charged separately.
             </p>
           </section>
         </div>

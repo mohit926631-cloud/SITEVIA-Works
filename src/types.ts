@@ -41,6 +41,8 @@ export interface PricingPlan {
   features: string[];
   ctaText: string;
   websiteTypeVal: string;
+  adminPanelType?: string;
+  adminPanelDesc?: string;
 }
 
 export interface PricingComparisonRow {
