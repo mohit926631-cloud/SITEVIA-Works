@@ -43,11 +43,8 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
   return (
     <section
       id="home"
-      className="relative pt-20 sm:pt-28 pb-16 sm:pb-20 bg-white dark:bg-[#070A10] text-slate-900 dark:text-white overflow-hidden transition-colors"
+      className="relative pt-20 sm:pt-28 pb-16 sm:pb-20 bg-transparent text-slate-900 dark:text-white overflow-hidden transition-colors"
     >
-      {/* Subtle, quiet ambient background texture */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
-
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Hero Header */}
         <motion.div

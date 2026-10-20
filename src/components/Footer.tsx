@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SiteviaLogo } from './SiteviaLogo';
-import { MessageCircle, Mail, ArrowUp, ShieldCheck, Check, Clock } from 'lucide-react';
+import { MessageCircle, Mail, ArrowUp, ShieldCheck, Check, Clock, Share2 } from 'lucide-react';
 import { VITEWEB_EMAIL, VITEWEB_WHATSAPP_NUMBER } from '../constants';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
+import { shareWebsite } from '../utils/share';
 import { PageType } from '../types';
 
 interface FooterProps {
@@ -11,6 +12,16 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) => {
+  const [copiedShare, setCopiedShare] = useState(false);
+
+  const handleShareClick = async () => {
+    const res = await shareWebsite();
+    if (res.method === 'clipboard') {
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2400);
+    }
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -148,6 +159,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigatePage }) =
                   className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   Terms of Service
+                </button>
+                <span className="text-slate-300 dark:text-slate-700">•</span>
+                <button
+                  type="button"
+                  onClick={handleShareClick}
+                  className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1"
+                >
+                  {copiedShare ? (
+                    <>
+                      <Check className="w-3 h-3 text-emerald-500" />
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-3 h-3 text-blue-500" />
+                      <span>Share Website</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

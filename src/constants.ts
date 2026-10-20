@@ -50,6 +50,66 @@ export const PACKAGES = [
   'Not Sure',
 ];
 
+export interface PackageRadioOption {
+  id: string;
+  name: string;
+  price?: string;
+  pages: string;
+  label: string;
+  value: string;
+}
+
+export const PACKAGE_RADIO_OPTIONS: PackageRadioOption[] = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: '₹2,999',
+    pages: 'Up to 3 pages',
+    label: '₹2,999 · Up to 3 pages',
+    value: 'Starter (₹2,999)',
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    price: '₹5,499',
+    pages: 'Up to 6 pages',
+    label: '₹5,499 · Up to 6 pages',
+    value: 'Business (₹5,499)',
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
+    price: '₹7,999',
+    pages: 'Up to 10 pages',
+    label: '₹7,999 · Up to 10 pages',
+    value: 'Premium (₹7,999)',
+  },
+  {
+    id: 'not-sure',
+    name: 'Not Sure',
+    price: '',
+    pages: "We'll help you choose",
+    label: "We'll help you choose",
+    value: 'Not Sure',
+  },
+];
+
+export const STEP4_PAGE_OPTIONS = [
+  '1 page',
+  '2–3 pages',
+  '4–6 pages',
+  '7–10 pages',
+  'Not sure yet',
+];
+
+export const STEP4_BUDGET_OPTIONS = [
+  'Under ₹3,000',
+  '₹3,000 – ₹5,500',
+  '₹5,500 – ₹8,000',
+  'Above ₹8,000',
+  'Not sure yet',
+];
+
 export const FEATURE_OPTIONS = [
   'WhatsApp Integration',
   'Google Maps',

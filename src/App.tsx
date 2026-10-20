@@ -17,6 +17,7 @@ import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { PageSkeletonScreen } from './components/PageSkeletonScreen';
+import { TechGridBackground } from './components/TechGridBackground';
 import { PageType } from './types';
 
 const VALID_PAGES: PageType[] = ['home', 'services', 'pricing', 'about', 'contact', 'terms', 'privacy'];
@@ -156,6 +157,9 @@ export default function App() {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
       {/* Viewport Scroll Progress Bar */}
       <ScrollProgressBar />
+
+      {/* 3D Perspective Tech-Grid Background (Ultra-Lightweight CSS Hardware Accelerated) */}
+      <TechGridBackground />
 
       {/* Fixed Navigation Header with Page Tabs */}
       <Navbar

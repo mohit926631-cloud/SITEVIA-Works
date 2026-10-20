@@ -147,8 +147,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
               })}
             </nav>
 
-            {/* Desktop Right Controls: "Start Project" Blue CTA */}
+            {/* Desktop Right Controls: Share + "Start Project" Blue CTA */}
             <div className="hidden md:flex items-center gap-2.5">
+              <button
+                id="header-share-btn"
+                type="button"
+                onClick={handleShareClick}
+                title="Share SITEVIA WORKS with friends & clients"
+                className="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-semibold"
+              >
+                {copiedShare ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <span>Share</span>
+                  </>
+                )}
+              </button>
+
               <button
                 id="header-get-started-cta"
                 type="button"
