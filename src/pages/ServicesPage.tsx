@@ -8,8 +8,8 @@ import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 
 interface ServicesPageProps {
   onNavigatePage: (page: PageType) => void;
-  onSelectServiceType: (serviceType: string) => void;
-  onSelectAudienceType: (audienceType: string) => void;
+  onSelectServiceType: (serviceType: string, packageVal?: string, businessType?: string) => void;
+  onSelectAudienceType: (audienceType: string, websiteType?: string) => void;
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({
@@ -22,8 +22,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     onNavigatePage('contact');
   };
 
-  const handleSelectAudience = (audience: string) => {
-    onSelectAudienceType(audience);
+  const handleSelectAudience = (audience: string, websiteType?: string) => {
+    onSelectAudienceType(audience, websiteType);
     onNavigatePage('contact');
   };
 

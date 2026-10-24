@@ -12,6 +12,7 @@ import {
 } from '../constants';
 import { ProjectFormData } from '../types';
 import { createWhatsAppUrl } from '../utils/whatsapp';
+import { isValidIndianMobile } from '../utils/phone';
 import {
   Send,
   Check,
@@ -134,6 +135,8 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
       }
       if (!formData.phone.trim()) {
         newErrors.phone = 'Please enter your WhatsApp number.';
+      } else if (!isValidIndianMobile(formData.phone)) {
+        newErrors.phone = 'Please enter a valid 10-digit Indian WhatsApp number.';
       }
     } else if (step === 2) {
       if (!formData.businessType) {
@@ -187,6 +190,14 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(4)) return;
+
+    // Validate phone number once again before final step launch
+    if (!isValidIndianMobile(formData.phone)) {
+      setErrors({ phone: 'Please enter a valid 10-digit Indian WhatsApp number.' });
+      setCurrentStep(1);
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+      return;
+    }
 
     try {
       confetti({

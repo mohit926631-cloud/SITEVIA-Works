@@ -2,6 +2,7 @@ import React from 'react';
 import { Hero } from '../components/Hero';
 import { InfiniteMarquee } from '../components/InfiniteMarquee';
 import { TrustStrip } from '../components/TrustStrip';
+import { WebsiteDifferenceDemo } from '../components/WebsiteDifferenceDemo';
 import { HowItWorks } from '../components/HowItWorks';
 import { FAQSection } from '../components/FAQSection';
 import { FinalCTA } from '../components/FinalCTA';
@@ -27,16 +28,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigatePage }) => {
       {/* 3. Trust & Core Value Benefits Strip */}
       <TrustStrip />
 
-      {/* 4. 4-Step Simple Process */}
+      {/* 4. "With / Without Website" Flip Demo (Part C: Item 12) */}
+      <WebsiteDifferenceDemo />
+
+      {/* 5. 4-Step Simple Process */}
       <HowItWorks />
 
-      {/* 5. Final Call to Action */}
+      {/* 6. Final Call to Action */}
       <FinalCTA
         onGetWebsiteClick={() => onNavigatePage('contact')}
         onViewWorkClick={() => onNavigatePage('services')}
       />
 
-      {/* 6. Dedicated FAQ Accordion Section */}
+      {/* 7. Dedicated FAQ Accordion Section */}
       <FAQSection onNavigatePage={onNavigatePage} />
     </div>
   );

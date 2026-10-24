@@ -18,8 +18,23 @@ import { motion } from 'motion/react';
 import { TargetAudience } from '../types';
 
 interface WhoWeBuildForProps {
-  onSelectAudience?: (businessType: string) => void;
+  onSelectAudience?: (businessType: string, websiteType?: string) => void;
 }
+
+const AUDIENCE_MAPPING: Record<string, { businessType: string; websiteType: string }> = {
+  restaurants: { businessType: 'Restaurant', websiteType: 'Restaurant & Café Website' },
+  cafes: { businessType: 'Café', websiteType: 'Restaurant & Café Website' },
+  beauty: { businessType: 'Salon / Beauty', websiteType: 'Salon & Beauty Website' },
+  gyms: { businessType: 'Gym / Fitness', websiteType: 'Gym & Fitness Website' },
+  fashion: { businessType: 'Fashion Studio', websiteType: 'Business Website' },
+  shops: { businessType: 'Local Shop', websiteType: 'Business Website' },
+  freelancers: { businessType: 'Freelancer', websiteType: 'Portfolio' },
+  creators: { businessType: 'Creator / Photographer', websiteType: 'Portfolio' },
+  developers: { businessType: 'Developer', websiteType: 'Portfolio' },
+  students: { businessType: 'Student', websiteType: 'Portfolio' },
+  startups: { businessType: 'Startup', websiteType: 'Landing Page' },
+  clinics: { businessType: 'Clinic / Healthcare', websiteType: 'Business Website' },
+};
 
 export const WhoWeBuildFor: React.FC<WhoWeBuildForProps> = ({ onSelectAudience }) => {
   const getAudienceIcon = (iconName: string) => {
@@ -139,7 +154,13 @@ export const WhoWeBuildFor: React.FC<WhoWeBuildForProps> = ({ onSelectAudience }
 
                     <button
                       type="button"
-                      onClick={() => onSelectAudience?.(item.title.split('&')[0].trim())}
+                      onClick={() => {
+                        const mapping = AUDIENCE_MAPPING[item.id] || {
+                          businessType: item.title.split('&')[0].trim(),
+                          websiteType: 'Business Website',
+                        };
+                        onSelectAudience?.(mapping.businessType, mapping.websiteType);
+                      }}
                       className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       <span>Inquire</span>

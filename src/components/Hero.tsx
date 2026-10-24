@@ -9,6 +9,7 @@ import {
 import { motion } from 'motion/react';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 import { MagneticButton } from './MagneticButton';
+import { RotatingCircularBadge } from './RotatingCircularBadge';
 
 interface HeroProps {
   onExploreWorkClick?: () => void;
@@ -16,30 +17,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClick }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 280,
-        damping: 24,
-      },
-    },
-  };
-
   return (
     <section
       id="home"
@@ -47,16 +24,14 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Hero Header */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto text-center flex flex-col items-center"
-        >
-          {/* Studio Banner Graphic */}
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          
+          {/* Studio Banner Graphic - Gentle Fade In, No Zoom or Spin */}
           <motion.div
-            variants={itemVariants}
             id="hero-banner-image-container"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8 flex justify-center w-full relative"
           >
             <div className="relative z-10">
@@ -74,22 +49,39 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
             </div>
           </motion.div>
 
-          {/* High-Impact Headline */}
-          <motion.h1
-            variants={itemVariants}
+          {/* High-Impact Headline with Masked Rise-up Lines */}
+          <h1
             id="hero-main-headline"
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12] mb-6 [text-wrap:balance]"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.14] mb-6 [text-wrap:balance]"
           >
-            Websites That Turn Visitors Into{' '}
-            <span className="text-blue-600 dark:text-blue-400">
-              Paying Clients.
+            <span className="block overflow-hidden py-1">
+              <motion.span
+                className="block"
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              >
+                Websites That Turn Visitors Into
+              </motion.span>
             </span>
-          </motion.h1>
+            <span className="block overflow-hidden py-1">
+              <motion.span
+                className="block text-blue-600 dark:text-blue-400"
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+              >
+                Paying Clients.
+              </motion.span>
+            </span>
+          </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - Smooth Fade In */}
           <motion.p
-            variants={itemVariants}
             id="hero-subtext"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
             className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-2xl font-normal"
           >
             We design and build fast, modern websites for businesses, creators, clinics, and local brands with{' '}
@@ -99,39 +91,50 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
             . Delivered in 3 to 7 days.
           </motion.p>
 
-          {/* Dual Action Buttons */}
+          {/* Dual Action Buttons + Rotating Circular Badge */}
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+            className="relative w-full max-w-xl mx-auto flex flex-col items-center"
           >
-            {/* WhatsApp Consultation Button */}
-            <MagneticButton
-              id="hero-whatsapp-btn"
-              href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I would like to discuss building a custom website for my business.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="emerald"
-              className="w-full sm:w-auto px-7 py-3.5 text-base font-bold shadow-sm min-h-[50px]"
-            >
-              <MessageCircle className="w-5 h-5 fill-white/20" />
-              <span>Chat on WhatsApp</span>
-            </MagneticButton>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full">
+              {/* WhatsApp Consultation Button */}
+              <MagneticButton
+                id="hero-whatsapp-btn"
+                href={createQuickWhatsAppUrl('Hi SITEVIA WORKS! I would like to discuss building a custom website for my business.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="emerald"
+                className="w-full sm:w-auto px-7 py-3.5 text-base font-bold shadow-sm min-h-[50px]"
+              >
+                <MessageCircle className="w-5 h-5 fill-white/20" />
+                <span>Chat on WhatsApp</span>
+              </MagneticButton>
 
-            {/* Explore Demos / Get Started Button */}
-            <button
-              id="hero-view-work-btn"
-              type="button"
-              onClick={onExploreWorkClick}
-              className="w-full sm:w-auto px-7 py-3.5 text-base font-bold rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm min-h-[50px]"
-            >
-              <span>Explore Live Blueprints</span>
-              <ArrowRight className="w-4 h-4 text-blue-500" />
-            </button>
+              {/* Explore Demos / Get Started Button */}
+              <button
+                id="hero-view-work-btn"
+                type="button"
+                onClick={onExploreWorkClick}
+                className="w-full sm:w-auto px-7 py-3.5 text-base font-bold rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm min-h-[50px]"
+              >
+                <span>Explore Live Blueprints</span>
+                <ArrowRight className="w-4 h-4 text-blue-500" />
+              </button>
+            </div>
+
+            {/* Rotating Circular Badge (Part C: Item 11) */}
+            <div className="mt-6 md:mt-0 md:absolute md:-right-28 lg:-right-32 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center">
+              <RotatingCircularBadge />
+            </div>
           </motion.div>
 
           {/* Clean Proof & Turnaround Points */}
           <motion.div
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.42 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-slate-500 dark:text-slate-400"
           >
             <div className="flex items-center gap-1.5">
@@ -149,7 +152,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
               <span>Dedicated Support Included</span>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

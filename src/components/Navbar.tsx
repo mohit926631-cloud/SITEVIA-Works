@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SiteviaLogo } from './SiteviaLogo';
 import { Menu, X, ArrowRight, Share2, Check } from 'lucide-react';
 import { PageType } from '../types';
@@ -10,15 +10,15 @@ interface NavbarProps {
   onNavigatePage: (page: PageType) => void;
 }
 
-interface NavItem {
-  id: PageType;
-  label: string;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  currentPage,
+  onNavigatePage,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
+  const lastScrollYRef = useRef(0);
 
   const handleShareClick = async () => {
     const res = await shareWebsite();
@@ -28,13 +28,29 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
     }
   };
 
+  // Hide on scroll down, show on scroll up (Part B: Item 10)
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 15);
+
+      if (currentScrollY <= 60) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollYRef.current + 8) {
+        // Scrolling down -> hide header
+        if (!mobileMenuOpen) {
+          setIsVisible(false);
+        }
+      } else if (currentScrollY < lastScrollYRef.current - 8) {
+        // Scrolling up -> show header
+        setIsVisible(true);
+      }
+      lastScrollYRef.current = currentScrollY;
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -96,7 +112,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
     <>
       <header
         id="main-header"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        } ${
           isScrolled
             ? 'py-3 bg-white/95 dark:bg-[#0A0F1D]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800 shadow-sm'
             : 'py-4 bg-white dark:bg-[#0A0F1D] border-b border-slate-100 dark:border-slate-800/60'
@@ -148,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
             </nav>
 
             {/* Desktop Right Controls: Share + "Start Project" Blue CTA */}
-            <div className="hidden md:flex items-center gap-2.5">
+            <div className="hidden md:flex items-center gap-2">
               <button
                 id="header-share-btn"
                 type="button"
@@ -173,14 +191,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
                 id="header-get-started-cta"
                 type="button"
                 onClick={() => handleNavClick('contact')}
-                className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-slate-900 dark:hover:bg-slate-800 active:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors duration-200 flex items-center gap-1.5 cursor-pointer"
               >
                 <span>Start Project</span>
               </button>
             </div>
 
-            {/* Mobile Actions: Hamburger Menu Toggle (3 lines) */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile Actions: Hamburger Menu Toggle */}
+            <div className="md:hidden flex items-center gap-2">
               <button
                 id="mobile-menu-toggle-btn"
                 type="button"
@@ -266,7 +284,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigatePage }) =
               id="mobile-nav-get-started-btn"
               type="button"
               onClick={() => handleNavClick('contact')}
-              className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 text-base cursor-pointer"
+              className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-slate-900 active:bg-blue-700 text-white font-bold text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 text-base cursor-pointer transition-colors duration-200"
             >
               <span>Start Your Project</span>
               <ArrowRight className="w-4 h-4" />

@@ -59,6 +59,19 @@ export default function App() {
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Business Website');
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>('');
 
+  // Strictly enforce Light Mode only
+  useEffect(() => {
+    try {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      document.documentElement.style.colorScheme = 'light';
+      localStorage.removeItem('sitevia-theme');
+      localStorage.setItem('sitevia_theme', 'light');
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
   // Sync state with URL hash
   useEffect(() => {
     const handleHashChange = () => {
@@ -148,8 +161,11 @@ export default function App() {
     navigateToPage('contact');
   }, [navigateToPage]);
 
-  const handleSelectAudience = useCallback((businessType: string) => {
+  const handleSelectAudience = useCallback((businessType: string, websiteType?: string) => {
     setSelectedBusinessType(businessType);
+    if (websiteType) {
+      setSelectedWebsiteType(websiteType);
+    }
     navigateToPage('contact');
   }, [navigateToPage]);
 
