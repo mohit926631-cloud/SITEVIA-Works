@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
-import { ExternalLink, Check, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ExternalLink, Check, ArrowRight, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { DEMO_PROJECTS } from '../constants';
 import { MagneticButton } from './MagneticButton';
 import { createQuickWhatsAppUrl } from '../utils/whatsapp';
 
+const VIEWED_DEMOS_STORAGE_KEY = 'sitevia_viewed_demos';
+
 export const PortfolioSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
+  const [viewedDemos, setViewedDemos] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem(VIEWED_DEMOS_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed) ? parsed : [];
+      }
+    } catch (e) {
+      // ignore localStorage errors
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(VIEWED_DEMOS_STORAGE_KEY, JSON.stringify(viewedDemos));
+    } catch (e) {
+      // ignore localStorage errors
+    }
+  }, [viewedDemos]);
+
+  const markDemoAsViewed = (projectId: string) => {
+    setViewedDemos((prev) => (prev.includes(projectId) ? prev : [...prev, projectId]));
+  };
 
   const filterOptions = [
     { key: 'all', label: 'All Demos' },
@@ -82,110 +108,135 @@ export const PortfolioSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 15 }}
-                transition={{ duration: 0.25 }}
-              >
-                <div
-                  id={`project-card-${project.id}`}
-                  className="w-full h-full rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm hover:border-slate-400 dark:hover:border-slate-700 transition-all group"
+            {filteredProjects.map((project) => {
+              const isViewed = viewedDemos.includes(project.id);
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 15 }}
+                  transition={{ duration: 0.25 }}
                 >
-                  <div>
-                    {/* Browser Mockup Header */}
-                    <div className="flex items-center justify-between px-3.5 py-2 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                        <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                        <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                      </div>
-                      <span className="truncate max-w-[200px] text-slate-400">
-                        {project.url.replace('https://', '')}
-                      </span>
-                      <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
-                        {project.categoryLabel}
-                      </span>
-                    </div>
-
-                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-                      <img
-                        src={project.previewImage}
-                        alt={`${project.name} — ${project.categoryLabel} Website Demo`}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    <div className="p-5 sm:p-6">
-                      <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                          {project.name}
-                        </h3>
-                        <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                          {project.category === 'portfolio' ? 'Creator Prototype' : 'Business Prototype'}
+                  <div
+                    id={`project-card-${project.id}`}
+                    className="w-full h-full rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between shadow-sm hover:border-slate-400 dark:hover:border-slate-700 transition-all group"
+                  >
+                    <div>
+                      {/* Browser Mockup Header */}
+                      <div className="flex items-center justify-between px-3.5 py-2 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                          <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                          <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                        </div>
+                        <span className="truncate max-w-[180px] sm:max-w-[200px] text-slate-400">
+                          {project.url.replace('https://', '')}
+                        </span>
+                        <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
+                          {project.categoryLabel}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-2">
-                        {project.description}
-                      </p>
 
-                      <div className="space-y-1.5 mb-4">
-                        <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
-                          <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 stroke-[2.5]" />
-                          <span>{project.highlights?.[0] || 'Mobile Responsive Design'}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
-                          <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 stroke-[2.5]" />
-                          <span>{project.highlights?.[1] || 'Direct WhatsApp Integration'}</span>
-                        </div>
-                      </div>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => markDemoAsViewed(project.id)}
+                        className="block relative aspect-[16/10] overflow-hidden bg-slate-900 cursor-pointer"
+                        aria-label={`Open ${project.name} live demo`}
+                      >
+                        <img
+                          src={project.previewImage}
+                          alt={`${project.name} — ${project.categoryLabel} Website Demo`}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102"
+                          loading="lazy"
+                        />
+                        {isViewed && (
+                          <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-900/85 backdrop-blur-sm text-emerald-400 border border-emerald-500/40 text-[11px] font-semibold shadow-sm">
+                            <Check className="w-3 h-3 stroke-[2.5]" />
+                            <span>Viewed</span>
+                          </span>
+                        )}
+                      </a>
 
-                      <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-                        {project.tags.map((tag, i) => (
-                          <React.Fragment key={tag}>
-                            {i > 0 && <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>}
-                            <span>{tag}</span>
-                          </React.Fragment>
-                        ))}
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                              {project.name}
+                            </h3>
+                            {isViewed && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold shrink-0">
+                                <Eye className="w-2.5 h-2.5" />
+                                <span>Viewed</span>
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 shrink-0">
+                            {project.category === 'portfolio' ? 'Creator Prototype' : 'Business Prototype'}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-2">
+                          {project.description}
+                        </p>
+
+                        <div className="space-y-1.5 mb-4">
+                          <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 stroke-[2.5]" />
+                            <span>{project.highlights?.[0] || 'Mobile Responsive Design'}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 stroke-[2.5]" />
+                            <span>{project.highlights?.[1] || 'Direct WhatsApp Integration'}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                          {project.tags.map((tag, i) => (
+                            <React.Fragment key={tag}>
+                              {i > 0 && <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>}
+                              <span>{tag}</span>
+                            </React.Fragment>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Dual Action Buttons: View Live Demo + Get Similar Website */}
-                  <div className="p-5 sm:p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <MagneticButton
-                      id={`view-live-btn-${project.id}`}
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variant="primary"
-                      className="w-full py-2.5 px-3 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
-                    >
-                      <span>View Live Demo</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </MagneticButton>
+                    {/* Dual Action Buttons: View Live Demo + Get Similar Website */}
+                    <div className="p-5 sm:p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <MagneticButton
+                        id={`view-live-btn-${project.id}`}
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => markDemoAsViewed(project.id)}
+                        variant="primary"
+                        className="w-full py-2.5 px-3 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
+                      >
+                        <span>{isViewed ? 'View Demo Again' : 'View Live Demo'}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </MagneticButton>
 
-                    <a
-                      id={`get-similar-btn-${project.id}`}
-                      href={createQuickWhatsAppUrl(
-                        `Hi SITEVIA WORKS! I tested your "${project.name}" (${project.categoryLabel}) live demo and would like to build something similar for my business.`
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 px-3 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1.5 transition-colors cursor-pointer text-center"
-                    >
-                      <span>Build Something Similar</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-                    </a>
+                      <a
+                        id={`get-similar-btn-${project.id}`}
+                        href={createQuickWhatsAppUrl(
+                          `Hi SITEVIA WORKS! I tested your "${project.name}" (${project.categoryLabel}) live demo and would like to build something similar for my business.`
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-2.5 px-3 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1.5 transition-colors cursor-pointer text-center"
+                      >
+                        <span>Build Something Similar</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </motion.div>
       </div>
