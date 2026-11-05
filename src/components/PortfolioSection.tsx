@@ -153,6 +153,7 @@ export const PortfolioSection: React.FC = () => {
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102"
                           loading="lazy"
+                          decoding="async"
                         />
                         {isViewed && (
                           <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-900/85 backdrop-blur-sm text-emerald-400 border border-emerald-500/40 text-[11px] font-semibold shadow-sm">

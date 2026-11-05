@@ -45,6 +45,8 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWorkClick, onGetWebsiteClic
                 alt="SITEVIA WORKS Studio Banner"
                 className="max-w-[260px] xs:max-w-[300px] sm:max-w-md md:max-w-lg w-full h-auto object-contain mx-auto rounded-xl drop-shadow-sm transition-all"
                 loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
           </motion.div>

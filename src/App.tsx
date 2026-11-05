@@ -2,16 +2,10 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './pages/ServicesPage';
-import { PricingPage } from './pages/PricingPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { TermsPage } from './pages/TermsPage';
-import { PrivacyPage } from './pages/PrivacyPage';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
@@ -19,6 +13,21 @@ import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { PageSkeletonScreen } from './components/PageSkeletonScreen';
 import { TechGridBackground } from './components/TechGridBackground';
 import { PageType } from './types';
+
+// Smart Code-Splitting: Eager-load HomePage for instant first paint; lazy-load secondary pages
+const loadServicesPage = () => import('./pages/ServicesPage').then((m) => ({ default: m.ServicesPage }));
+const loadPricingPage = () => import('./pages/PricingPage').then((m) => ({ default: m.PricingPage }));
+const loadAboutPage = () => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }));
+const loadContactPage = () => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage }));
+const loadTermsPage = () => import('./pages/TermsPage').then((m) => ({ default: m.TermsPage }));
+const loadPrivacyPage = () => import('./pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage }));
+
+const ServicesPage = React.lazy(loadServicesPage);
+const PricingPage = React.lazy(loadPricingPage);
+const AboutPage = React.lazy(loadAboutPage);
+const ContactPage = React.lazy(loadContactPage);
+const TermsPage = React.lazy(loadTermsPage);
+const PrivacyPage = React.lazy(loadPrivacyPage);
 
 const VALID_PAGES: PageType[] = ['home', 'services', 'pricing', 'about', 'contact', 'terms', 'privacy'];
 
@@ -70,6 +79,28 @@ export default function App() {
     } catch (e) {
       // ignore
     }
+  }, []);
+
+  // Background Idle Prefetching: silently warm up secondary page chunks after initial render
+  useEffect(() => {
+    const prefetchAll = () => {
+      loadServicesPage().catch(() => {});
+      loadPricingPage().catch(() => {});
+      loadContactPage().catch(() => {});
+      loadAboutPage().catch(() => {});
+      loadTermsPage().catch(() => {});
+      loadPrivacyPage().catch(() => {});
+    };
+
+    const timer = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(prefetchAll, { timeout: 2500 });
+      } else {
+        prefetchAll();
+      }
+    }, 900);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Sync state with URL hash
@@ -200,49 +231,51 @@ export default function App() {
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="w-full flex-1"
             >
-              {currentPage === 'home' && (
-                <HomePage
-                  onNavigatePage={navigateToPage}
-                  onOpenLegal={handleOpenLegal}
-                />
-              )}
+              <Suspense fallback={<PageSkeletonScreen targetPage={currentPage} />}>
+                {currentPage === 'home' && (
+                  <HomePage
+                    onNavigatePage={navigateToPage}
+                    onOpenLegal={handleOpenLegal}
+                  />
+                )}
 
-              {currentPage === 'services' && (
-                <ServicesPage
-                  onNavigatePage={navigateToPage}
-                  onSelectServiceType={handleSelectServiceType}
-                  onSelectAudienceType={handleSelectAudience}
-                />
-              )}
+                {currentPage === 'services' && (
+                  <ServicesPage
+                    onNavigatePage={navigateToPage}
+                    onSelectServiceType={handleSelectServiceType}
+                    onSelectAudienceType={handleSelectAudience}
+                  />
+                )}
 
-              {currentPage === 'pricing' && (
-                <PricingPage
-                  onNavigatePage={navigateToPage}
-                  onSelectPlan={handleSelectPricingPlan}
-                />
-              )}
+                {currentPage === 'pricing' && (
+                  <PricingPage
+                    onNavigatePage={navigateToPage}
+                    onSelectPlan={handleSelectPricingPlan}
+                  />
+                )}
 
-              {currentPage === 'about' && (
-                <AboutPage onNavigatePage={navigateToPage} />
-              )}
+                {currentPage === 'about' && (
+                  <AboutPage onNavigatePage={navigateToPage} />
+                )}
 
-              {currentPage === 'contact' && (
-                <ContactPage
-                  initialPackage={selectedPackage}
-                  initialWebsiteType={selectedWebsiteType}
-                  initialBusinessType={selectedBusinessType}
-                  onOpenLegal={handleOpenLegal}
-                  onNavigatePage={navigateToPage}
-                />
-              )}
+                {currentPage === 'contact' && (
+                  <ContactPage
+                    initialPackage={selectedPackage}
+                    initialWebsiteType={selectedWebsiteType}
+                    initialBusinessType={selectedBusinessType}
+                    onOpenLegal={handleOpenLegal}
+                    onNavigatePage={navigateToPage}
+                  />
+                )}
 
-              {currentPage === 'terms' && (
-                <TermsPage onNavigatePage={navigateToPage} />
-              )}
+                {currentPage === 'terms' && (
+                  <TermsPage onNavigatePage={navigateToPage} />
+                )}
 
-              {currentPage === 'privacy' && (
-                <PrivacyPage onNavigatePage={navigateToPage} />
-              )}
+                {currentPage === 'privacy' && (
+                  <PrivacyPage onNavigatePage={navigateToPage} />
+                )}
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>

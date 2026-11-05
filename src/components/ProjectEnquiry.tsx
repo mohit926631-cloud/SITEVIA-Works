@@ -32,6 +32,8 @@ interface ProjectEnquiryProps {
   onOpenLegal?: (tab: 'privacy' | 'terms') => void;
 }
 
+const ENQUIRY_DRAFT_STORAGE_KEY = 'sitevia_enquiry_draft';
+
 export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
   initialPackage = '',
   initialWebsiteType = '',
@@ -40,7 +42,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
-  // Form State
+  // Form State (with localStorage draft recovery)
   const [formData, setFormData] = useState<ProjectFormData>(() => {
     // Resolve initial package if passed from pricing cards
     let pkgVal = 'Starter (₹2,999)';
@@ -64,7 +66,7 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
       }
     }
 
-    return {
+    const defaults: ProjectFormData = {
       name: '',
       businessName: '',
       businessType: initialBusinessType || '',
@@ -77,7 +79,39 @@ export const ProjectEnquiry: React.FC<ProjectEnquiryProps> = ({
       email: '',
       requirements: '',
     };
+
+    try {
+      const savedDraft = localStorage.getItem(ENQUIRY_DRAFT_STORAGE_KEY);
+      if (savedDraft) {
+        const parsed = JSON.parse(savedDraft);
+        if (parsed && typeof parsed === 'object') {
+          return {
+            ...defaults,
+            ...parsed,
+            businessType: initialBusinessType || parsed.businessType || '',
+            websiteType: initialWebsiteType || parsed.websiteType || '',
+            package: initialPackage ? pkgVal : parsed.package || pkgVal,
+            pages: initialPackage ? pageVal : parsed.pages || pageVal,
+            budget: initialPackage ? budgetVal : parsed.budget || budgetVal,
+            features: Array.isArray(parsed.features) ? parsed.features : defaults.features,
+          };
+        }
+      }
+    } catch (e) {
+      // ignore localStorage read errors
+    }
+
+    return defaults;
   });
+
+  // Auto-save form draft to localStorage as the user types/selects
+  useEffect(() => {
+    try {
+      localStorage.setItem(ENQUIRY_DRAFT_STORAGE_KEY, JSON.stringify(formData));
+    } catch (e) {
+      // ignore localStorage write errors
+    }
+  }, [formData]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
