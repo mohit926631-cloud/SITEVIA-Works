@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         onNavigatePage('services');
         setTimeout(() => {
           document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
-        }, 360);
+        }, 80);
       }
     } else if (dest === 'faq') {
       if (currentPage === 'home' || currentPage === 'pricing') {
@@ -102,11 +102,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         onNavigatePage('home');
         setTimeout(() => {
           document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
-        }, 360);
+        }, 80);
       }
     } else if (dest === 'contact') {
       onNavigatePage('contact');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

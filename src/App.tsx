@@ -2,32 +2,22 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
+import { ServicesPage } from './pages/ServicesPage';
+import { PricingPage } from './pages/PricingPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
 import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
-import { PageSkeletonScreen } from './components/PageSkeletonScreen';
 import { TechGridBackground } from './components/TechGridBackground';
 import { PageType } from './types';
-
-// Smart Code-Splitting: Eager-load HomePage for instant first paint; lazy-load secondary pages
-const loadServicesPage = () => import('./pages/ServicesPage').then((m) => ({ default: m.ServicesPage }));
-const loadPricingPage = () => import('./pages/PricingPage').then((m) => ({ default: m.PricingPage }));
-const loadAboutPage = () => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }));
-const loadContactPage = () => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage }));
-const loadTermsPage = () => import('./pages/TermsPage').then((m) => ({ default: m.TermsPage }));
-const loadPrivacyPage = () => import('./pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage }));
-
-const ServicesPage = React.lazy(loadServicesPage);
-const PricingPage = React.lazy(loadPricingPage);
-const AboutPage = React.lazy(loadAboutPage);
-const ContactPage = React.lazy(loadContactPage);
-const TermsPage = React.lazy(loadTermsPage);
-const PrivacyPage = React.lazy(loadPrivacyPage);
 
 const VALID_PAGES: PageType[] = ['home', 'services', 'pricing', 'about', 'contact', 'terms', 'privacy'];
 
@@ -60,10 +50,6 @@ export default function App() {
     return 'home';
   });
 
-  const [isPageTransitioning, setIsPageTransitioning] = useState<boolean>(false);
-  const [targetPage, setTargetPage] = useState<PageType>(currentPage);
-  const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const [selectedPackage, setSelectedPackage] = useState<string>('Business — ₹5,499');
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Business Website');
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>('');
@@ -81,52 +67,19 @@ export default function App() {
     }
   }, []);
 
-  // Background Idle Prefetching: silently warm up secondary page chunks after initial render
-  useEffect(() => {
-    const prefetchAll = () => {
-      loadServicesPage().catch(() => {});
-      loadPricingPage().catch(() => {});
-      loadContactPage().catch(() => {});
-      loadAboutPage().catch(() => {});
-      loadTermsPage().catch(() => {});
-      loadPrivacyPage().catch(() => {});
-    };
-
-    const timer = setTimeout(() => {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(prefetchAll, { timeout: 2500 });
-      } else {
-        prefetchAll();
-      }
-    }, 900);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Sync state with URL hash
+  // Sync state with URL hash immediately (zero artificial delay)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (VALID_PAGES.includes(hash as PageType) && hash !== currentPage) {
-        const next = hash as PageType;
-        setTargetPage(next);
-        setIsPageTransitioning(true);
-        if (transitionTimerRef.current) {
-          clearTimeout(transitionTimerRef.current);
-        }
-        transitionTimerRef.current = setTimeout(() => {
-          setCurrentPage(next);
-          setIsPageTransitioning(false);
-        }, 340);
+        setCurrentPage(hash as PageType);
+        window.scrollTo(0, 0);
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
-      if (transitionTimerRef.current) {
-        clearTimeout(transitionTimerRef.current);
-      }
     };
   }, [currentPage]);
 
@@ -158,25 +111,15 @@ export default function App() {
   }, [currentPage]);
 
   const navigateToPage = useCallback((page: PageType) => {
-    if (page === currentPage && !isPageTransitioning) {
+    if (page === currentPage) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    if (transitionTimerRef.current) {
-      clearTimeout(transitionTimerRef.current);
-    }
-
-    setTargetPage(page);
-    setIsPageTransitioning(true);
+    setCurrentPage(page);
     window.location.hash = page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    transitionTimerRef.current = setTimeout(() => {
-      setCurrentPage(page);
-      setIsPageTransitioning(false);
-    }, 340);
-  }, [currentPage, isPageTransitioning]);
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const handleOpenLegal = useCallback((tab: 'privacy' | 'terms') => {
     navigateToPage(tab === 'terms' ? 'terms' : 'privacy');
@@ -201,84 +144,72 @@ export default function App() {
   }, [navigateToPage]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070A10] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative transition-colors duration-300">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative">
       {/* Viewport Scroll Progress Bar */}
       <ScrollProgressBar />
 
-      {/* 3D Perspective Tech-Grid Background (Ultra-Lightweight CSS Hardware Accelerated) */}
+      {/* Static Hardware-Cached Background */}
       <TechGridBackground />
 
       {/* Fixed Navigation Header with Page Tabs */}
       <Navbar
-        currentPage={isPageTransitioning ? targetPage : currentPage}
+        currentPage={currentPage}
         onNavigatePage={navigateToPage}
       />
 
-      {/* Page Content Container with Smooth Transition Animations */}
+      {/* Page Content Container with Pure GPU Opacity + Y Transition (No Blur Filter or Skeleton Lag) */}
       <main className="flex-1 relative z-10 pt-20 sm:pt-24 flex flex-col">
-        <AnimatePresence mode="wait">
-          {isPageTransitioning ? (
-            <PageSkeletonScreen
-              key={`skeleton-${targetPage}`}
-              targetPage={targetPage}
+        <motion.div
+          key={currentPage}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
+          className="w-full flex-1"
+        >
+          {currentPage === 'home' && (
+            <HomePage
+              onNavigatePage={navigateToPage}
+              onOpenLegal={handleOpenLegal}
             />
-          ) : (
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -16, filter: 'blur(4px)' }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full flex-1"
-            >
-              <Suspense fallback={<PageSkeletonScreen targetPage={currentPage} />}>
-                {currentPage === 'home' && (
-                  <HomePage
-                    onNavigatePage={navigateToPage}
-                    onOpenLegal={handleOpenLegal}
-                  />
-                )}
-
-                {currentPage === 'services' && (
-                  <ServicesPage
-                    onNavigatePage={navigateToPage}
-                    onSelectServiceType={handleSelectServiceType}
-                    onSelectAudienceType={handleSelectAudience}
-                  />
-                )}
-
-                {currentPage === 'pricing' && (
-                  <PricingPage
-                    onNavigatePage={navigateToPage}
-                    onSelectPlan={handleSelectPricingPlan}
-                  />
-                )}
-
-                {currentPage === 'about' && (
-                  <AboutPage onNavigatePage={navigateToPage} />
-                )}
-
-                {currentPage === 'contact' && (
-                  <ContactPage
-                    initialPackage={selectedPackage}
-                    initialWebsiteType={selectedWebsiteType}
-                    initialBusinessType={selectedBusinessType}
-                    onOpenLegal={handleOpenLegal}
-                    onNavigatePage={navigateToPage}
-                  />
-                )}
-
-                {currentPage === 'terms' && (
-                  <TermsPage onNavigatePage={navigateToPage} />
-                )}
-
-                {currentPage === 'privacy' && (
-                  <PrivacyPage onNavigatePage={navigateToPage} />
-                )}
-              </Suspense>
-            </motion.div>
           )}
-        </AnimatePresence>
+
+          {currentPage === 'services' && (
+            <ServicesPage
+              onNavigatePage={navigateToPage}
+              onSelectServiceType={handleSelectServiceType}
+              onSelectAudienceType={handleSelectAudience}
+            />
+          )}
+
+          {currentPage === 'pricing' && (
+            <PricingPage
+              onNavigatePage={navigateToPage}
+              onSelectPlan={handleSelectPricingPlan}
+            />
+          )}
+
+          {currentPage === 'about' && (
+            <AboutPage onNavigatePage={navigateToPage} />
+          )}
+
+          {currentPage === 'contact' && (
+            <ContactPage
+              initialPackage={selectedPackage}
+              initialWebsiteType={selectedWebsiteType}
+              initialBusinessType={selectedBusinessType}
+              onOpenLegal={handleOpenLegal}
+              onNavigatePage={navigateToPage}
+            />
+          )}
+
+          {currentPage === 'terms' && (
+            <TermsPage onNavigatePage={navigateToPage} />
+          )}
+
+          {currentPage === 'privacy' && (
+            <PrivacyPage onNavigatePage={navigateToPage} />
+          )}
+        </motion.div>
       </main>
 
       {/* Unified Footer */}

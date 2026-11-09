@@ -31,13 +31,11 @@ const SEARCH_QUERIES = [
   'clinic near me',
 ];
 
-export const WebsiteDifferenceDemo: React.FC = () => {
-  const [hasWebsite, setHasWebsite] = useState<boolean>(true);
+const TypewriterSearchText: React.FC = React.memo(() => {
   const [displayText, setDisplayText] = useState<string>('salon near me');
   const [queryIndex, setQueryIndex] = useState<number>(0);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-  // Automated typing animation for the search bar
   useEffect(() => {
     const currentFullQuery = SEARCH_QUERIES[queryIndex];
     let timer: ReturnType<typeof setTimeout>;
@@ -46,7 +44,7 @@ export const WebsiteDifferenceDemo: React.FC = () => {
       if (displayText.length < currentFullQuery.length) {
         timer = setTimeout(() => {
           setDisplayText(currentFullQuery.slice(0, displayText.length + 1));
-        }, 85);
+        }, 90);
       } else {
         timer = setTimeout(() => {
           setIsDeleting(true);
@@ -56,7 +54,7 @@ export const WebsiteDifferenceDemo: React.FC = () => {
       if (displayText.length > 0) {
         timer = setTimeout(() => {
           setDisplayText(displayText.slice(0, -1));
-        }, 45);
+        }, 50);
       } else {
         setIsDeleting(false);
         setQueryIndex((prev) => (prev + 1) % SEARCH_QUERIES.length);
@@ -65,6 +63,16 @@ export const WebsiteDifferenceDemo: React.FC = () => {
 
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, queryIndex]);
+
+  return (
+    <span className="text-slate-900 dark:text-slate-100 font-medium font-mono truncate">
+      {displayText}
+    </span>
+  );
+});
+
+export const WebsiteDifferenceDemo: React.FC = () => {
+  const [hasWebsite, setHasWebsite] = useState<boolean>(true);
 
   // Generic example businesses as strictly requested
   const yourBusiness: ResultItem = {
@@ -192,9 +200,7 @@ export const WebsiteDifferenceDemo: React.FC = () => {
             {/* Mock Search Input with Typewriter Animation */}
             <div className="flex-1 max-w-lg mx-auto flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm">
               <Search className="w-4 h-4 text-slate-400 shrink-0" />
-              <span className="text-slate-900 dark:text-slate-100 font-medium font-mono truncate">
-                {displayText}
-              </span>
+              <TypewriterSearchText />
               <span className="w-0.5 h-4 bg-blue-500 animate-pulse shrink-0" />
             </div>
 
